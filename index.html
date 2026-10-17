@@ -1,0 +1,1339 @@
+<!doctype html>
+<html lang="ka" class="intro-on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ბაკურიანი. მთის მინერალური წყალი</title>
+<meta name="description" content="ბაკურიანი. ბუნებრივი მინერალური წყალი 1700 მეტრიდან. კლასიკა, ხილის გემოთი, 0+, ბავშვები, ოჯახი, სპორტი, სპრეი.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2348; --blue:#1C7FD6; --mute:#4D5F76; --line:rgba(10,35,72,.12);
+  --bg:#F3F7FA; --card:#FFFFFF;
+  --gut:clamp(20px,4.2vw,72px); --max:1440px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Noto Sans Georgian",system-ui,sans-serif;color:var(--navy);background:var(--bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* ---------- fixed layers: photo, outline word, 3D canvas ---------- */
+#bg{position:fixed;inset:-3%;z-index:0;opacity:0;transition:opacity 1s ease;will-change:transform,opacity}
+#bg.on{opacity:1}
+#bg img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(243,247,250,.28) 0%,rgba(243,247,250,0) 26%,rgba(243,247,250,0) 80%,rgba(243,247,250,.7) 100%)}
+#mark{position:fixed;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .45s ease}
+#mark.on{opacity:1}
+#mark span{font-weight:900;text-align:center;color:transparent;-webkit-text-stroke:1.5px rgba(10,35,72,.12);line-height:.95;transform:translateY(-1vh)}
+@media(max-width:800px){#mark{display:none}}
+#gl{position:fixed;inset:0;z-index:1;pointer-events:none}
+#gl canvas{display:block;width:100%;height:100%}
+main,footer{position:relative;z-index:2}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+
+/* ---------- type (Georgian caps are real Mtavruli characters, set by script) ---------- */
+h1{font-size:clamp(32px,5vw,88px);line-height:1.04;font-weight:900;letter-spacing:.005em}
+h1 span{display:block;white-space:nowrap}
+h1 .l2,h2 .l2{color:var(--blue)}
+h2{font-size:clamp(30px,3.8vw,62px);line-height:1.06;font-weight:900;letter-spacing:.005em}
+.lead{font-size:clamp(16px,1.2vw,18px);line-height:1.7;color:var(--mute);max-width:42ch}
+.sec{padding:clamp(96px,14vh,168px) 0}
+
+/* ---------- buttons: liquid glass ----------
+   primary: a blue glow held in clear glass (pill on the leading side, soft corners trailing), white light pooling at the bottom
+   where slow water swells move; ghost: frosted ice that fills with the same blue glow. One text setting for all. */
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;height:58px;padding:0 34px 0 36px;border:0;cursor:pointer;
+  border-radius:12px 29px 29px 29px;   /* tear drop: only the top-left corner narrows (explicit px: 999px would shrink every radius) */
+  font:700 15px/1 "Noto Sans Georgian",sans-serif;letter-spacing:.03em;text-decoration:none;color:#0B2B5E;
+  background:
+    radial-gradient(46% 90% at 50% 0%,rgba(78,160,255,.62) 0%,rgba(78,160,255,.3) 40%,rgba(78,160,255,0) 78%),
+    radial-gradient(38% 80% at 18% 35%,rgba(140,195,255,.38) 0%,rgba(140,195,255,0) 75%),
+    radial-gradient(38% 80% at 82% 35%,rgba(140,195,255,.38) 0%,rgba(140,195,255,0) 75%),
+    radial-gradient(75% 65% at 50% 118%,rgba(255,255,255,1) 0%,rgba(255,255,255,.6) 35%,rgba(255,255,255,0) 80%),
+    linear-gradient(180deg,#DDEBFF 0%,#F4F9FF 100%);
+  box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(30,110,220,.14),0 16px 30px -16px rgba(30,110,220,.65);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s,filter .5s,color .4s}
+.btn::before,.btn::after{content:"";position:absolute;left:-6px;right:-6px;bottom:-4px;z-index:-1;pointer-events:none;filter:blur(3px);transition:height 1.2s cubic-bezier(.25,.6,.2,1),transform 1s cubic-bezier(.2,.7,.2,1),opacity .6s}
+.btn::before{height:38%;opacity:.45;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C20 3.2 40 3.2 60 6 S100 8.8 120 6 V12 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") 0 0/240px 10px repeat-x,linear-gradient(#fff,#fff) 0 9px/100% 100% no-repeat;animation:wave 11s linear infinite}
+.btn::after{height:26%;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C15 3.8 30 3.8 45 6 S75 8.2 90 6 V12 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") 0 0/180px 8px repeat-x,linear-gradient(#fff,#fff) 0 7px/100% 100% no-repeat;animation:wave2 7.5s linear infinite reverse}
+@keyframes wave{to{background-position:240px 0,0 9px}}
+@keyframes wave2{to{background-position:180px 0,0 7px}}
+.btn:hover{transform:translateY(-1px);filter:saturate(1.08) brightness(1.03);box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(30,110,220,.16),0 20px 36px -16px rgba(30,110,220,.72)}
+.btn:hover::before{height:48%}
+.btn:hover::after{height:36%}
+.btn:active{transform:translateY(0) scale(.985)}
+.btn.ghost{border-radius:12px 29px 29px 29px;color:var(--navy);
+  background:radial-gradient(75% 65% at 50% 104%,rgba(255,255,255,1) 0%,rgba(255,255,255,0) 72%),linear-gradient(180deg,rgba(226,238,252,.78) 0%,rgba(250,252,255,.72) 100%);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
+  box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(10,35,72,.1),0 14px 28px -18px rgba(10,35,72,.35)}
+.btn.ghost::before{height:calc(100% + 12px);opacity:1;transform:translateY(102%);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C20 3.2 40 3.2 60 6 S100 8.8 120 6 V12 H0Z' fill='%238CC2FF'/%3E%3C/svg%3E") 0 0/240px 12px repeat-x,radial-gradient(60% 80% at 50% 30%,rgba(38,136,255,.85),rgba(38,136,255,.35) 60%,rgba(140,194,255,.6)) 0 11px/100% 100% no-repeat;animation:wave3 6s linear infinite}
+.btn.ghost::after{display:none}
+@keyframes wave3{to{background-position:240px 0,0 11px}}
+.btn.ghost:hover{color:#0B2B5E;box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(30,110,220,.14),0 16px 30px -16px rgba(30,110,220,.5)}
+.btn.ghost:hover::before{transform:translateY(-12px)}
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+.sq svg{width:18px;height:18px}
+.sq{position:relative;isolation:isolate;overflow:hidden;display:inline-grid;place-items:center;width:46px;height:46px;border-radius:15px;color:var(--navy);text-decoration:none;
+  background:radial-gradient(75% 65% at 50% 104%,#fff 0%,rgba(255,255,255,0) 72%),linear-gradient(180deg,#E6F0FC,#FAFCFF);box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(10,35,72,.1);transition:color .4s}
+.sq::before{content:"";position:absolute;inset:auto 0 0 0;height:calc(100% + 10px);z-index:-1;transform:translateY(102%);transition:transform .8s cubic-bezier(.2,.7,.2,1);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M0 7 Q15 0 30 7 T60 7 T90 7 T120 7 V14 H0Z' fill='%232E93E6'/%3E%3C/svg%3E") 0 0/60px 10px repeat-x,linear-gradient(165deg,#2E93E6,#0B4793) 0 9px/100% 100% no-repeat;animation:wave4 2.8s linear infinite}
+@keyframes wave4{to{background-position:60px 0,0 9px}}
+.sq:hover{color:#fff}
+.sq:hover::before{transform:translateY(-10px)}
+
+/* sound: SF-style speaker in a small glass circle; the arcs breathe in turn while the brook plays, a cross when muted */
+.sound{display:inline-grid;place-items:center;width:40px;height:40px;border:0;border-radius:50%;cursor:pointer;color:var(--navy);
+  background:radial-gradient(75% 65% at 50% 104%,#fff 0%,rgba(255,255,255,0) 72%),linear-gradient(180deg,rgba(226,238,252,.8),rgba(250,252,255,.75));-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(10,35,72,.1);transition:color .25s,transform .3s}
+.sound:hover{transform:scale(1.06)}
+.sound svg{width:20px;height:20px}
+.sound .x{display:none}
+.sound .a1,.sound .a2{transition:opacity .4s}
+.sound.on:not(.live) .a2{opacity:.35}
+.sound.live .a1{animation:arc 1.3s ease-in-out infinite}
+.sound.live .a2{animation:arc 1.3s ease-in-out .22s infinite}
+@keyframes arc{0%,100%{opacity:1}50%{opacity:.2}}
+.sound:not(.on){color:var(--mute)}
+.sound:not(.on) .a1,.sound:not(.on) .a2{display:none}
+.sound:not(.on) .x{display:inline}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:10;transition:background .3s,box-shadow .3s}
+nav.solid{background:rgba(243,247,250,.82);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:80px}
+nav .logo img{height:38px}
+nav .right{display:flex;align-items:center;gap:6px}
+nav .lang{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 12px;border:0;background:transparent;cursor:pointer;border-radius:22px;font:700 12px/1 "Noto Sans Georgian",sans-serif;letter-spacing:.08em;color:var(--navy);transition:background .25s}
+nav .lang svg{width:20px;height:20px}
+nav .lang:hover{background:rgba(10,35,72,.06)}
+.burger{display:block;width:48px;height:44px;border:0;background:transparent;cursor:pointer;position:relative;z-index:12;margin-left:6px}
+.burger i{position:absolute;right:10px;height:1.6px;background:var(--navy);border-radius:2px;transition:transform .45s cubic-bezier(.6,0,.2,1),top .45s cubic-bezier(.6,0,.2,1),width .45s,opacity .3s}
+.burger i:nth-child(1){top:15px;width:26px}.burger i:nth-child(2){top:21.5px;width:18px}.burger i:nth-child(3){top:28px;width:26px}
+.burger:hover i:nth-child(2){width:26px}
+.burger[aria-expanded="true"] i:nth-child(1){top:21.5px;transform:rotate(45deg)}
+.burger[aria-expanded="true"] i:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] i:nth-child(3){top:21.5px;transform:rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:9;background:rgba(243,247,250,.97);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);display:flex;align-items:center;opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.6,0,.2,1)}
+.menu.open{opacity:1;pointer-events:auto}
+.menu-in{width:100%;display:grid;grid-template-columns:7fr 4fr;gap:48px;align-items:center;padding-top:80px}
+.menu-links{display:flex;flex-direction:column;gap:4px}
+.menu-links a{font-size:clamp(30px,3.7vw,60px);font-weight:900;line-height:1.16;text-decoration:none;color:rgba(10,35,72,.2);transform:translateY(24px);opacity:0;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .6s,color .3s}
+.menu.open .menu-links a{transform:none;opacity:1}
+.menu.open .menu-links a:nth-child(2){transition-delay:.05s}.menu.open .menu-links a:nth-child(3){transition-delay:.1s}.menu.open .menu-links a:nth-child(4){transition-delay:.15s}
+.menu-links a.on{color:var(--blue)}.menu-links:hover a.on{color:rgba(10,35,72,.2)}.menu-links a:hover{color:var(--blue)!important}
+.menu-side{display:grid;gap:28px;padding-bottom:14px;opacity:0;transform:translateY(16px);transition:opacity .6s .2s,transform .7s .2s cubic-bezier(.2,.7,.2,1)}
+.menu.open .menu-side{opacity:1;transform:none}
+.menu-side h4{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--mute);margin-bottom:10px}
+.menu-side p{font-size:15px;line-height:1.75;color:var(--navy)}
+.menu-side a{text-decoration:none}.menu-side a:hover{color:var(--blue)}
+@media(max-width:800px){nav .wrap{height:64px}nav .logo img{height:30px}nav .lang span{display:none}nav .lang{padding:0 10px}
+  .menu{align-items:flex-start}.menu-in{grid-template-columns:1fr;gap:40px;padding-top:110px}.menu-side{grid-template-columns:1fr 1fr}.menu-side>div:first-child{grid-column:1/-1}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:620px}
+.hero .wrap{height:100%;display:grid;grid-template-columns:repeat(12,1fr);align-items:start}
+.hero .copy{grid-column:1/8;padding-top:clamp(120px,19vh,200px)}
+.hero .lead{margin:24px 0 38px}
+@media(max-width:800px){
+  .hero .wrap{align-items:start}
+  .hero .copy{grid-column:1/-1;padding-top:104px}
+  .hero .lead{margin:20px 0 0;font-size:15px}
+  .hero .lead{margin-bottom:26px}
+  .hero .btns{flex-wrap:nowrap;gap:10px}.hero .btn{height:48px;padding:0 18px 0 20px;font-size:13px}
+  }
+
+/* ---------- range (pinned stage) ---------- */
+#range{position:relative;height:calc(var(--n) * 85svh + 100svh)}
+.stage{position:sticky;top:0;height:100svh;overflow:hidden}
+.stage .wrap{height:100%;display:grid;grid-template-columns:4fr 4fr 4fr;align-items:center;gap:32px}
+.r-list{align-self:center}
+.r-list ul{list-style:none;border-top:1px solid var(--line);max-width:300px}
+.r-list li{position:relative;display:flex;align-items:center;gap:22px;height:54px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700;letter-spacing:.08em;cursor:pointer;opacity:.45;transition:opacity .35s}
+.r-list li em{font-style:normal;font-size:11px;letter-spacing:.08em;color:var(--mute);width:18px}
+.r-list li::after{content:"";position:absolute;left:0;bottom:-1px;height:1.5px;width:var(--p,0%);background:var(--navy)}
+.r-list li.on{opacity:1}
+.r-list li.on em{color:var(--blue)}
+.r-list li:hover{opacity:.7}.r-list li.on:hover{opacity:1}
+.r-panels{display:grid;grid-column:3}
+.panel{grid-area:1/1;opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
+.panel.on{opacity:1;transform:none;pointer-events:auto}
+.counter{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--mute)}
+.counter b{color:var(--navy)}
+.panel h2{margin:16px 0 18px;font-size:clamp(30px,3vw,50px)}
+.panel .lead{font-size:16px;color:#3E5068}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tags span{font-size:12px;font-weight:700;letter-spacing:.04em;padding:10px 15px;border-radius:7px 17px 17px 17px;background:rgba(255,255,255,.75);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 1px 3px rgba(10,35,72,.08),0 8px 18px -12px rgba(10,35,72,.25)}
+.panel .prod{margin-top:32px;height:clamp(140px,22vh,220px);width:auto;max-width:100%;object-fit:contain;object-position:left bottom;filter:drop-shadow(0 18px 24px rgba(10,35,72,.14))}
+.progress{display:none}
+@media(max-width:800px){
+  .stage .wrap{grid-template-columns:1fr;align-items:end;padding-bottom:28px}
+  .r-list{display:none}
+  .r-panels{grid-column:1}
+  .panel{position:relative}
+  .panel h2{margin:12px 0;font-size:28px}
+  .panel .lead{font-size:15px}
+  .tags{margin-top:16px}
+  .panel .prod{position:absolute;right:0;top:-6px;margin:0;height:72px}
+  .progress{display:flex;gap:6px;margin:0 104px 16px 0}
+  .progress i{flex:1;height:2px;background:var(--line);transition:background .3s}
+  .progress i.on{background:var(--navy)}
+}
+
+/* ---------- moments ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,24px)}
+.grid figure:nth-child(even){transform:translateY(56px)}
+.grid .ph{aspect-ratio:3/4;overflow:hidden;border-radius:6px;background:#dfe8ef}
+.grid img{width:100%;height:100%;object-fit:cover;transform:scale(1.14);transition:filter .6s ease}
+.grid figure:hover img{filter:saturate(1.12) brightness(1.03)}
+.cap{margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--mute)}
+.grid-pad{height:56px}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.grid figure:nth-child(even){transform:translateY(32px)}.grid-pad{height:32px}}
+
+/* ---------- source ---------- */
+#source{min-height:100svh;display:flex;align-items:flex-start}
+#source .wrap{width:100%;padding-top:clamp(120px,18vh,200px)}
+#source h2{font-size:clamp(34px,5vw,86px);margin-top:18px}
+#source .lead{margin-top:24px;color:#3E5068}
+/* ---------- buy ---------- */
+#buy{background:var(--card)}
+.buy{display:grid;grid-template-columns:6fr 6fr;gap:48px;align-items:start}
+/* additions after the clean-up */
+.concept{position:fixed;left:16px;bottom:16px;z-index:8;padding:8px 14px;border-radius:6px 16px 16px 16px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 6px 18px -10px rgba(10,35,72,.3);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--mute);pointer-events:none}
+.lng{display:flex;gap:18px}.lng button{border:0;background:none;padding:0;font:500 15px/1.75 "Noto Sans Georgian",sans-serif;color:var(--mute);cursor:pointer}.lng button.on{font-weight:700;color:var(--navy)}.lng button:hover{color:var(--blue)}
+html[lang=en] .mt{text-transform:uppercase}
+.ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}.ln>span{display:block}
+.stage{-webkit-user-select:none;user-select:none}.stage-grab{cursor:grab}.stage-grab:active{cursor:grabbing}
+.r-title{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--mute);margin-bottom:22px}
+.moments-h{margin-bottom:clamp(40px,6vh,64px)}
+#source h2{margin-top:0}
+.alt-num{display:flex;align-items:flex-end;gap:18px;margin-top:44px}
+.alt-num b{font-size:clamp(72px,8.4vw,150px);font-weight:900;line-height:.82;letter-spacing:-.02em}
+.alt-num span{font-size:14px;line-height:1.45;color:#3E5068;padding-bottom:6px}
+.buy .lead{margin:22px 0 34px}
+.hotline{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:flex;gap:16px;align-items:baseline;font-size:15px}.hotline span{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--mute)}.hotline a{font-weight:700;text-decoration:none;color:var(--navy)}
+.buy-ph img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px}
+.f-links{display:flex;gap:20px;flex-wrap:wrap}
+@media(max-width:800px){#source .wrap{padding-top:104px}.buy{grid-template-columns:1fr;gap:40px}}
+
+/* ---------- footer ---------- */
+footer{background:var(--card);border-top:1px solid var(--line);overflow:hidden}
+.f-top{display:grid;grid-template-columns:5fr 2fr 3fr 2fr;gap:40px;padding:80px 0 64px;align-items:start}
+.f-top img{height:34px;margin-bottom:20px}
+.f-top p,.f-top li{font-size:14px;line-height:1.7;color:var(--mute);list-style:none}
+.f-top li{display:flex;align-items:center;gap:10px;padding:2px 0}
+footer h4{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--mute);margin-bottom:18px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--navy)}
+.f-word{display:block;font-weight:900;line-height:1;white-space:nowrap;padding:0 0 36px;font-size:120px;color:#E6EEF6;user-select:none}
+.f-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 0 28px;font-size:12px;line-height:1.6;color:var(--mute);border-top:1px solid var(--line)}
+@media(max-width:800px){.f-top{grid-template-columns:1fr 1fr;padding:56px 0 40px}.f-top>div:first-child,.f-top>div:nth-child(3){grid-column:1/-1}.f-word{padding:4px 0 20px}}
+
+/* ---------- opening: the real logo assembles itself, then the page fades up through white ---------- */
+html.intro-on{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:30;display:grid;place-items:center;background:#fff;transition:opacity 1.1s cubic-bezier(.6,0,.2,1)}
+#intro.out{opacity:0;pointer-events:none}
+.ilogo{width:clamp(210px,24vw,340px);overflow:visible;transition:transform 1.4s cubic-bezier(.6,0,.2,1),opacity 1s}
+#intro.out .ilogo{transform:scale(1.035);opacity:0}
+.ilogo .mts{clip-path:inset(0 100% 0 0);transform:translateY(3px)}
+#intro.play .mts{animation:mts 1.5s cubic-bezier(.7,0,.2,1) .25s forwards}
+@keyframes mts{to{clip-path:inset(0 0 0 0);transform:none}}
+.ilogo .lts path{opacity:0;transform:translateY(7px);transform-box:fill-box}
+#intro.play .lts path{animation:lt .9s cubic-bezier(.2,.7,.2,1) calc(1.05s + var(--i) * .06s) forwards}
+@keyframes lt{to{opacity:1;transform:none}}
+#intro.quick .mts{clip-path:none;transform:none}#intro.quick .lts path{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="intro" aria-hidden="true">
+  <svg class="ilogo" viewBox="0 0 175 62" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ბაკურიანი"><g class="mts"><path d="M147.75 18.3558L143.199 17.4511C142.159 17.244 141.175 16.8516 140.278 16.2957C136.941 14.2138 128.594 9.00352 128.594 8.99262L112.065 17.9198L105.742 10.9001C104.713 9.75563 103.51 8.78551 102.164 8.0225L88.0524 0L69.849 11.4887C69.0285 12.0011 68.1206 12.3608 67.1688 12.5461C64.8606 12.9821 62.618 13.7015 60.4957 14.7043L57.7936 15.9687L47.3245 9.00352C47.3245 9.00352 32.02 16.7971 31.9982 16.7971H31.9763L21.2993 20.8084C20.7523 21.0155 20.26 21.3207 19.8443 21.724C18.8379 22.6832 16.8359 24.5144 15.4685 25.2665C14.0464 26.0513 12.5805 26.8579 10.9286 27.7954C10.2394 28.1878 7.60297 30.3787 7.08881 30.7602C7.17632 30.7602 10.5895 30.7602 10.5895 30.7602L11.9022 29.6702C11.9022 29.6702 13.1056 29.2233 13.39 29.1797C13.5322 29.1579 14.4074 28.9617 14.7027 28.8963C14.8996 28.8527 15.0856 28.8091 15.3153 28.7873C15.5341 28.7655 15.7201 28.7546 15.8733 28.7546C16.2015 28.7546 16.4312 28.7982 16.639 28.8527C16.6937 28.8636 16.7484 28.8745 16.7922 28.8854C17 28.9399 17.197 28.9835 17.4704 28.9835C17.6017 28.9835 17.7658 28.9835 17.9408 28.9508C18.2143 28.9072 18.5425 28.8418 18.9582 28.711C19.9428 28.4167 22.1198 27.3267 22.7433 27.2722C23.1153 27.2395 22.1854 28.0025 22.1854 28.3404C22.1854 28.9508 23.2465 29.4304 24.6905 29.6702C24.7671 29.6702 25.0734 30.7493 25.1609 30.7602C25.9158 30.8365 34.4814 30.7602 34.4814 30.7602C34.4814 30.7602 29.0773 28.0897 29.1867 28.0025C30.0072 27.3485 32.2388 26.52 33.8798 25.6916C34.1533 25.5499 35.0831 24.994 35.2582 24.8632C35.3894 24.7542 35.4988 24.6452 35.5863 24.5253C36.1005 23.8277 36.188 22.3235 36.2755 22.2472C37.0632 21.5169 36.8225 21.0809 36.56 20.743C36.5053 20.6667 36.4396 20.5904 36.3959 20.525C36.374 20.4923 36.3521 20.4596 36.3302 20.4269C36.2646 20.2961 36.2646 20.1653 36.4177 20.0236C37.1179 19.3805 37.8399 19.0316 38.5947 18.7482C39.0979 18.552 39.6121 18.3885 40.1591 18.1814C40.706 17.9743 41.264 17.7236 41.8656 17.353C42.161 17.1677 42.4673 16.9606 42.7846 16.7208C42.9596 16.5791 43.1346 16.4265 43.3097 16.2521C43.4409 16.1213 43.5503 15.9687 43.6707 15.8161C44.6333 15.6526 47.4229 10.2788 47.6964 10.2352L57.181 16.7644L42.3251 30.782H46.1758C46.1758 30.782 50.0047 28.2859 51.6128 27.73C52.9912 27.2504 54.293 26.8361 55.0587 26.8688C55.19 26.8688 55.2994 26.8906 55.3869 26.9233C55.5729 26.9887 55.6932 27.0978 55.7261 27.2831C55.7589 27.4684 55.8026 27.6428 55.8464 27.8063C56.1418 28.8091 63.9854 30.782 63.9854 30.782C63.9854 30.782 104.91 30.8038 105.009 30.782C105.031 30.782 98.1715 28.057 92.3845 26.1603C87.2101 24.4708 83.0421 25.9314 82.0357 24.2419C83.0312 23.1955 83.2062 22.1382 85.1316 20.416C85.5691 20.0236 85.8536 19.6857 85.8973 19.4241C85.9411 19.1624 85.7551 18.988 85.2519 18.9226C84.9347 18.879 84.7377 18.7591 84.6393 18.5629C84.5955 18.4648 84.5736 18.3558 84.5736 18.225C84.5736 17.0805 86.3787 14.7697 87.9102 13.0257C88.5885 12.2518 89.212 11.5977 89.6058 11.2053C89.8793 10.9219 89.8027 10.7802 89.4964 10.7366C89.3105 10.7039 89.037 10.7148 88.6979 10.7366C88.4681 10.7584 88.2275 10.7802 87.954 10.8238C87.8227 10.8456 87.6805 10.8565 87.5273 10.8783C87.232 10.9219 86.9256 10.9655 86.6084 11.02C86.138 11.0963 85.6348 11.1835 85.1425 11.2707C84.8143 11.3252 84.4861 11.3797 84.1579 11.4233C83.9939 11.4451 83.8407 11.4669 83.6875 11.4887C82.9108 11.5977 82.1998 11.6741 81.6856 11.6741C81.4559 11.6741 81.2699 11.6523 81.1167 11.6196C80.9308 11.5541 80.6901 11.2816 80.9198 11.0091C80.9527 10.9546 80.9964 10.9001 81.0511 10.8456C82.8014 8.93812 84.6393 7.27039 86.6412 5.42827C86.9256 5.16667 87.2101 4.90506 87.4945 4.64346C87.5383 4.61076 87.5273 4.57806 87.4945 4.55626C87.4726 4.54536 87.4508 4.53446 87.407 4.52356C87.0241 4.42546 85.7989 4.42546 85.6785 4.01125C85.6676 3.97855 85.6676 3.93495 85.6785 3.89135C85.6785 3.84775 85.7114 3.79325 85.7332 3.73875C86.0614 3.18284 87.221 1.96203 87.8118 1.14451L88.0087 1.10091L101.508 8.70921C102.865 9.47222 104.079 10.4423 105.118 11.5978L111.879 19.0752L134.327 30.7166L139.72 30.7711C139.72 30.7711 135.639 27.5883 134.097 24.3618C133.725 23.5988 132.478 22.9993 132.204 22.2581C132.128 22.0292 132.106 21.8003 132.095 21.5714C132.095 21.4515 132.095 21.3425 132.106 21.2335C132.139 20.6776 132.183 20.1762 131.657 19.9255C131.603 19.8928 131.515 19.8819 131.406 19.8819C130.87 19.8819 129.852 20.1762 129.262 20.2089C129.021 20.2089 128.857 20.1871 128.813 20.0781C128.649 19.6421 128.496 10.0826 128.496 10.0826L139.479 17.1786C140.409 17.7781 141.437 18.1923 142.531 18.4103L147.443 19.3696C148.132 19.5004 148.778 19.7838 149.358 20.1762L164.706 30.782H165.592L149.762 19.2605C149.161 18.8245 148.483 18.5302 147.75 18.3776V18.3558Z" fill="#009ADE"/></g><g class="lts"><path style="--i:0" d="M12.3398 45.2029V41.4859C12.3398 39.0661 10.9395 37.5401 8.29217 37.5401H4.94466C4.04762 37.5401 3.61004 36.9515 3.43501 36.4283C2.05662 36.9406 1.38931 38.1396 1.38931 39.404C1.38931 40.6248 1.84877 41.2352 2.45045 41.5949C3.1834 42.0309 4.88997 42.0418 6.18083 42.0418C7.03412 42.0418 7.35136 42.3579 7.37324 43.2082V44.6252C2.51608 45.2029 0.0109253 48.9634 0.0109253 53.2799C0.0109253 57.9778 2.97554 62.0109 8.68599 62.0109C14.3964 62.0109 17.3611 57.9778 17.3611 53.2799C17.3611 49.7264 15.6545 46.5436 12.3398 45.2138V45.2029ZM8.67505 57.3783C6.39962 57.3783 4.93372 56.0485 4.93372 53.269C4.93372 50.4894 6.39962 49.1596 8.67505 49.1596C10.9505 49.1596 12.4164 50.4894 12.4164 53.269C12.4164 56.0485 10.9505 57.3783 8.67505 57.3783Z" fill="#EA0029"/><path style="--i:1" d="M29.7774 36.7117H26.5503C25.6094 36.7117 24.8437 37.4747 24.8437 38.4121V39.0879C24.8437 45.3446 31.5059 46.9578 31.5059 52.3098V53.4325C31.5059 56.212 30.3791 57.3783 28.0927 57.3783C25.8064 57.3783 24.6796 55.8196 24.6796 52.6041V51.3397C24.6796 50.4022 23.9138 49.6392 22.973 49.6392H19.7458V52.6041C19.7458 57.52 22.3823 62 28.0927 62C33.8032 62 36.4396 57.9124 36.4396 53.4325V52.3098C36.4396 45.3337 29.7774 43.012 29.7774 38.8372V36.7008V36.7117Z" fill="#EA0029"/><path style="--i:2" d="M51.9191 45.8678C53.2209 44.6797 53.8664 42.9793 53.8664 40.8319V40.1888C53.8664 38.1178 52.2911 36.7117 50.7158 36.7117H47.6418C48.495 37.7581 48.9436 39.0007 48.9436 40.5812C48.9436 43.5788 47.6418 44.1892 45.3663 44.1892H44.1411V46.9251C44.1411 47.8843 44.9178 48.6691 45.8914 48.6691H47.5324C49.8078 48.6691 51.2737 50.0316 51.2737 53.0292C51.2737 56.0267 49.8078 57.3892 47.5324 57.3892C45.2569 57.3892 43.791 55.8305 43.791 52.615V51.3506C43.791 50.4131 43.0253 49.6501 42.0845 49.6501H38.8573V52.615C38.8573 57.5309 41.8219 62.0109 47.5324 62.0109C53.2428 62.0109 56.2074 57.7271 56.2074 53.0292C56.2074 49.7482 54.7525 47.1431 51.9301 45.8678H51.9191Z" fill="#EA0029"/><path style="--i:3" d="M69.313 36.4174C67.322 36.4174 65.5389 37.3112 64.3465 38.7064C63.154 37.3003 61.3709 36.4174 59.3799 36.4174H56.9294V39.295C56.9294 40.2542 57.7061 41.039 58.6798 41.039H59.8394C60.9661 41.039 61.8741 41.9437 61.8741 43.0665V46.5872H65.1013C66.0421 46.5872 66.8079 45.8242 66.8079 44.8868V43.0665C66.8079 41.9437 67.7158 41.039 68.8426 41.039C69.9694 41.039 70.8774 41.9437 70.8774 43.0665V52.6041C70.8774 55.8196 69.4115 57.3783 67.136 57.3783C64.8606 57.3783 63.3947 55.8196 63.3947 52.6041V51.3397C63.3947 50.4022 62.6289 49.6392 61.6881 49.6392H58.461V52.6041C58.461 57.52 61.4256 62 67.136 62C72.8465 62 75.8111 57.52 75.8111 52.6041V42.903C75.8111 39.3168 72.8902 36.4174 69.3021 36.4174H69.313Z" fill="#EA0029"/><path style="--i:4" d="M88.14 45.3664C86.2365 45.3664 84.7268 45.8678 83.5672 46.7071V43.3499C83.5672 42.2271 84.4752 41.3224 85.602 41.3224H92.5814C93.5441 41.3224 94.3317 40.5485 94.3317 39.5784V36.7008H85.0659C81.5106 36.7008 78.6335 39.5675 78.6335 43.1101V61.6403H81.8607C82.8015 61.6403 83.5672 60.8773 83.5672 59.9399V54.7623C83.5672 51.5468 85.0331 49.988 87.3085 49.988C89.584 49.988 91.0499 51.5468 91.0499 54.7623V61.6403H94.277C95.2178 61.6403 95.9836 60.8773 95.9836 59.9399V54.7623C95.9836 49.8463 93.8504 45.3664 88.14 45.3664Z" fill="#EA0029"/><path style="--i:5" d="M107.394 36.4174C101.683 36.4174 98.7185 40.8973 98.7185 45.8133V61.6403H101.946C102.886 61.6403 103.652 60.8773 103.652 59.9399V45.8133C103.652 42.5977 105.118 41.039 107.394 41.039C109.669 41.039 111.135 42.5977 111.135 45.8133V61.6403H114.362C115.303 61.6403 116.069 60.8773 116.069 59.9399V45.8133C116.069 40.8973 113.104 36.4174 107.394 36.4174Z" fill="#EA0029"/><path style="--i:6" d="M128.671 36.7117H125.444C124.503 36.7117 123.737 37.4747 123.737 38.4121V39.0879C123.737 45.3446 130.399 46.9578 130.399 52.3098V53.4325C130.399 56.212 129.273 57.3783 126.986 57.3783C124.7 57.3783 123.573 55.8196 123.573 52.6041V51.3397C123.573 50.4022 122.807 49.6392 121.867 49.6392H118.639V52.6041C118.639 57.52 121.276 62 126.986 62C132.697 62 135.333 57.9124 135.333 53.4325V52.3098C135.333 45.3337 128.671 43.012 128.671 38.8372V36.7008V36.7117Z" fill="#EA0029"/><path style="--i:7" d="M147.235 44.538C145.332 44.538 143.822 44.9849 142.663 45.7588V43.3499C142.663 42.2271 143.571 41.3224 144.697 41.3224H151.677C152.64 41.3224 153.427 40.5485 153.427 39.5784V36.7008H144.161C140.606 36.7008 137.729 39.5675 137.729 43.1101V53.269C137.729 57.9669 140.694 62 146.404 62C152.114 62 155.079 57.9669 155.079 53.269C155.079 48.571 152.946 44.538 147.235 44.538ZM146.404 57.3783C144.129 57.3783 142.663 56.0485 142.663 53.269C142.663 50.4895 144.129 49.1596 146.404 49.1596C148.679 49.1596 150.145 50.4895 150.145 53.269C150.145 56.0485 148.679 57.3783 146.404 57.3783Z" fill="#EA0029"/><path style="--i:8" d="M166.325 36.4174C160.615 36.4174 157.65 40.8973 157.65 45.8133V61.6403H160.877C161.818 61.6403 162.584 60.8773 162.584 59.9399V45.8133C162.584 42.5977 164.05 41.039 166.325 41.039C168.6 41.039 170.066 42.5977 170.066 45.8133V61.6403H173.293C174.234 61.6403 175 60.8773 175 59.9399V45.8133C175 40.8973 172.035 36.4174 166.325 36.4174Z" fill="#EA0029"/></g><defs>
+<linearGradient id="introGrad" x1="86.324" y1="30.7929" x2="86.324" y2="0" gradientUnits="userSpaceOnUse">
+<stop offset="0.18" stop-color="white"/>
+<stop offset="0.22" stop-color="#F6F8FB"/>
+<stop offset="0.28" stop-color="#E0E6F3"/>
+<stop offset="0.36" stop-color="#BBC9E6"/>
+<stop offset="0.45" stop-color="#89A0D3"/>
+<stop offset="0.54" stop-color="#486CBB"/>
+<stop offset="0.64" stop-color="#0033A1"/>
+</linearGradient>
+<clipPath id="introClip">
+<rect width="175" height="62" fill="white"/>
+</clipPath>
+</defs></svg>
+</div>
+<div id="bg" class="on"><img src="assets/bakuriani-hero.jpg" alt=""></div>
+<div id="mark" aria-hidden="true"><span></span></div>
+<div id="gl"></div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="assets/logo.svg" alt="ბაკურიანი"></a>
+    <div class="right">
+      <button class="sound on" id="sound" aria-pressed="true" aria-label="ხმა"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path class="spk" d="M4.6 9.4c0-.6.4-1 1-1h2.3l3.5-2.9c.5-.4 1.3-.1 1.3.6v11.8c0 .7-.8 1-1.3.6l-3.5-2.9H5.6c-.6 0-1-.4-1-1z" fill="currentColor" stroke="none"/><path class="a1" d="M15.6 9.2a4 4 0 0 1 0 5.6"/><path class="a2" d="M18.3 6.6a7.6 7.6 0 0 1 0 10.8"/><path class="x" d="M16.2 9.8l4.2 4.4M20.4 9.8l-4.2 4.4"/></svg></button>
+      <button class="lang" type="button" aria-label="ენა"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5s1.2-6.1 3.6-8.5z"/></svg><span>GEO</span></button>
+      <button class="burger" id="burger" aria-label="მენიუ" aria-expanded="false"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</nav>
+<div class="menu" id="menu">
+  <div class="wrap menu-in">
+    <div class="menu-links">
+      <a class="mt" href="#range">ასორტიმენტი</a>
+      <a class="mt" href="#source">წყარო</a>
+      <a class="mt" href="#buy">სად ვიყიდო</a>
+      <a class="mt" href="#">ბლოგი</a>
+    </div>
+    <div class="menu-side">
+      <div><h4 class="mt">კონტაქტი</h4><p>ბიძინა კვერნაძის 10, თბილისი<br><a href="tel:+995322484484">(995 32) 248-44-84</a><br><a href="mailto:marketing@borjomi.com">marketing@borjomi.com</a></p></div>
+      <div><h4 class="mt">სოციალური</h4><p><a href="#">Instagram</a><br><a href="#">Facebook</a></p></div>
+      <div><h4 class="mt">ენა</h4><p class="lng"><button type="button" data-l="ka">GEO</button><button type="button" data-l="en">ENG</button></p></div>
+    </div>
+  </div>
+</div>
+
+<div class="concept">დიზაინის კონცეფცია · არაოფიციალური</div>
+<main>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="copy">
+        <h1 class="mt"><span>მთის წყალი</span><span class="l2">1700 მეტრიდან</span></h1>
+        <p class="lead">წყარო ბორჯომ-ბაკურიანის ხეობაშია. წყალი რბილი და სუფთაა, ზუსტად ისეთი, როგორიც მთაში.</p>
+        <div class="btns">
+          <a class="btn mt" href="#range">ასორტიმენტი</a>
+          <a class="btn ghost mt" href="#buy">სად ვიყიდო</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="range" style="--n:9">
+    <div class="stage">
+      <div class="wrap">
+        <div class="r-list">
+          <div class="r-title mt">ასორტიმენტი</div>
+          <ul>
+            <li class="on"><em>01</em><span class="mt">კლასიკა</span></li>
+            <li><em>02</em><span class="mt">0+</span></li>
+            <li><em>03</em><span class="mt">ბავშვები</span></li>
+            <li><em>04</em><span class="mt">ოჯახი</span></li>
+            <li><em>05</em><span class="mt">სპორტი</span></li>
+            <li><em>06</em><span class="mt">ციტრუსის მიქსი</span></li>
+            <li><em>07</em><span class="mt">ლიმონი</span></li>
+            <li><em>08</em><span class="mt">ატამი</span></li>
+            <li><em>09</em><span class="mt">სპრეი</span></li>
+          </ul>
+        </div>
+        <div></div>
+        <div class="r-panels">
+          <article class="panel on" data-color="#3E9BE0" data-name="კლასიკა">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>01</b> / 09</div>
+            <h2 class="mt">კლასიკა</h2>
+            <p class="lead">ბუნებრივი მინერალური წყალი ბაკურიანის წყაროდან. გაზიანი და უგაზო.</p>
+            <div class="tags mt"><span>0.5 ლ</span><span>1 ლ</span><span>1.5 ლ</span><span>მინა</span></div>
+            <img class="prod" src="assets/p-classic.png" alt="ბაკურიანი კლასიკა 0.5, 1 და 1.5 ლიტრი">
+          </article>
+          <article class="panel" data-color="#8E6FD1" data-name="0+">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>02</b> / 09</div>
+            <h2 class="mt">0+</h2>
+            <p class="lead">დაბალი მინერალიზაცია პირველი დღიდან. ჩვილის საკვებისთვის და დასალევად.</p>
+            <div class="tags mt"><span>0+ თვე</span><span>დაბალი მინერალიზაცია</span></div>
+            <img class="prod" src="assets/p-zero.png" alt="ბაკურიანი 0+">
+          </article>
+          <article class="panel" data-color="#F2B705" data-name="ბავშვები">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>03</b> / 09</div>
+            <h2 class="mt">ბავშვები</h2>
+            <p class="lead">პატარა ბოთლი, სპორტული ხუფი და საყვარელი გმირები.</p>
+            <div class="tags mt"><span>0.33 ლ</span><span>სპორტული ხუფი</span></div>
+            <img class="prod" src="assets/p-kids.png" alt="ბაკურიანი ბავშვებისთვის">
+          </article>
+          <article class="panel" data-color="#1F5FAF" data-name="ოჯახი">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>04</b> / 09</div>
+            <h2 class="mt">ოჯახი</h2>
+            <p class="lead">დიდი ბოთლები სახლისა და ოფისისთვის. მიწოდებით კართან.</p>
+            <div class="tags mt"><span>5 ლ</span><span>19 ლ</span><span>მიწოდება</span></div>
+            <img class="prod" src="assets/p-family.png" alt="ბაკურიანი 19 ლიტრი">
+          </article>
+          <article class="panel" data-color="#E04848" data-name="სპორტი">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>05</b> / 09</div>
+            <h2 class="mt">სპორტი</h2>
+            <p class="lead">სპორტული ხუფი ერთი ხელით. ვარჯიშზე, მატჩზე, მთაში.</p>
+            <div class="tags mt"><span>0.75 ლ</span><span>სპორტული ხუფი</span></div>
+            <img class="prod" src="assets/p-sport.png" alt="ბაკურიანი სპორტი">
+          </article>
+          <article class="panel" data-color="#3FBFB0" data-name="ციტრუსის მიქსი">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>06</b> / 09</div>
+            <h2 class="mt">ციტრუსის მიქსი</h2>
+            <p class="lead">მთის წყალი ლიმონის, ლაიმისა და ფორთოხლის გემოთი.</p>
+            <div class="tags mt"><span>0 შაქარი და კალორია</span><span>0.5 ლ</span></div>
+            <img class="prod" src="assets/p-fruit.png" alt="ბაკურიანი ციტრუსის მიქსი">
+          </article>
+          <article class="panel" data-color="#F2C21B" data-name="ლიმონი">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>07</b> / 09</div>
+            <h2 class="mt">ლიმონი</h2>
+            <p class="lead">მთის წყალი ლიმონის გემოთი. მსუბუქი და გამაგრილებელი.</p>
+            <div class="tags mt"><span>0 შაქარი და კალორია</span><span>0.5 ლ</span></div>
+            <img class="prod" src="assets/p-fruit.png" alt="ბაკურიანი ლიმონი">
+          </article>
+          <article class="panel" data-color="#F59A63" data-name="ატამი">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>08</b> / 09</div>
+            <h2 class="mt">ატამი</h2>
+            <p class="lead">მთის წყალი ნაზი ატმის გემოთი.</p>
+            <div class="tags mt"><span>0.5 ლ</span></div>
+            <img class="prod" src="assets/p-fruit.png" alt="ბაკურიანი ატამი">
+          </article>
+          <article class="panel" data-color="#6FA8D6" data-name="სპრეი">
+            <div class="progress"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="counter"><b>09</b> / 09</div>
+            <h2 class="mt">სპრეი</h2>
+            <p class="lead">მთის წყალი კანისთვის. ნაზი ნისლი, რომელიც აგრილებს და ატენიანებს.</p>
+            <div class="tags mt"><span>150 მლ</span><span>ყველა ტიპის კანი</span></div>
+            <img class="prod" src="assets/p-spray.png" alt="ბაკურიანი მინერალური წყლის სპრეი">
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="sec" id="moments">
+    <div class="wrap">
+      <h2 class="mt moments-h">ბაკურიანი<br>ყოველ დღეს</h2>
+      <div class="grid">
+        <figure><div class="ph"><img src="assets/girls.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">ბაღში</figcaption></figure>
+        <figure><div class="ph"><img src="assets/team.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">მატჩის შემდეგ</figcaption></figure>
+        <figure><div class="ph"><img src="assets/baby.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">პირველი წყალი</figcaption></figure>
+        <figure><div class="ph"><img src="assets/kitchen.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სამზარეულოში</figcaption></figure>
+        <figure><div class="ph"><img src="assets/sport.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">კორტზე</figcaption></figure>
+        <figure><div class="ph"><img src="assets/spray.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სიგრილე</figcaption></figure>
+        <figure><div class="ph"><img src="assets/kids.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სკოლის გზაზე</figcaption></figure>
+        <figure><div class="ph"><img src="assets/picnic.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">პიკნიკზე</figcaption></figure>
+      </div>
+      <div class="grid-pad"></div>
+    </div>
+  </section>
+  <section id="source">
+    <div class="wrap">
+      <h2 class="mt"><span>დაბადებული</span><br><span class="l2">ბაკურიანში</span></h2>
+      <p class="lead">წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.</p>
+      <div class="alt-num"><b>1700</b><span>მეტრი ზღვის<br>დონიდან</span></div>
+    </div>
+  </section>
+  <section class="sec" id="buy">
+    <div class="wrap buy">
+      <div>
+        <h2 class="mt">სად ვიყიდო</h2>
+        <p class="lead">ბაკურიანი ყველა სუპერმარკეტშია. 5 და 19 ლიტრიან ბოთლებს სახლში ან ოფისში მოგიტანთ.</p>
+        <div class="btns">
+          <a class="btn mt" href="tel:+995322484484">მიწოდების შეკვეთა</a>
+          <a class="btn ghost mt" href="https://www.google.com/maps/search/%E1%83%A1%E1%83%A3%E1%83%9E%E1%83%94%E1%83%A0%E1%83%9B%E1%83%90%E1%83%A0%E1%83%99%E1%83%94%E1%83%A2%E1%83%98" target="_blank" rel="noopener">მაღაზიების რუკა</a>
+        </div>
+        <p class="hotline"><span class="mt">ცხელი ხაზი</span><a href="tel:+995322484484">(995 32) 248-44-84</a></p>
+      </div>
+      <figure class="buy-ph"><img src="assets/family.jpg" alt="ოჯახი სახლში, ბაკურიანის ბოთლით" loading="lazy"></figure>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div><img src="assets/logo.svg" alt="ბაკურიანი"><p>ბუნებრივი მინერალური წყალი<br>ბორჯომ-ბაკურიანის ხეობიდან.</p></div>
+      <div><h4 class="mt">ნავიგაცია</h4><ul><li><a href="#range">ასორტიმენტი</a></li><li><a href="#source">წყარო</a></li><li><a href="#buy">სად ვიყიდო</a></li><li><a href="#">ბლოგი</a></li></ul></div>
+      <div><h4 class="mt">კონტაქტი</h4><ul>
+        <li>ბიძინა კვერნაძის 10, თბილისი</li>
+        <li><a href="tel:+995322484484">(995 32) 248-44-84</a></li>
+        <li><a href="mailto:marketing@borjomi.com">marketing@borjomi.com</a></li>
+      </ul></div>
+      <div><h4 class="mt">სოციალური</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li></ul></div>
+    </div>
+    <div class="f-word mt" aria-hidden="true">ბაკურიანი</div>
+    <div class="f-bot"><span>© 2026 IDS ბორჯომი საქართველო</span><span class="f-links"><a href="#">წესები და პირობები</a><a href="#">კონფიდენციალურობა</a><span>ფოტო: Agshin Osmanov / Unsplash</span></span></div>
+  </div>
+</footer>
+
+<script>
+/* Opening: the logo assembles, holds a breath, fades. Once per visit; a click skips. */
+(() => {
+  const intro = document.getElementById('intro');
+  let seen = false; try { seen = sessionStorage.getItem('bk-intro') === '1'; sessionStorage.setItem('bk-intro', '1'); } catch (e) {}
+  const quick = seen || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ended = false;
+  const end = () => { if (ended) return; ended = true; intro.classList.add('out'); document.documentElement.classList.remove('intro-on'); window.introDone = true; setTimeout(() => intro.remove(), 1300); };
+  if (quick) { intro.classList.add('quick'); setTimeout(end, 500); } else { intro.classList.add('play'); setTimeout(end, 3300); }
+  intro.addEventListener('click', end);
+})();
+/* Real Mtavruli: Chrome won't map Georgian through text-transform:uppercase, so swap the characters
+   (Mkhedruli U+10D0–10FA, 10FD–10FF → Mtavruli U+1C90–1CBA, 1CBD–1CBF). */
+window.toMt = s => s.replace(/[ა-ჺჽ-ჿ]/g, c => String.fromCharCode(c.charCodeAt(0) + 0xBC0));
+document.querySelectorAll('.mt').forEach(el => {
+  const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  for (let n; (n = w.nextNode());) n.nodeValue = toMt(n.nodeValue);
+});
+/* fit a single-line element to a width (used for the footer wordmark and the outline word) */
+window.fitText = (el, maxW, maxPx) => {
+  el.style.fontSize = '100px';
+  const r = document.createRange(); r.selectNodeContents(el);
+  el.style.fontSize = Math.min(maxPx, 100 * maxW / r.getBoundingClientRect().width) + 'px';
+};
+const fitWord = () => { const f = document.querySelector('.f-word'); fitText(f, f.clientWidth - 2, 1000); };
+document.fonts.ready.then(fitWord); addEventListener('resize', fitWord);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile = () => innerWidth <= 800;
+const clamp01 = x => Math.max(0, Math.min(1, x));
+const smooth = x => x * x * (3 - 2 * x);
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/* ---------- renderer: transparent, the photo lives in #bg underneath ---------- */
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+$('#gl').appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(renderer), 0.04).texture;
+const camera = new THREE.PerspectiveCamera(30, innerWidth / innerHeight, 0.1, 100);
+camera.position.set(0, 0, 10);
+scene.add(new THREE.HemisphereLight('#ffffff', '#cfe3f2', 0.9));
+const key = new THREE.DirectionalLight('#ffffff', 2.2); key.position.set(4, 6, 5); scene.add(key);
+const rim = new THREE.DirectionalLight('#bfe0ff', 2.0); rim.position.set(-5, 2, -4); scene.add(rim);
+
+/* ---------- bottle: silhouette traced from the real 0.5 L Bakuriani render ---------- */
+const bottle = new THREE.Group(); scene.add(bottle);
+const HB = 5, RB = HB / 3.554 / 2;
+const SIL = [[0.426,1.0],[0.45,0.983],[0.465,0.967],[0.468,0.95],[0.458,0.933],[0.436,0.917],[0.413,0.9],[0.436,0.883],[0.51,0.867],[0.591,0.85],[0.663,0.833],[0.73,0.817],[0.79,0.8],[0.842,0.783],[0.889,0.767],[0.926,0.75],[0.95,0.733],[0.96,0.717],[0.955,0.7],[0.945,0.683],[0.938,0.667],[0.941,0.65],[0.948,0.633],[0.945,0.617],[0.941,0.6],[0.945,0.583],[0.945,0.567],[0.943,0.55],[0.955,0.533],[0.972,0.517],[0.988,0.5],[0.993,0.483],[0.973,0.467],[0.936,0.45],[0.909,0.433],[0.899,0.417],[0.888,0.4],[0.873,0.383],[0.859,0.367],[0.847,0.35],[0.842,0.333],[0.839,0.317],[0.834,0.3],[0.835,0.283],[0.84,0.267],[0.847,0.25],[0.856,0.233],[0.866,0.217],[0.881,0.2],[0.898,0.183],[0.911,0.167],[0.931,0.15],[0.965,0.133],[0.987,0.117],[0.988,0.1],[0.988,0.083],[0.985,0.067],[0.958,0.05],[0.886,0.033],[0.656,0.017],[0.178,0.0]];
+const V = (r, h, k = 1) => new THREE.Vector2(r * RB * k, (h - 0.5) * HB);
+const between = (lo, hi) => SIL.filter(p => p[1] >= lo && p[1] <= hi);
+// clear PET: mostly see-through so the mountains show through it, bright clear-coat highlights carry the shape
+const glassMat = new THREE.MeshPhysicalMaterial({
+  color: '#C2E2F7', transparent: true, opacity: 0.56, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.03,
+  envMapIntensity: 2.4, specularIntensity: 1, side: THREE.DoubleSide, depthWrite: false
+});
+bottle.add(new THREE.Mesh(new THREE.LatheGeometry([...between(0, 0.92).map(p => V(p[0], p[1])), V(0, 0)].reverse(), 128), glassMat));
+const waterMat = new THREE.MeshPhysicalMaterial({ color: '#6CB4E8', transparent: true, opacity: 0.34, roughness: 0.1, depthWrite: false });
+bottle.add(new THREE.Mesh(new THREE.LatheGeometry([V(0, 0.02), ...between(0.02, 0.86).map(p => V(p[0], p[1], 0.94)).reverse(), V(0, 0.86)], 96), waterMat));
+const capMat = new THREE.MeshStandardMaterial({ color: '#3E9BE0', roughness: 0.42 });
+bottle.add(new THREE.Mesh(new THREE.LatheGeometry([...between(0.92, 1).map(p => V(p[0], p[1], 1.02)), V(0, 1)].reverse(), 40), capMat));
+const lc = document.createElement('canvas'); lc.width = 1024; lc.height = 448;
+const ctx = lc.getContext('2d');
+const labelTex = new THREE.CanvasTexture(lc); labelTex.colorSpace = THREE.SRGBColorSpace; labelTex.anisotropy = 8;
+labelTex.wrapS = THREE.RepeatWrapping; labelTex.offset.x = 0.25;   // artwork is centred at a quarter turn, the lathe front is u = 0
+const label = new THREE.Mesh(new THREE.LatheGeometry(between(0.52, 0.875).map(p => V(p[0], p[1], 1.015)).reverse(), 128), new THREE.MeshStandardMaterial({ map: labelTex, roughness: 0.55, transparent: true, alphaTest: 0.02 }));
+label.renderOrder = 2; bottle.add(label);
+const logoImg = new Image(); logoImg.src = 'assets/logo.svg';
+const sceneImg = new Image(); sceneImg.src = 'assets/label-scene.jpg';
+let labelColor = '#3E9BE0', labelName = 'კლასიკა', labelStyle = 'classic';
+const hasLogo = () => logoImg.complete && logoImg.naturalWidth;
+function drawLabel() {
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, 1024, 448); ctx.textAlign = 'center';
+  if (labelStyle === 'zero') {                       // 0+: small navy label, white logo plate, big 0+
+    ctx.clearRect(0, 0, 1024, 448); ctx.fillStyle = '#17264B'; ctx.fillRect(0, 150, 1024, 230);
+    for (let k = 0; k < 2; k++) { const ox = k * 512 + 256;
+      ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.roundRect(ox - 104, 168, 208, 76, 14); ctx.fill();
+      if (hasLogo()) ctx.drawImage(logoImg, ox - 82, 178, 164, 58);
+      ctx.fillStyle = '#B99BF5'; ctx.font = '900 64px "Noto Sans Georgian"'; ctx.fillText('0+', ox, 316);
+      ctx.fillStyle = '#ffffff'; ctx.font = '600 15px "Noto Sans Georgian"'; ctx.fillText('ბუნებრივი მინერალური წყალი', ox, 350); }
+    labelTex.needsUpdate = true; return;
+  }
+  if (labelStyle === 'sport') {                      // sport: cool blue sleeve, red mark
+    const g = ctx.createLinearGradient(0, 0, 0, 448); g.addColorStop(0, '#E4F3FC'); g.addColorStop(1, '#A9D5F3');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, 1024, 448);
+    for (let k = 0; k < 2; k++) { const ox = k * 512 + 256;
+      ctx.fillStyle = '#E04848'; ctx.beginPath(); ctx.moveTo(ox - 256, 0); ctx.lineTo(ox + 40, 0); ctx.lineTo(ox - 60, 70); ctx.lineTo(ox - 256, 70); ctx.fill();
+      if (hasLogo()) ctx.drawImage(logoImg, ox - 135, 150, 270, 96);
+      ctx.fillStyle = '#E04848'; ctx.font = '900 34px "Noto Sans Georgian"'; ctx.fillText(toMt('სპორტი'), ox, 300);
+      ctx.fillStyle = '#3E5068'; ctx.font = '500 16px "Noto Sans Georgian"'; ctx.fillText('ბუნებრივი მინერალური წყალი · 0.75 ლ', ox, 336); }
+    labelTex.needsUpdate = true; return;
+  }
+  if (labelStyle === 'fruit') {                      // flavoured: colour band on top, white below
+    for (let k = 0; k < 2; k++) { const ox = k * 512 + 256;
+      ctx.fillStyle = labelColor; ctx.fillRect(ox - 256, 0, 512, 120);
+      ctx.fillStyle = '#ffffff'; ctx.font = '700 22px "Noto Sans Georgian"'; ctx.fillText(toMt('0 შაქარი და კალორია'), ox, 72);
+      if (hasLogo()) ctx.drawImage(logoImg, ox - 130, 160, 260, 92);
+      ctx.fillStyle = '#5A6B80'; ctx.font = '500 17px "Noto Sans Georgian"'; ctx.fillText('წყალი ხილის გემოთი', ox, 296);
+      ctx.fillStyle = labelColor; ctx.font = '900 30px "Noto Sans Georgian"'; ctx.fillText(toMt(labelName), ox, 340); }
+    labelTex.needsUpdate = true; return;
+  }
+  for (let k = 0; k < 2; k++) {
+    const ox = k * 512;
+    if (sceneImg.complete && sceneImg.naturalWidth) ctx.drawImage(sceneImg, ox, 0, 512, 205);
+    if (logoImg.complete && logoImg.naturalWidth) ctx.drawImage(logoImg, ox + 126, 232, 260, 92);
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#5A6B80'; ctx.font = '500 17px "Noto Sans Georgian"'; ctx.fillText('ბუნებრივი მინერალური წყალი', ox + 256, 352);
+    ctx.fillStyle = labelColor; ctx.font = '700 19px "Noto Sans Georgian"'; ctx.fillText(toMt(labelName), ox + 256, 380);
+    ctx.textAlign = 'left';
+    ctx.fillRect(ox + 20, 404, 150, 26);
+    ctx.fillStyle = '#9fb3c8'; ctx.font = '500 12px "Noto Sans Georgian"'; ctx.fillText('ბაკურიანი · 1700 მ · 0.5 ლ', ox + 190, 422);
+  }
+  labelTex.needsUpdate = true;
+}
+document.fonts.ready.then(drawLabel); logoImg.onload = drawLabel; sceneImg.onload = drawLabel; drawLabel();
+
+/* ---------- one shape per product: bottle (screw or sport cap), kids character bottle, 19 L jug, spray can ---------- */
+const vBottle = new THREE.Group(); [...bottle.children].forEach(c => vBottle.add(c)); bottle.add(vBottle);
+const screwCap = vBottle.children[2];
+const lathe = (pts, mat, seg = 96) => new THREE.Mesh(new THREE.LatheGeometry(pts.map(([r, h]) => new THREE.Vector2(r, h)), seg), mat);
+const ringMat = new THREE.MeshPhysicalMaterial({ color: '#F4F8FB', roughness: 0.3, transparent: true, opacity: 0.92, clearcoat: 0.6 });
+const sportCap = new THREE.Group(), zeroCap = new THREE.Group(); sportCap.visible = zeroCap.visible = false; vBottle.add(sportCap, zeroCap);
+const domeMat = new THREE.MeshPhysicalMaterial({ color: '#ffffff', transparent: true, opacity: 0.16, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 2, side: THREE.DoubleSide, depthWrite: false });
+{ const y0 = (0.9 - 0.5) * HB, r = 0.47 * RB, ribs = [];
+  // traced from the real sport bottle: clear blue collar with two rings, white ribbed band, red push-pull cap, narrow drinking spout
+  const ribbed = (m, h0, h1, n, amp) => { const pos = m.geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) { const y = pos.getY(i) - y0; if (y < h0 || y > h1) continue;
+      const x = pos.getX(i), z = pos.getZ(i), k = 1 + amp * Math.cos(n * Math.atan2(x, z)); pos.setX(i, x * k); pos.setZ(i, z * k); }
+    m.geometry.computeVertexNormals(); return m; };
+  const L = (pts, mat, seg = 96) => lathe(pts.map(([rr, h]) => [rr, y0 + h]), mat, seg);
+  const collarMat = new THREE.MeshPhysicalMaterial({ color: '#8FC6EC', transparent: true, opacity: 0.72, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.6 });
+  sportCap.add(L([[0, 0], [0.345, 0], [0.348, 0.015], [0.345, 0.03], [0.31, 0.04], [0.31, 0.13], [0.335, 0.14], [0.338, 0.155], [0.335, 0.17], [0.31, 0.18], [0.31, 0.235], [0, 0.235]], collarMat));
+  sportCap.add(ribbed(L([[0, 0.23], [0.3, 0.23], [0.302, 0.24], [0.302, 0.31], [0.298, 0.322], [0, 0.322]], ringMat, 144), 0.235, 0.315, 48, 0.018));
+  const redCap = L([[0, 0.315], [0.302, 0.315], [0.306, 0.33], [0.306, 0.5], [0.294, 0.53], [0.272, 0.59], [0.265, 0.62], [0.243, 0.65], [0.228, 0.675], [0.206, 0.705], [0.175, 0.726], [0.15, 0.737], [0.11, 0.745], [0.094, 0.748], [0.09, 0.772], [0.08, 0.781], [0.048, 0.781], [0.04, 0.772], [0, 0.772]], new THREE.MeshPhysicalMaterial({ color: '#C92A26', roughness: 0.28, clearcoat: 0.6, clearcoatRoughness: 0.2, envMapIntensity: 0.9 }), 160);
+  sportCap.add(ribbed(redCap, 0.335, 0.495, 40, 0.022));
+  const hole = new THREE.Mesh(new THREE.CircleGeometry(0.038, 24), new THREE.MeshStandardMaterial({ color: '#5A1612', roughness: 0.6 }));
+  hole.rotation.x = -Math.PI / 2; hole.position.y = y0 + 0.773; sportCap.add(hole);
+  // 0+: purple ribbed skirt, shoulder up to a spout, clear carry loop
+  const zr = [];
+  for (let k = 0; k <= 12; k++) zr.push([r * (k % 2 ? 1.0 : 1.03), y0 + k * 0.026]);
+  zeroCap.add(lathe([[0, y0], ...zr, [r * 0.98, y0 + 0.34], [r * 0.7, y0 + 0.42], [r * 0.52, y0 + 0.46], [r * 0.5, y0 + 0.66], [r * 0.42, y0 + 0.7], [0, y0 + 0.7]], capMat, 64));
+  const loop = new THREE.Mesh(new THREE.TorusGeometry(r * 0.72, 0.022, 10, 40, Math.PI), domeMat);
+  loop.position.y = y0 + 0.38; loop.scale.y = 1.25; zeroCap.add(loop); }
+// kids: rounded character bottle wearing the real printed sleeve
+const kidsTex = new THREE.TextureLoader().load('assets/kids-sleeve.jpg'); kidsTex.colorSpace = THREE.SRGBColorSpace; kidsTex.anisotropy = 8; kidsTex.wrapS = THREE.RepeatWrapping; kidsTex.offset.x = 0.25;
+const vKids = new THREE.Group(); vKids.visible = false; bottle.add(vKids);
+{ const H = HB, R = H * 0.15, P = (r, h) => [r * R, (h - 0.5) * H];
+  const shape = [[0, 0], [0.7, 0], [0.88, 0.008], [0.94, 0.02], [1, 0.06], [0.99, 0.1], [0.88, 0.14], [0.78, 0.18], [0.78, 0.22], [0.88, 0.26], [0.95, 0.3], [0.95, 0.34], [0.91, 0.38], [0.87, 0.42], [0.78, 0.46], [0.69, 0.5], [0.68, 0.54], [0.73, 0.58], [0.84, 0.62], [0.93, 0.66], [0.98, 0.7], [1, 0.74], [0.95, 0.78], [0.85, 0.82], [0.64, 0.86], [0.46, 0.88]];
+  const sleeve = lathe(shape.map(([r, h]) => P(r * 1.005, h)), new THREE.MeshStandardMaterial({ map: kidsTex, roughness: 0.45 }), 96);
+  { const uv = sleeve.geometry.attributes.uv, pos = sleeve.geometry.attributes.position;
+    for (let i = 0; i < uv.count; i++) uv.setY(i, ((pos.getY(i) / H + 0.5) - 0.02) / 0.86); }        // print runs top to bottom over the body
+  vKids.add(sleeve);
+  vKids.add(lathe([P(0, 0.875), P(0.46, 0.875), P(0.44, 0.9), P(0.44, 0.912), P(0, 0.912)], glassMat, 48));
+  vKids.add(lathe([P(0, 0.908), P(0.48, 0.908), P(0.49, 0.985), P(0.45, 1), P(0, 1)], new THREE.MeshStandardMaterial({ color: '#5CB6F2', roughness: 0.4 }), 48)); }
+// family: the 19 L jug, ribbed, tinted blue, white band label
+const jugC = document.createElement('canvas'); jugC.width = 2048; jugC.height = 250;
+const jugTex = new THREE.CanvasTexture(jugC); jugTex.colorSpace = THREE.SRGBColorSpace; jugTex.anisotropy = 8; jugTex.wrapS = THREE.RepeatWrapping; jugTex.offset.x = 0.25;
+function drawJug() { const g = jugC.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0, 0, 2048, 250); g.textAlign = 'center';
+  for (let k = 0; k < 2; k++) { const ox = k * 1024 + 512;
+    if (hasLogo()) g.drawImage(logoImg, ox - 130, 34, 260, 92);
+    g.fillStyle = '#5A6B80'; g.font = '500 17px "Noto Sans Georgian"'; g.fillText('ბუნებრივი მინერალური წყალი', ox, 158);
+    g.fillStyle = '#1F5FAF'; g.font = '900 36px "Noto Sans Georgian"'; g.fillText('19 ლ', ox, 210);
+    g.fillStyle = '#1F5FAF'; g.fillRect(ox - 512, 0, 1024, 8); g.fillRect(ox - 512, 242, 1024, 8); }
+  jugTex.needsUpdate = true; }
+document.fonts.ready.then(drawJug); logoImg.addEventListener('load', drawJug);
+const vJug = new THREE.Group(); vJug.visible = false; bottle.add(vJug);
+{ const H = HB, R = H * 0.262, P = (r, h) => [r * R, (h - 0.5) * H];
+  const prof = [[0, 0], [0.9, 0], [0.98, 0.02], [1, 0.06], [1, 0.19], [0.965, 0.225], [1, 0.26], [1, 0.52], [0.965, 0.555], [1, 0.59], [1, 0.7], [0.95, 0.765], [0.76, 0.84], [0.46, 0.885], [0.3, 0.9], [0.3, 0.93]];
+  const jugGlass = glassMat.clone(); jugGlass.color.set('#9FCBF0'); jugGlass.opacity = 0.62;
+  vJug.add(lathe([...prof.map(([r, h]) => P(r, h)), P(0, 0.93)], jugGlass, 128));
+  const jugWater = waterMat.clone(); jugWater.opacity = 0.42; jugWater.color.set('#5AA8E6');
+  vJug.add(lathe([P(0, 0.02), ...prof.filter(q => q[1] >= 0.02 && q[1] <= 0.8).map(([r, h]) => P(r * 0.95, h)), P(0, 0.8)], jugWater, 96));
+  const band = lathe([P(1.008, 0.29), P(1.008, 0.49)], new THREE.MeshStandardMaterial({ map: jugTex, roughness: 0.5 }), 128);
+  band.renderOrder = 2; vJug.add(band);
+  vJug.add(lathe([P(0, 0.925), P(0.34, 0.925), P(0.35, 0.99), P(0.32, 1), P(0, 1)], new THREE.MeshStandardMaterial({ color: '#2F86D8', roughness: 0.38 }), 48)); }
+let vCan = null;
+const PRODUCT = {
+  'კლასიკა': { v: vBottle, r: RB,  cap: 'screw', label: 'classic', s: 1, sx: 1 },
+  '0+': { v: vBottle, r: RB * 1.12,  cap: 'zero', label: 'zero', s: 0.82, sx: 1.12 },
+  'ბავშვები': { v: vKids, r: HB * 0.15,  s: 0.8 },
+  'ოჯახი': { v: vJug, r: HB * 0.262,  s: 0.94 },
+  'სპორტი': { v: vBottle, r: RB,  cap: 'sport', label: 'sport', s: 1.06, sx: 1.02 },
+  'ციტრუსის მიქსი': { v: vBottle, r: RB,  cap: 'screw', label: 'fruit', s: 1, sx: 1 },
+  'ლიმონი': { v: vBottle, r: RB,  cap: 'screw', label: 'fruit', s: 1, sx: 1 },
+  'ატამი': { v: vBottle, r: RB,  cap: 'screw', label: 'fruit', s: 1, sx: 1 },
+  'სპრეი': { v: 'can', r: HB * 0.13,  s: 0.8 }
+};
+let productScale = 1, psNow = 1, productR = RB;
+const pShC = document.createElement('canvas'); pShC.width = 256; pShC.height = 128;
+{ const g = pShC.getContext('2d');
+  g.filter = 'blur(14px)'; g.fillStyle = 'rgba(25,45,75,.30)'; g.beginPath(); g.ellipse(128, 64, 96, 24, 0, 0, Math.PI * 2); g.fill();
+  g.filter = 'blur(6px)'; g.fillStyle = 'rgba(25,45,75,.42)'; g.beginPath(); g.ellipse(128, 64, 58, 10, 0, 0, Math.PI * 2); g.fill(); }
+const pShadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 0.5), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(pShC), transparent: true, depthWrite: false, opacity: 0 }));
+pShadow.renderOrder = 0; scene.add(pShadow);
+function setProduct(name) {
+  const c = PRODUCT[name] || PRODUCT['კლასიკა'];
+  if (c.v === 'can' && !vCan) {                     // a still copy of the face mist (its cap never pops here)
+    vCan = can.clone(true); vCan.visible = true; vCan.position.set(0, 0, 0); vCan.rotation.set(0, 0, 0); vCan.scale.setScalar(HB / CANH);
+    const ci = can.children.indexOf(cap), cc = vCan.children[ci]; cc.material = capMat2.clone(); cc.material.transparent = false; cc.material.opacity = 1; cc.position.set(0, CAP0, 0); cc.rotation.set(0, 0, 0); cc.visible = true;
+    vCan.traverse(o => { o.visible = true; }); vCan.visible = false; bottle.add(vCan);
+  }
+  const v = c.v === 'can' ? vCan : c.v;
+  [vBottle, vKids, vJug, vCan].forEach(g => g && (g.visible = g === v));
+  productScale = c.s; productR = c.r;
+  if (v === vBottle) { vBottle.scale.set(c.sx, 1, c.sx); screwCap.visible = c.cap === 'screw'; sportCap.visible = c.cap === 'sport'; zeroCap.visible = c.cap === 'zero'; labelStyle = c.label; }
+}
+
+/* ---------- forest fog: reads the photo, finds the dark tree line, and lets mist rise out of it ---------- */
+const photoTex = new THREE.TextureLoader().load('assets/bakuriani-hero.jpg');
+const fogMat = new THREE.ShaderMaterial({
+  transparent: true, depthWrite: false, depthTest: false,
+  uniforms: { uTime: { value: 0 }, uAmt: { value: 1 }, uPhoto: { value: photoTex }, uClear: { value: new THREE.Vector4(0.7, 0.5, 0.1, 0.3) }, uMapA: { value: new THREE.Vector2(1, 1) }, uMapB: { value: new THREE.Vector2() } },
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
+  fragmentShader: `
+    precision highp float;
+    varying vec2 vUv; uniform float uTime, uAmt; uniform sampler2D uPhoto; uniform vec2 uMapA, uMapB; uniform vec4 uClear;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p){ vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1, 0)), u.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), u.x), u.y); }
+    float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++){ v += a * noise(p); p = p * 2.03 + 17.3; a *= 0.5; } return v; }
+    // tree darkness in the photo, used so a band can pass behind the forest in front of it
+    float trees(vec2 q){ vec3 c = texture2D(uPhoto, vec2(q.x, 1.0 - q.y), 2.0).rgb; return smoothstep(0.78, 0.5, dot(c, vec3(0.299, 0.587, 0.114))); }
+    // one fog bank: a soft, billowing body of cloud lying along height y0 (photo space, 0 = top), drifting sideways
+    float bank(vec2 q, float y0, float thick, float speed, float seed){
+      float t = uTime * speed;
+      float wander = (fbm(vec2(q.x * 1.2 + t * 0.4, seed)) - 0.5) * thick * 1.6;      // the top edge rolls up and down along its length
+      float dy = (q.y - y0 - wander) / thick;
+      float body = exp(-dy * dy * 1.2);
+      vec2 p = vec2(q.x * 2.2 + t, q.y * 4.2 + seed - t * 0.15);
+      vec2 w = vec2(fbm(p * 0.6 + seed), fbm(p * 0.6 + seed + 3.7));
+      float n = fbm(p + w * 1.1);                                   // big rounded billows, no streaks
+      return body * smoothstep(0.28, 0.7, n + (body - 0.5) * 0.35);
+    }
+    void main(){
+      vec2 q = vec2(vUv.x, 1.0 - vUv.y) * uMapA + uMapB;             // screen → photo (cover crop, same as the CSS)
+      float tr = trees(q);
+      // upper: wraps the snowy slope, the crest stays visible above it
+      float up   = bank(q, 0.665, 0.06, 0.008, 1.0) * 0.5;
+      // middle: lies behind the tree line, so the treetops stand dark against it
+      float mid  = bank(q, 0.775, 0.055, 0.013, 7.0) * 0.62 * (1.0 - tr * 0.88);
+      // lower: rolls in front of the lower forest
+      float low  = bank(q, 0.95, 0.08, 0.02, 13.0) * 0.7;
+      float d = 1.0 - (1.0 - up) * (1.0 - mid) * (1.0 - low);
+      // a breath of haze around each bank so the edges melt instead of cutting
+      float halo = (exp(-pow((q.y - 0.665) / 0.12, 2.0)) * 0.05 + exp(-pow((q.y - 0.95) / 0.16, 2.0)) * 0.08) * (1.0 - tr * 0.5);
+      d = 1.0 - (1.0 - d) * (1.0 - halo);
+      vec2 e = (vUv - uClear.xy) / uClear.zw;                        // ellipse around the bottle on screen
+      d *= mix(0.25, 1.0, smoothstep(0.7, 1.6, length(e)));
+      gl_FragColor = vec4(vec3(0.965, 0.972, 0.982), clamp(d, 0.0, 1.0) * uAmt);
+    }`
+});
+function mapPhoto() {
+  // mirror CSS: #bg is inset -3%, object-fit: cover, object-position 50% 45%; photo is 2000x1650
+  const vw = innerWidth, vh = innerHeight, bw = vw * 1.06, bh = vh * 1.06, s = Math.max(bw / 2000, bh / 1650);
+  const dw = 2000 * s, dh = 1650 * s, ox = (bw - dw) * 0.5, oy = (bh - dh) * 0.45;
+  fogMat.uniforms.uMapA.value.set(vw / dw, vh / dh);
+  fogMat.uniforms.uMapB.value.set((vw * 0.03 - ox) / dw, (vh * 0.03 - oy) / dh);
+}
+mapPhoto();
+const fog = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), fogMat);
+fog.frustumCulled = false; fog.renderOrder = -1; scene.add(fog);
+
+/* ---------- screen-space helpers ---------- */
+function half() { const h = camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)); return { h, w: h * camera.aspect }; }
+const scaleFor = frac => frac * 2 * half().h / HB;   // bottle height as a fraction of the viewport
+
+/* ---------- direction state ---------- */
+const range = $('#range'), panels = $$('.panel'), items = $$('.r-list li'), N = panels.length;
+const mark = $('#mark'), markText = $('#mark span');
+// the outline word sits behind the bottle, one word per line, never wider than the empty middle column
+const measure = document.createElement('canvas').getContext('2d');
+function fitMark(name) {
+  const col = $('.stage .wrap > div:nth-child(2)').getBoundingClientRect();
+  const words = name.split(' ');
+  measure.font = '900 100px "Noto Sans Georgian"';
+  const widest = Math.max(...words.map(w => measure.measureText(w).width));
+  const px = Math.min(100 * (col.width - 24) / widest, innerHeight * 0.36 / (words.length * 0.95));
+  markText.style.fontSize = px + 'px';
+  markText.innerHTML = words.join('<br>');
+}
+let active = -1;
+function setDir(i) {
+  if (i === active) return;
+  active = i;
+  panels.forEach((p, k) => p.classList.toggle('on', k === i));
+  items.forEach((li, k) => li.classList.toggle('on', k === i));
+  $$('.progress').forEach(pr => [...pr.children].forEach((d, k) => d.classList.toggle('on', k <= i)));
+  const p = panels[i], c = new THREE.Color(p.dataset.color);
+  labelColor = p.dataset.color; labelName = p.dataset.name; setProduct(p.dataset.name); drawLabel();
+  gsap.to(capMat.color, { r: c.r, g: c.g, b: c.b, duration: .5 });
+  // outline word behind the bottle: fade, swap, fade back
+  mark.classList.remove('on');
+  clearTimeout(setDir.t);
+  setDir.t = setTimeout(() => { fitMark(lang === 'en' ? trName(p.dataset.name).toUpperCase() : toMt(p.dataset.name)); mark.classList.toggle('on', inRange); }, 220);
+}
+items.forEach((li, i) => li.addEventListener('click', () => {
+  const y = range.offsetTop + (i + 0.3) / N * (range.offsetHeight - innerHeight);
+  lenis ? lenis.scrollTo(y, { duration: 1.4 }) : scrollTo(0, y);
+}));
+
+/* ---------- the shot: one continuous, scroll-scrubbed camera move ---------- */
+let intro = 0, inRange = false;
+const bgEl = $('#bg'), nav = $('nav'), source = $('#source');
+function shot() {
+  const vh = innerHeight, m = isMobile(), { w, h } = half(), y = scrollY;
+  const rTop = range.offsetTop, rLen = range.offsetHeight - vh;
+  const a = smooth(clamp01(y / rTop));                              // hero → stage travel
+  const rp = clamp01((y - rTop) / rLen);                            // progress inside the stage
+  const e = smooth(clamp01((y - rTop - rLen) / (vh * 0.8)));        // exit
+  const H = m ? { x: 0, y: -h * 0.47, s: 0.38 } : { x: w * 0.42, y: -h * 0.04, s: 0.68 };
+  const R = m ? { x: 0, y: h * 0.30, s: 0.40 } : { x: 0, y: -h * 0.02, s: 0.72 };
+  // stage: hold facing the camera, then a full turn into the next direction; colour and label swap mid-spin
+  const sp = rp * N, seg = Math.min(N - 1, Math.floor(sp)), f = sp - Math.floor(sp);
+  const turnT = seg < N - 1 ? smooth(clamp01((f - 0.5) / 0.5)) : 0;
+  const turn = seg + turnT;
+  const k2 = clamp01((f - 0.5) / 0.5), c2 = 0.9 * 1.525;            // the spin winds back a touch, then overshoots and settles
+  const turnS = seg + (seg < N - 1 ? (k2 < 0.5 ? (Math.pow(2 * k2, 2) * ((c2 + 1) * 2 * k2 - c2)) / 2 : (Math.pow(2 * k2 - 2, 2) * ((c2 + 1) * (2 * k2 - 2) + c2) + 2) / 2) : 0);
+  const dir = Math.min(N - 1, Math.round(turn));
+  const i3 = 1 - Math.pow(1 - intro, 3);                            // intro: drop in with a twirl
+  return {
+    dir, fill: clamp01(sp - dir), inStage: a >= 1 && e < 0.5 && y < rTop + rLen + vh * 0.4,
+    x: lerp(H.x, R.x, a) + Math.sin(turnT * Math.PI) * w * 0.04,
+    y: lerp(H.y, R.y, a) + e * h * 2.4 + (1 - i3) * h * 1.8 - Math.sin(turnT * Math.PI) * h * 0.03,
+    s: scaleFor(lerp(H.s, R.s, a) * (1 - e * 0.2)),
+    spin: a * Math.PI * 2 + turnS * Math.PI * 2 + e * Math.PI * 1.5 - (1 - i3) * Math.PI * 2, exit: e,
+    tilt: Math.sin(a * Math.PI) * (m ? 0.18 : 0.32) + Math.sin(turnT * Math.PI) * 0.14 - e * 0.3,
+    lean: Math.sin(a * Math.PI) * 0.12
+  };
+}
+
+/* ---------- face mist can: flies in over the mountains in "წყარო", the cap pops, it sprays ---------- */
+const can = new THREE.Group(); can.visible = false; scene.add(can);
+const CANH = 4.62;                                          // can + cap height in units, for screen sizing
+const canPaint = new THREE.MeshPhysicalMaterial({ color: '#EEF1F4', roughness: 0.36, clearcoat: 0.7, clearcoatRoughness: 0.12, envMapIntensity: 0.55 });
+const C = (r, y) => new THREE.Vector2(r, y - 2.31);
+can.add(new THREE.Mesh(new THREE.LatheGeometry([[0,0],[0.54,0],[0.6,0.05],[0.6,3.15],[0.585,3.32],[0.52,3.47],[0.36,3.6],[0.22,3.65],[0.22,3.7],[0,3.7]].map(p => C(p[0], p[1])), 96), canPaint));
+// printed sleeve, drawn after the real product: logo, face profile line, pale blue mountains
+const sc = document.createElement('canvas'); sc.width = 1024; sc.height = 1024;
+const sx = sc.getContext('2d');
+const sTex = new THREE.CanvasTexture(sc); sTex.colorSpace = THREE.SRGBColorSpace; sTex.anisotropy = 8;
+const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.602, 0.602, 3.0, 96, 1, true, -Math.PI, Math.PI * 2), new THREE.MeshStandardMaterial({ map: sTex, roughness: 0.38, envMapIntensity: 0.55, color: '#F4F6F8' }));
+sleeve.position.y = 1.6 - 2.31; can.add(sleeve);
+function drawSleeve() {
+  sx.setTransform(1, 0, 0, 1, 0, 0);
+  sx.fillStyle = '#ffffff'; sx.fillRect(0, 0, 1024, 1024);
+  sx.setTransform(1 / 1.26, 0, 0, 1, 512 - 512 / 1.26, 0);  // undo the cylinder's horizontal stretch, front = centre
+  if (logoImg.complete && logoImg.naturalWidth) sx.drawImage(logoImg, 362, 70, 300, 106);
+  sx.fillStyle = '#1C7FD6'; sx.font = '600 22px "Noto Sans Georgian"'; sx.textAlign = 'center';
+  sx.fillText('მინერალური წყლის სპრეი', 512, 214);
+  // face profile, facing left
+  sx.strokeStyle = '#7FA6CF'; sx.lineWidth = 3; sx.lineCap = 'round'; sx.beginPath();
+  sx.moveTo(600, 300); sx.bezierCurveTo(580, 360, 586, 400, 572, 440); sx.lineTo(530, 492); sx.lineTo(566, 512);
+  sx.bezierCurveTo(552, 528, 560, 538, 552, 548); sx.bezierCurveTo(562, 556, 556, 566, 556, 574);
+  sx.bezierCurveTo(552, 604, 570, 620, 590, 630); sx.lineTo(600, 700); sx.stroke();
+  sx.fillStyle = '#E04848'; sx.beginPath(); sx.arc(536, 548, 4, 0, Math.PI * 2); sx.fill();
+  sx.fillStyle = '#7FA6CF'; sx.font = '600 15px system-ui'; sx.textAlign = 'left';
+  ['MINERAL', 'WATER SPRAY'].forEach((t, i) => sx.fillText(t, 404, 600 + i * 22));
+  // mountains along the base
+  const g = sx.createLinearGradient(0, 760, 0, 1024); g.addColorStop(0, '#CFE6F7'); g.addColorStop(1, '#8EC1E8');
+  sx.fillStyle = g; sx.beginPath(); sx.moveTo(-300, 1024); sx.lineTo(-300, 900);
+  [[-150, 820], [0, 880], [140, 790], [300, 870], [440, 800], [600, 880], [760, 780], [920, 860], [1080, 800], [1330, 880]].forEach(p => sx.lineTo(p[0], p[1]));
+  sx.lineTo(1330, 1024); sx.closePath(); sx.fill();
+  sx.fillStyle = '#ffffff'; [[140, 790], [440, 800], [760, 780], [1080, 800]].forEach(([x, y]) => { sx.beginPath(); sx.moveTo(x - 46, y + 34); sx.lineTo(x, y); sx.lineTo(x + 46, y + 34); sx.lineTo(x + 18, y + 26); sx.lineTo(x, y + 36); sx.lineTo(x - 20, y + 26); sx.closePath(); sx.fill(); });
+  sx.fillStyle = '#5A6B80'; sx.font = '600 16px system-ui'; sx.textAlign = 'center'; sx.fillText('150 ml', 512, 990);
+  sTex.needsUpdate = true;
+}
+document.fonts.ready.then(drawSleeve); logoImg.addEventListener('load', drawSleeve); drawSleeve();
+// actuator with the nozzle facing left (-x), and the overcap that pops off
+const head = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.22, 0.34, 40), canPaint); head.position.y = 3.87 - 2.31; can.add(head);
+const nozzle = new THREE.Mesh(new THREE.CircleGeometry(0.05, 20), new THREE.MeshBasicMaterial({ color: '#22324a' }));
+nozzle.position.set(-0.203, head.position.y + 0.07, 0); nozzle.rotation.y = -Math.PI / 2; can.add(nozzle);
+const capMat2 = canPaint.clone(); capMat2.transparent = true; capMat2.side = THREE.DoubleSide; capMat2.roughness = 0.58; capMat2.clearcoat = 0.18; capMat2.clearcoatRoughness = 0.5; capMat2.envMapIntensity = 0.9;
+const cap = new THREE.Mesh(new THREE.LatheGeometry([[0,0.92],[0.3,0.9],[0.48,0.8],[0.58,0.62],[0.612,0.35],[0.607,0]].map(p => new THREE.Vector2(p[0], p[1])).reverse(), 64), capMat2);
+const CAP0 = 3.12 - 2.31; cap.position.y = CAP0; can.add(cap);
+const shc = document.createElement('canvas'); shc.width = shc.height = 256;
+{ const g = shc.getContext('2d');
+  g.filter = 'blur(26px)'; g.fillStyle = 'rgba(30,45,70,.3)'; g.beginPath(); g.ellipse(128, 128, 86, 40, 0, 0, Math.PI * 2); g.fill();   // wide ambient shade
+  g.filter = 'blur(10px)'; g.fillStyle = 'rgba(30,45,70,.45)'; g.beginPath(); g.ellipse(128, 128, 52, 16, 0, 0, Math.PI * 2); g.fill(); } // contact under the base
+const canShadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(shc), transparent: true, depthWrite: false }));
+canShadow.renderOrder = 0; scene.add(canShadow);
+
+/* particles: fine mist (many, tiny, slowing fast), droplets (fewer, glossy, falling) */
+const NP = 4000, pPos = new Float32Array(NP * 3), pVel = new Float32Array(NP * 3), pLife = new Float32Array(NP).fill(9), pMax = new Float32Array(NP).fill(1);
+const pF = new Uint8Array(NP), pBase = new Float32Array(NP), pU = new Float32Array(NP), pSize = new Float32Array(NP), pAlpha = new Float32Array(NP), pKind = new Float32Array(NP);
+const pGeo = new THREE.BufferGeometry();
+pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+pGeo.setAttribute('aSize', new THREE.BufferAttribute(pSize, 1));
+pGeo.setAttribute('aAlpha', new THREE.BufferAttribute(pAlpha, 1));
+pGeo.setAttribute('aKind', new THREE.BufferAttribute(pKind, 1));
+const pMat = new THREE.ShaderMaterial({
+  transparent: true, depthWrite: false, uniforms: { uScale: { value: 1 } },
+  vertexShader: `attribute float aSize, aAlpha, aKind; uniform float uScale; varying float vA, vK;
+    void main(){ vec4 mv = modelViewMatrix * vec4(position, 1.0); gl_PointSize = max(1.5, aSize * uScale / -mv.z); gl_Position = projectionMatrix * mv; vA = aAlpha; vK = aKind; }`,
+  fragmentShader: `varying float vA, vK;
+    void main(){ vec2 c = gl_PointCoord - 0.5; float d = length(c);
+      if (vK < 0.5) { float a = smoothstep(0.5, 0.1, d); gl_FragColor = vec4(0.74, 0.87, 0.97, a * vA); }
+      else { // a water bead: darker rim, bright offset highlight, clear centre
+        float body = smoothstep(0.5, 0.42, d);
+        float rim = smoothstep(0.28, 0.48, d) * body;
+        float hi = smoothstep(0.16, 0.0, length(c + vec2(0.14, 0.16)));
+        vec3 col = mix(vec3(0.82, 0.91, 0.98), vec3(0.42, 0.62, 0.82), rim);
+        col = mix(col, vec3(1.0), hi);
+        gl_FragColor = vec4(col, body * vA * (0.55 + rim * 0.45 + hi * 0.5)); } }`
+});
+const spray = new THREE.Points(pGeo, pMat); spray.frustumCulled = false; spray.renderOrder = 3; scene.add(spray);
+let pNext = 0, sprayLeft = 0, canPhase = 'idle', canT = 0, alive = 0;
+const tmpV = new THREE.Vector3(), tmpD = new THREE.Vector3(), jit = new THREE.Vector3();
+function spawn(kind, x, y, z, vx, vy, vz, size, life, unit, fol = 0) {
+  const k = pNext++ % NP; pF[k] = fol;
+  pPos[k * 3] = x; pPos[k * 3 + 1] = y; pPos[k * 3 + 2] = z;
+  pVel[k * 3] = vx; pVel[k * 3 + 1] = vy; pVel[k * 3 + 2] = vz;
+  pLife[k] = 0; pMax[k] = life; pKind[k] = kind; pBase[k] = size; pU[k] = unit;
+}
+// aerosol: a widening cone of fine mist, a few droplets thrown further
+function emitSpray(n, o, dir, unit) {
+  for (let i = 0; i < n; i++) {
+    const drop = Math.random() < 0.12, cone = drop ? 0.3 : 0.56;
+    jit.set(Math.random() - .5, Math.random() - .5, Math.random() - .5).multiplyScalar(cone);
+    const sp = unit * (drop ? 3.4 + Math.random() * 1.6 : 1.4 + 6.5 * Math.pow(Math.random(), 1.8));   // long tail of fast ones, so the cloud has no front edge
+    const v = tmpV.copy(dir).add(jit).normalize().multiplyScalar(sp);
+    if (drop) spawnDrop(o.x, o.y, o.z, v.x, v.y, v.z, unit * (0.01 + Math.random() * 0.012), 0.9 + Math.random() * 0.5, unit, 1);
+    else spawn(0, o.x, o.y, o.z, v.x, v.y, v.z, unit * (0.012 + Math.random() * 0.026), 1.2 + Math.random() * 1.6, unit, 1);
+  }
+}
+function stepParticles(dt) {
+  alive = 0;
+  for (let k = 0; k < NP; k++) {
+    if (pLife[k] >= pMax[k]) { pAlpha[k] = 0; continue; }
+    alive++; pLife[k] += dt; const t = Math.min(1, pLife[k] / pMax[k]), i = k * 3, u = pU[k];
+    if (pKind[k] < 0.5) {   // mist: drag slows it, slow eddies scatter it, it swells and thins out as it drifts
+      const dr = Math.exp(-2.6 * dt), L = pLife[k];
+      pVel[i] = pVel[i] * dr + Math.sin(L * 2.7 + k * 1.3) * 0.5 * u * dt;
+      pVel[i + 1] = pVel[i + 1] * dr + (0.1 + Math.cos(L * 2.1 + k * 0.7) * 0.45) * u * dt;
+      pVel[i + 2] = pVel[i + 2] * dr + Math.sin(L * 1.9 + k * 2.1) * 0.3 * u * dt;
+      pSize[k] = pBase[k] * (1 + t * 3.5); pAlpha[k] = Math.pow(1 - t, 2) * Math.min(1, t * 14) * 0.42;
+    } else {                // droplet: light drag, real gravity
+      const dr = Math.exp(-0.5 * dt); pVel[i] *= dr; pVel[i + 1] = pVel[i + 1] * dr - 9.0 * u * dt; pVel[i + 2] *= dr;
+      pSize[k] = pBase[k]; pAlpha[k] = 1 - t * t;
+    }
+    pPos[i] += pVel[i] * dt; pPos[i + 1] += pVel[i + 1] * dt; pPos[i + 2] += pVel[i + 2] * dt;
+  }
+  pGeo.attributes.position.needsUpdate = pGeo.attributes.aSize.needsUpdate = pGeo.attributes.aAlpha.needsUpdate = pGeo.attributes.aKind.needsUpdate = true;
+}
+// real water beads: small glossy spheres that catch the environment, stretched along their flight
+const DN = 320, dF = new Uint8Array(DN), dPos = new Float32Array(DN * 3), dVel = new Float32Array(DN * 3), dLife = new Float32Array(DN).fill(9), dMax = new Float32Array(DN).fill(1), dR = new Float32Array(DN), dU = new Float32Array(DN);
+const drops = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 16, 12), new THREE.MeshPhysicalMaterial({
+  color: '#cfe8fa', roughness: 0.02, clearcoat: 1, clearcoatRoughness: 0, envMapIntensity: 2.8, specularIntensity: 1, transparent: true, opacity: 0.62, depthWrite: false
+}), DN);
+drops.instanceMatrix.setUsage(THREE.DynamicDrawUsage); drops.frustumCulled = false; drops.renderOrder = 4; scene.add(drops);
+let dNext = 0, dAlive = 0;
+const dM = new THREE.Matrix4(), dQ = new THREE.Quaternion(), dS = new THREE.Vector3(), dP = new THREE.Vector3(), UP = new THREE.Vector3(0, 1, 0), dDir = new THREE.Vector3();
+function spawnDrop(x, y, z, vx, vy, vz, r, life, unit, fol = 0) {
+  const k = dNext++ % DN; dF[k] = fol;
+  dPos[k * 3] = x; dPos[k * 3 + 1] = y; dPos[k * 3 + 2] = z; dVel[k * 3] = vx; dVel[k * 3 + 1] = vy; dVel[k * 3 + 2] = vz;
+  dLife[k] = 0; dMax[k] = life; dR[k] = r; dU[k] = unit;
+}
+function stepDrops(dt) {
+  dAlive = 0;
+  for (let k = 0; k < DN; k++) {
+    if (dLife[k] >= dMax[k]) { dM.makeScale(0, 0, 0); drops.setMatrixAt(k, dM); continue; }
+    dAlive++; dLife[k] += dt; const i = k * 3, u = dU[k], t = Math.min(1, dLife[k] / dMax[k]);
+    const dr = Math.exp(-0.45 * dt); dVel[i] *= dr; dVel[i + 1] = dVel[i + 1] * dr - 9.0 * u * dt; dVel[i + 2] *= dr;
+    dPos[i] += dVel[i] * dt; dPos[i + 1] += dVel[i + 1] * dt; dPos[i + 2] += dVel[i + 2] * dt;
+    dDir.set(dVel[i], dVel[i + 1], dVel[i + 2]); const sp = dDir.length() || 1e-4; dDir.divideScalar(sp);
+    dQ.setFromUnitVectors(UP, dDir);
+    const r = dR[k] * (t > 0.8 ? 1 - (t - 0.8) / 0.2 : 1), stretch = 1 + Math.min(2.2, sp / (u * 9));
+    dM.compose(dP.set(dPos[i], dPos[i + 1], dPos[i + 2]), dQ, dS.set(r, r * stretch, r));
+    drops.setMatrixAt(k, dM);
+  }
+  drops.instanceMatrix.needsUpdate = true;
+  drops.visible = dAlive > 0;
+}
+let lastSpin = 0;
+// splash off the first bottle only: born on its surface during the first big turn, thrown along the spin
+function flingDroplets(dt, spinRate) {
+  const speed = Math.abs(spinRate);
+  if (!bottle.visible || speed < 1.0) return;
+  const n = Math.min(10, Math.round((speed - 1.0) * 1.6 * dt * 60 * (0.4 + Math.random())));
+  if (!n) return;
+  bottle.updateMatrixWorld(true);
+  const sc = bottle.scale.x;
+  for (let i = 0; i < n; i++) {
+    const h = 0.1 + Math.random() * 0.7, row = SIL.reduce((a, p) => Math.abs(p[1] - h) < Math.abs(a[1] - h) ? p : a);
+    const ang = Math.random() * Math.PI * 2, r = row[0] * RB;
+    tmpV.set(Math.cos(ang) * r * 1.02, (h - 0.5) * HB, Math.sin(ang) * r * 1.02).applyMatrix4(bottle.matrixWorld);
+    tmpD.set(-Math.sin(ang), 0, Math.cos(ang)).multiplyScalar(Math.sign(spinRate)).add(jit.set(Math.cos(ang), 0.15 + Math.random() * 0.35, Math.sin(ang)).multiplyScalar(0.45)).transformDirection(bottle.matrixWorld);
+    const v = speed * r * sc * (0.8 + Math.random() * 0.7);
+    const big = Math.random() < 0.18;
+    spawnDrop(tmpV.x, tmpV.y, tmpV.z, tmpD.x * v, tmpD.y * v + 0.4 * sc, tmpD.z * v, sc * (big ? 0.03 + Math.random() * 0.02 : 0.011 + Math.random() * 0.014), 1.0 + Math.random() * 0.6, sc);
+    if (Math.random() < 0.5) spawn(0, tmpV.x, tmpV.y, tmpV.z, tmpD.x * v * 0.5, tmpD.y * v * 0.5, tmpD.z * v * 0.5, sc * 0.03, 0.5 + Math.random() * 0.4, sc);   // a breath of spray with it
+  }
+}
+let capV = null, capP = null, capR = 0, lastCanY = scrollY;
+const BURST = 0.9;                                                   // one press of a face mist
+function resetCan() { if (sprayLeft > 0) sfx.stopSpray(); canPhase = 'idle'; canT = 0; capV = null; cap.position.set(0, CAP0, 0); cap.rotation.set(0, 0, 0); capMat2.opacity = 1; cap.visible = true; sprayLeft = 0; }
+function updateCan(dt, t) {
+  const vh = innerHeight, m = isMobile(), { w, h } = half(), sr = source.getBoundingClientRect();
+  const enter = clamp01((vh - sr.top) / (vh * 0.9));
+  const k = 1 - Math.pow(1 - smooth(enter), 2);
+  const settle = Math.sin(clamp01((enter - 0.72) / 0.28) * Math.PI) * (1 - enter) * 0.35;
+  const F = m ? { x: w * 0.5, y: -h * 0.6, s: 0.27 } : { x: w * 0.5, y: -h * 0.1, s: 0.56 };
+  const follow = Math.max(0, -sr.top) * 2 * h / vh;
+  can.visible = enter > 0.01 && sr.bottom > -vh * 0.2;
+  const unit = F.s * 2 * h / CANH;
+  can.scale.setScalar(unit);
+  const press = sprayLeft > 0 ? Math.min(1, (BURST - sprayLeft) * 12) * Math.min(1, sprayLeft * 8) : 0;
+  can.position.set(lerp(w * 1.2, F.x, k) - settle * w * 0.03, F.y + follow - press * 0.015 * unit, 0);
+  can.rotation.set(sm.y * 0.04, lerp(0.35, -0.42, k) + sm.x * 0.12, lerp(-0.08, 0.04, k) + settle * 0.05);
+  head.position.y = 3.87 - 2.31 - press * 0.05;
+  nozzle.position.y = head.position.y + 0.07;
+  // contact shadow: flat under the base, as if it stands on the snow
+  canShadow.visible = can.visible;
+  canShadow.position.set(can.position.x + unit * 0.1, can.position.y - unit * 2.33, -unit * 0.6);
+  canShadow.scale.set(unit * 2.9, unit * 1.1, 1);
+  canShadow.material.opacity = 0.8 * k;
+  // particles born from the spray ride the page scroll with the can, so mist never slides off it
+  const dyW = (scrollY - lastCanY) * 2 * h / vh; lastCanY = scrollY;
+  if (dyW) { for (let i = 0; i < NP; i++) if (pF[i] && pLife[i] < pMax[i]) pPos[i * 3 + 1] += dyW; for (let i = 0; i < DN; i++) if (dF[i] && dLife[i] < dMax[i]) dPos[i * 3 + 1] += dyW; }
+  if (enter > 0.96 && canPhase === 'idle') { canPhase = 'pop'; canT = 0; sfx.pop(); capV = true; }
+  if ((enter < 0.55 || !can.visible) && canPhase !== 'idle') resetCan();
+  if (canPhase !== 'idle') {
+    canT += dt;
+    if (capV) {
+      // unseat with a small lift, then glide up and away in one eased arc while it turns and fades
+      const lift = smooth(clamp01(canT / 0.16)), u = 1 - Math.pow(1 - clamp01((canT - 0.08) / 1.5), 3);
+      cap.position.set(1.7 * u, CAP0 + 0.06 * lift + 1.5 * u - 0.55 * u * u, 0.7 * u);
+      cap.rotation.set(0.35 * u, 0.25 * u, -0.08 * lift - 1.15 * u);
+      capMat2.opacity = 1 - smooth(clamp01((canT - 0.55) / 0.9)); cap.visible = capMat2.opacity > 0.01;
+    }
+    if (canPhase === 'pop' && canT > 0.75) { canPhase = 'spray'; sprayLeft = BURST; sfx.spray(BURST); }   // sound and mist start on the same frame
+  }
+  if (sprayLeft > 0 && can.visible) {
+    sprayLeft = Math.max(0, sprayLeft - dt);
+    can.updateMatrixWorld(true);
+    nozzle.getWorldPosition(tmpV); const origin = tmpV.clone();
+    tmpD.set(-1, 0.05, 0.08).applyQuaternion(can.quaternion).normalize();
+    const ramp = Math.min(1, (BURST - sprayLeft) * 14) * Math.min(1, sprayLeft * 6);   // same shape as the hiss envelope
+    emitSpray(Math.round(2600 * dt * ramp), origin, tmpD, unit);
+  }
+}
+function updateParticles(dt) {
+  pMat.uniforms.uScale.value = innerHeight * renderer.getPixelRatio() / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
+  stepParticles(dt);
+  spray.visible = alive > 0;
+  stepDrops(dt);
+}
+
+/* ---------- sound: a brook that breathes with scrolling down, the cap pop and the mist hiss ----------
+   Synthesised with Web Audio (no files). Browsers only allow audio after a click/tap/key, so it unlocks on the first one. */
+let actx = null, master = null, brookGain = null, soundOn = true, whiteBuf = null;
+const soundBtn = $('#sound');
+function noiseBuf(sec, brown) {
+  const n = Math.floor(actx.sampleRate * sec), b = actx.createBuffer(1, n, actx.sampleRate), d = b.getChannelData(0);
+  let last = 0;
+  for (let i = 0; i < n; i++) { const w = Math.random() * 2 - 1; if (brown) { last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5; } else d[i] = w; }
+  const X = 4096; for (let i = 0; i < X; i++) d[n - X + i] = d[n - X + i] * (1 - i / X) + d[i] * (i / X);   // soften the loop seam
+  return b;
+}
+function loop(buf) { const s = actx.createBufferSource(); s.buffer = buf; s.loop = true; s.start(0, Math.random() * buf.duration); return s; }
+function brookLayer(pan, level) {
+  // Babbling brook (after Andy Farnell, "Designing Sound"): brown noise through a resonant high-pass whose cutoff is wobbled by slow noise
+  const lp1 = actx.createBiquadFilter(); lp1.type = 'lowpass'; lp1.frequency.value = 400;
+  const lp2 = actx.createBiquadFilter(); lp2.type = 'lowpass'; lp2.frequency.value = 14;
+  const depth = actx.createGain(); depth.gain.value = 1500;
+  const rhp = actx.createBiquadFilter(); rhp.type = 'highpass'; rhp.Q.value = 8.5; rhp.frequency.value = 500;
+  const g = actx.createGain(); g.gain.value = level;
+  const p = actx.createStereoPanner(); p.pan.value = pan;
+  loop(noiseBuf(9, true)).connect(lp1).connect(rhp).connect(g).connect(p).connect(brookGain);
+  loop(noiseBuf(9, true)).connect(lp2).connect(depth).connect(rhp.frequency);
+}
+function initAudio() {
+  if (actx) return actx.resume();
+  actx = new (window.AudioContext || window.webkitAudioContext)();
+  master = actx.createGain(); master.gain.value = soundOn ? 1 : 0; master.connect(actx.destination);
+  brookGain = actx.createGain(); brookGain.gain.value = 0; brookGain.connect(master);
+  brookLayer(-0.4, 0.8); brookLayer(0.4, 0.7);
+  // soft rush underneath the babble so it reads as running water, not just bubbles
+  const bp = actx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900; bp.Q.value = 0.6;
+  const rg = actx.createGain(); rg.gain.value = 0.35;
+  loop(noiseBuf(7, true)).connect(bp).connect(rg).connect(brookGain);
+  whiteBuf = noiseBuf(3, false);
+}
+const sfx = {
+  pop() {
+    if (!actx || !soundOn) return; actx.resume(); const t = actx.currentTime;
+    const o = actx.createOscillator(), g = actx.createGain(); o.type = 'sine';
+    o.frequency.setValueAtTime(520, t); o.frequency.exponentialRampToValueAtTime(140, t + 0.08);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.22, t + 0.006); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+    o.connect(g).connect(master); o.start(t); o.stop(t + 0.15);
+  },
+  spray(dur) {
+    if (!actx || !soundOn) return; actx.resume(); const t = actx.currentTime;
+    const s = actx.createBufferSource(); s.buffer = whiteBuf;
+    const hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 900;
+    const bp = actx.createBiquadFilter(); bp.type = 'peaking'; bp.frequency.value = 4200; bp.Q.value = 0.7; bp.gain.value = 4;
+    const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(9500, t); lp.frequency.linearRampToValueAtTime(6500, t + dur);
+    const g = actx.createGain();
+    // valve opens fast, a short steady hiss, then it closes
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.14, t + 0.04);
+    g.gain.setValueAtTime(0.14, t + dur * 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.12);
+    s.connect(hp).connect(bp).connect(lp).connect(g).connect(master); s.start(t); s.stop(t + dur + 0.15);
+    this.cur = g;
+  },
+  stopSpray() { if (this.cur && actx) { this.cur.gain.cancelScheduledValues(actx.currentTime); this.cur.gain.setTargetAtTime(0.0001, actx.currentTime, 0.03); this.cur = null; } }
+};
+function setSound(on) {
+  soundOn = on; soundBtn.classList.toggle('on', on); soundBtn.setAttribute('aria-pressed', on);
+  if (on) { initAudio(); master && master.gain.setTargetAtTime(1, actx.currentTime, 0.1); }
+  else if (actx) master.gain.setTargetAtTime(0, actx.currentTime, 0.1);
+}
+soundBtn.addEventListener('click', e => { e.stopPropagation(); setSound(!soundOn); });
+['pointerdown', 'keydown', 'touchend'].forEach(ev => addEventListener(ev, e => {
+  if (e.target.closest && e.target.closest('[data-mute]')) { setSound(false); return; }
+  if (soundOn) initAudio();
+}, { passive: true }));
+
+let lastY = scrollY, vS = 0, quiet = 0;
+function updateAudio(dt) {
+  const dy = scrollY - lastY; lastY = scrollY;
+  vS += ((dy > 1 ? dy / Math.max(dt, 1e-3) : 0) - vS) * Math.min(1, dt * 8);   // px per second, down is positive
+  if (!actx) return;
+  const nearEnd = scrollY > document.documentElement.scrollHeight - innerHeight * 1.6;
+  const target = soundOn && vS > 60 && !nearEnd ? 0.45 + 0.55 * Math.min(1, vS / 1200) : 0;
+  quiet = target || sprayLeft > 0 || canPhase !== 'idle' ? 0 : quiet + dt;
+  if (quiet > (nearEnd ? 0.6 : 2.5) && actx.state === 'running') { brookGain.gain.cancelScheduledValues(actx.currentTime); brookGain.gain.value = 0; actx.suspend(); }
+  if (quiet === 0 && actx.state === 'suspended') actx.resume();
+  if (actx.state !== 'running') { soundBtn.classList.remove('live'); return; }
+  const cur = brookGain.gain.value;
+  brookGain.gain.setTargetAtTime(target, actx.currentTime, target > cur ? 0.08 : (nearEnd ? 0.12 : 0.6));
+  soundBtn.classList.toggle('live', soundOn && (cur > 0.03 || sprayLeft > 0));
+}
+
+
+/* ---------- citrus slices for "ხილის გემოთი": real cross-sections that drift out from behind the bottle ---------- */
+function citrusTexture(rind, pith, flesh, fleshEdge) {
+  const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d'), R = 256;
+  g.fillStyle = rind; g.beginPath(); g.arc(R, R, R, 0, Math.PI * 2); g.fill();                       // peel
+  g.fillStyle = pith; g.beginPath(); g.arc(R, R, R * 0.9, 0, Math.PI * 2); g.fill();                 // white pith
+  const segs = 10;
+  for (let i = 0; i < segs; i++) {                                                                    // juicy segments
+    const a0 = i / segs * Math.PI * 2 + 0.035, a1 = (i + 1) / segs * Math.PI * 2 - 0.035;
+    const gr = g.createRadialGradient(R, R, R * 0.08, R, R, R * 0.84);
+    gr.addColorStop(0, flesh); gr.addColorStop(0.7, fleshEdge); gr.addColorStop(1, fleshEdge);
+    g.fillStyle = gr; g.beginPath(); g.moveTo(R + Math.cos((a0 + a1) / 2) * R * 0.1, R + Math.sin((a0 + a1) / 2) * R * 0.1);
+    g.arc(R, R, R * 0.83, a0, a1); g.closePath(); g.fill();
+  }
+  for (let i = 0; i < 1400; i++) {                                                                    // pulp vesicles catching light
+    const a = Math.random() * Math.PI * 2, r = R * (0.14 + Math.random() * 0.66);
+    g.fillStyle = `rgba(255,255,255,${0.05 + Math.random() * 0.14})`;
+    g.beginPath(); g.ellipse(R + Math.cos(a) * r, R + Math.sin(a) * r, 2 + Math.random() * 5, 1 + Math.random() * 2, a, 0, Math.PI * 2); g.fill();
+  }
+  g.fillStyle = pith; g.beginPath(); g.arc(R, R, R * 0.07, 0, Math.PI * 2); g.fill();                // core
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+// a halved peach: blushing skin, golden flesh warming to red at the stone, a ridged brown stone
+function peachTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d'), R = 256;
+  const skin = g.createRadialGradient(R, R, R * 0.9, R, R, R); skin.addColorStop(0, '#E8743C'); skin.addColorStop(1, '#B83A2A');
+  g.fillStyle = skin; g.beginPath(); g.arc(R, R, R, 0, Math.PI * 2); g.fill();
+  const flesh = g.createRadialGradient(R, R, R * 0.18, R, R, R * 0.94);
+  flesh.addColorStop(0, '#E2552E'); flesh.addColorStop(0.28, '#F4A24A'); flesh.addColorStop(0.65, '#FBC56A'); flesh.addColorStop(1, '#F7B256');
+  g.fillStyle = flesh; g.beginPath(); g.arc(R, R, R * 0.94, 0, Math.PI * 2); g.fill();
+  for (let i = 0; i < 900; i++) { const a = Math.random() * Math.PI * 2, r = R * (0.3 + Math.random() * 0.6);
+    g.strokeStyle = `rgba(255,236,190,${0.05 + Math.random() * 0.1})`; g.lineWidth = 1 + Math.random() * 2; g.beginPath();
+    g.moveTo(R + Math.cos(a) * r, R + Math.sin(a) * r); g.lineTo(R + Math.cos(a) * (r + 10), R + Math.sin(a) * (r + 10)); g.stroke(); }
+  g.fillStyle = '#7A3A22'; g.beginPath(); g.ellipse(R, R, R * 0.2, R * 0.26, 0.4, 0, Math.PI * 2); g.fill();
+  g.strokeStyle = 'rgba(60,25,12,.55)'; g.lineWidth = 3;
+  for (let i = 0; i < 7; i++) { g.beginPath(); g.ellipse(R, R, R * (0.05 + i * 0.022), R * (0.08 + i * 0.026), 0.4, Math.random(), Math.random() + 3); g.stroke(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+const CITRUS = [
+  { rind: '#F2C21B', pith: '#FBF3D2', flesh: '#FFF2A8', edge: '#F7D447' },   // lemon
+  { rind: '#7CB82F', pith: '#EEF5D6', flesh: '#E4F5A6', edge: '#A9D451' },   // lime
+  { rind: '#F28A1E', pith: '#FCEBD3', flesh: '#FFD08A', edge: '#F7A23C' },   // orange
+  { peach: true }                                                              // peach
+].map(c => {
+  if (c.peach) { const face = new THREE.MeshPhysicalMaterial({ map: peachTexture(), roughness: 0.4, clearcoat: 0.45, clearcoatRoughness: 0.3, envMapIntensity: 0.85, sheen: 0.4 }); return [new THREE.MeshStandardMaterial({ color: '#D9533A', roughness: 0.6, envMapIntensity: 0.7 }), face, face]; }
+  const face = new THREE.MeshPhysicalMaterial({ map: citrusTexture(c.rind, c.pith, c.flesh, c.edge), roughness: 0.32, clearcoat: 0.6, clearcoatRoughness: 0.25, envMapIntensity: 0.9, sheen: 0.3 });
+  const side = new THREE.MeshStandardMaterial({ color: c.rind, roughness: 0.55, envMapIntensity: 0.7 });
+  return [side, face, face];
+});
+const sliceGeo = new THREE.CylinderGeometry(1, 1, 0.14, 64, 1);
+sliceGeo.rotateX(Math.PI / 2);                                       // face toward the camera at rest
+const fruit = new THREE.Group(); scene.add(fruit);
+// a loose, hand-placed arrangement around the bottle: angle around it, height on it, size, which fruit
+const SLICES = [
+  [0.4, 0.7, 1.0, 0], [2.3, 0.35, 0.9, 1], [3.6, 0.8, 0.8, 2], [5.2, 0.25, 1.05, 0],
+  [1.3, 0.05, 0.75, 2], [4.4, 0.55, 0.85, 1], [6.0, 0.9, 0.7, 2]
+].map(([ang, hgt, size, kind], i) => {
+  const m = new THREE.Mesh(sliceGeo, CITRUS[kind]);
+  m.userData = { ang, hgt, size, spin: (i % 2 ? 1 : -1) * (0.25 + (i % 3) * 0.1), tilt: 0.5 + (i % 4) * 0.25, phase: i * 1.7 };
+  fruit.add(m); return m;
+});
+// which fruit each flavour shows (indices into CITRUS: 0 lemon, 1 lime, 2 orange, 3 peach)
+const FRUIT = { 'ციტრუსის მიქსი': [0, 1, 2, 0, 1, 2, 0], 'ლიმონი': [0, 0, 0, 0, 0, 0, 0], 'ატამი': [3, 3, 3, 3, 3, 3, 3] };
+let fruitOn = 0, shownFruit = null;
+function updateFruit(dt, t) {
+  const want = inRange && panels[active] ? FRUIT[panels[active].dataset.name] || null : null;
+  // changing flavour: the slices slip back behind the bottle, change fruit, and come out again
+  if (want !== shownFruit && fruitOn < 0.04) { shownFruit = want; if (want) SLICES.forEach((m, i) => m.material = CITRUS[want[i]]); }
+  fruitOn += ((want && want === shownFruit ? 1 : 0) - fruitOn) * ease(0.06, dt);
+  fruit.visible = fruitOn > 0.01 && bottle.visible;
+  if (!fruit.visible) return;
+  const br = RB * bottle.scale.x, bh = HB * bottle.scale.x, m = isMobile(), { w } = half();
+  // stay inside the empty middle column so the list and the text panel stay clear
+  const col = $('.stage .wrap > div:nth-child(2)').getBoundingClientRect();
+  const colHalf = m ? w * 0.9 : (col.width / innerWidth) * w;
+  const spread = Math.min(br * 2.4, colHalf * 0.8);
+  SLICES.forEach((s, i) => {
+    const u = s.userData;
+    const f = clamp01(fruitOn * 1.25 - i * 0.04);
+    const out = 1 - Math.pow(1 - f, 3);
+    const a = u.ang + t * 0.1;
+    const front = Math.max(0, Math.sin(a));                         // in front of the bottle: slide out to the side, shrink a touch
+    const side = Math.sign(Math.cos(a)) || 1;
+    const r = br * u.size * 0.9 * (1 - front * 0.25);
+    let x = Math.cos(a) * spread + side * front * br * 1.3;
+    x = Math.max(-colHalf + r, Math.min(colHalf - r, x));
+    s.position.set(
+      bottle.position.x + x * (0.25 + 0.75 * out),
+      bottle.position.y + (u.hgt - 0.5) * bh * 0.95 + Math.sin(t * 0.7 + u.phase) * br * 0.12,
+      Math.sin(a) * spread * 0.5 * out);
+    const back = 1 + 0.6 * (1 - f);
+    s.scale.setScalar(r * Math.min(1, out * back));
+    s.rotation.set(Math.sin(t * 0.4 + u.phase) * 0.6 + u.tilt, t * u.spin + u.phase, Math.cos(t * 0.3 + u.phase) * 0.4);
+  });
+}
+
+/* ---------- smooth scroll, anchors, menu ---------- */
+let lenis = null;
+gsap.registerPlugin(ScrollTrigger);
+if (!reduce) {
+  lenis = new Lenis({ lerp: 0.085 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+  if (!window.introDone) { lenis.stop(); const go = () => window.introDone ? lenis.start() : setTimeout(go, 100); go(); }
+}
+history.scrollRestoration = 'manual'; if (!location.hash) scrollTo(0, 0);
+const burger = $('#burger'), menu = $('#menu');
+function setMenu(open) {
+  if (open) { const mid = innerHeight / 2, links = $$('.menu-links a'); let on = links[0];
+    links.forEach(a => { const t = a.getAttribute('href').length > 1 && $(a.getAttribute('href')); if (t) { const r = t.getBoundingClientRect(); if (r.top < mid && r.bottom > mid) on = a; } });
+    links.forEach(a => a.classList.toggle('on', a === on)); }
+  menu.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); lenis && (open ? lenis.stop() : lenis.start()); }
+burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href'); if (id === '#') return;
+  const t = $(id); if (!t) return; e.preventDefault(); setMenu(false);
+  lenis ? lenis.scrollTo(t, { offset: id === '#range' ? 0 : -64, duration: 1.6 }) : t.scrollIntoView();
+}));
+
+/* ---------- entrance + reveals ---------- */
+if (!reduce) {
+  gsap.set('.hero .copy > *', { y: 36, opacity: 0 });
+  const heroIn = () => window.introDone ? gsap.to('.hero .copy > *', { y: 0, opacity: 1, stagger: .1, duration: 1.2, ease: 'power3.out', delay: .35 }) : setTimeout(heroIn, 80);
+  heroIn();
+  $$('.grid .ph, .buy-ph').forEach(el => gsap.fromTo(el, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%' } }));
+  $$('.grid .ph img').forEach(img => gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } }));
+  $$('.moments-h, #source h2, #buy h2').forEach(h => {
+    h.innerHTML = h.innerHTML.split(/<br\s*\/?>/i).map(l => `<span class="ln"><span>${l}</span></span>`).join('');
+    gsap.from(h.querySelectorAll('.ln > span'), { yPercent: 110, duration: 1.15, ease: 'expo.out', stagger: 0.09, scrollTrigger: { trigger: h, start: 'top 86%' } });
+  });
+}
+
+
+/* ---------- language: Georgian / English ---------- */
+const EN = {"კლასიკა": "Classic", "ასორტიმენტი": "Range", "წყარო": "Source", "სად ვიყიდო": "Where to buy", "ბლოგი": "Blog", "კონტაქტი": "Contact", "ბიძინა კვერნაძის 10, თბილისი": "10 Bidzina Kvernadze St, Tbilisi", "სოციალური": "Social", "ენა": "Language", "მთის წყალი": "Mountain water", "1700 მეტრიდან": "from 1,700 metres", "წყარო ბორჯომ-ბაკურიანის ხეობაშია. წყალი რბილი და სუფთაა, ზუსტად ისეთი, როგორიც მთაში.": "The spring lies in the Borjomi-Bakuriani valley. The water is soft and clean, just as it is in the mountains.", "ბავშვები": "Kids", "ოჯახი": "Family", "სპორტი": "Sport", "ციტრუსის მიქსი": "Citrus mix", "ლიმონი": "Lemon", "ატამი": "Peach", "სპრეი": "Spray", "ბუნებრივი მინერალური წყალი ბაკურიანის წყაროდან. გაზიანი და უგაზო.": "Natural mineral water from the Bakuriani spring. Still and sparkling.", "0.5 ლ": "0.5 L", "1 ლ": "1 L", "1.5 ლ": "1.5 L", "0.33 ლ": "0.33 L", "5 ლ": "5 L", "19 ლ": "19 L", "0.75 ლ": "0.75 L", "150 მლ": "150 ml", "მინა": "Glass", "დაბალი მინერალიზაცია პირველი დღიდან. ჩვილის საკვებისთვის და დასალევად.": "Low in minerals from day one. For preparing baby food and for drinking.", "0+ თვე": "0+ months", "დაბალი მინერალიზაცია": "Low mineral content", "პატარა ბოთლი, სპორტული ხუფი და საყვარელი გმირები.": "A small bottle, a sport cap and their favourite heroes.", "სპორტული ხუფი": "Sport cap", "დიდი ბოთლები სახლისა და ოფისისთვის. მიწოდებით კართან.": "Big bottles for home and office, delivered to your door.", "მიწოდება": "Delivery", "სპორტული ხუფი ერთი ხელით. ვარჯიშზე, მატჩზე, მთაში.": "A sport cap that opens with one hand. At training, at the match, in the mountains.", "მთის წყალი ლიმონის, ლაიმისა და ფორთოხლის გემოთი.": "Mountain water with lemon, lime and orange.", "0 შაქარი და კალორია": "0 sugar, 0 calories", "მთის წყალი ლიმონის გემოთი. მსუბუქი და გამაგრილებელი.": "Mountain water with a hint of lemon. Light and refreshing.", "მთის წყალი ნაზი ატმის გემოთი.": "Mountain water with a soft peach flavour.", "მთის წყალი კანისთვის. ნაზი ნისლი, რომელიც აგრილებს და ატენიანებს.": "Mountain water for your skin. A fine mist that cools and hydrates.", "ყველა ტიპის კანი": "All skin types", "ბაკურიანი": "Bakuriani", "ყოველ დღეს": "every day", "ბაღში": "In the garden", "მატჩის შემდეგ": "After the match", "პირველი წყალი": "First water", "სამზარეულოში": "In the kitchen", "კორტზე": "On the court", "სიგრილე": "Cool down", "სკოლის გზაზე": "On the way to school", "პიკნიკზე": "At the picnic", "დაბადებული": "Born in", "ბაკურიანში": "Bakuriani", "წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.": "For years the water travels through mountain rock. That is how it is filtered and gains its natural minerals.", "მეტრი ზღვის": "metres above", "დონიდან": "sea level", "ბაკურიანი ყველა სუპერმარკეტშია. 5 და 19 ლიტრიან ბოთლებს სახლში ან ოფისში მოგიტანთ.": "Bakuriani is in every supermarket. We deliver 5 and 19 litre bottles to your home or office.", "მიწოდების შეკვეთა": "Order delivery", "მაღაზიების რუკა": "Store map", "ცხელი ხაზი": "Hotline", "ბუნებრივი მინერალური წყალი": "Natural mineral water", "ბორჯომ-ბაკურიანის ხეობიდან.": "from the Borjomi-Bakuriani valley.", "ნავიგაცია": "Navigation", "© 2026 IDS ბორჯომი საქართველო": "© 2026 IDS Borjomi Georgia", "წესები და პირობები": "Terms and conditions", "კონფიდენციალურობა": "Privacy", "ფოტო: Agshin Osmanov / Unsplash": "Photo: Agshin Osmanov / Unsplash", "ხმა": "Sound", "მენიუ": "Menu", "ბაკურიანი კლასიკა 0.5, 1 და 1.5 ლიტრი": "Bakuriani Classic, 0.5, 1 and 1.5 litres", "ბაკურიანი 0+": "Bakuriani 0+", "ბაკურიანი ბავშვებისთვის": "Bakuriani for kids", "ბაკურიანი 19 ლიტრი": "Bakuriani 19 litres", "ბაკურიანი სპორტი": "Bakuriani Sport", "ბაკურიანი ციტრუსის მიქსი": "Bakuriani Citrus mix", "ბაკურიანი ლიმონი": "Bakuriani Lemon", "ბაკურიანი ატამი": "Bakuriani Peach", "ბაკურიანი მინერალური წყლის სპრეი": "Bakuriani mineral water spray", "ოჯახი სახლში, ბაკურიანის ბოთლით": "A family at home with a bottle of Bakuriani", "ბაკურიანი. მთის მინერალური წყალი": "Bakuriani. Mountain mineral water", "დიზაინის კონცეფცია · არაოფიციალური": "Design concept · unofficial"};
+const fromMt = t => t.replace(/[\u1C90-\u1CBA\u1CBD-\u1CBF]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xBC0));
+const trName = n => lang === 'en' ? (EN[n] || n) : n;
+const kaText = new Map(), kaAttr = new Map(), kaTitle = document.title;   // originals, restored when switching back
+let lang = 'ka';
+function setLang(l) {
+  lang = l; document.documentElement.lang = l;
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentNode.closest('script,style,svg,#intro') || !n.nodeValue.trim() ? 2 : 1 });
+  for (let n; (n = w.nextNode());) {
+    if (!kaText.has(n)) kaText.set(n, n.nodeValue);
+    const ka = kaText.get(n), key = fromMt(ka.trim().replace(/\s+/g, ' '));
+    n.nodeValue = l === 'en' && EN[key] ? ka.replace(ka.trim(), EN[key]) : ka;
+  }
+  $$('[alt],[aria-label]').forEach(e => { if (!kaAttr.has(e)) kaAttr.set(e, { alt: e.getAttribute('alt'), aria: e.getAttribute('aria-label') });
+    const o = kaAttr.get(e);
+    if (o.alt != null) e.setAttribute('alt', l === 'en' ? EN[o.alt] || o.alt : o.alt);
+    if (o.aria != null) e.setAttribute('aria-label', l === 'en' ? EN[o.aria] || o.aria : o.aria); });
+  document.title = l === 'en' ? EN[kaTitle] : kaTitle;
+  $$('.lang span').forEach(sp => sp.textContent = l === 'en' ? 'ENG' : 'GEO');
+  $$('.lng button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+  if (panels[active]) fitMark(l === 'en' ? trName(panels[active].dataset.name).toUpperCase() : toMt(panels[active].dataset.name));
+  dispatchEvent(new Event('resize'));
+  try { localStorage.setItem('bk-lang', l); } catch (e) {}
+}
+$$('.lang').forEach(b => b.addEventListener('click', () => setLang(lang === 'en' ? 'ka' : 'en')));
+$$('.lng button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l)));
+try { if (localStorage.getItem('bk-lang') === 'en') setLang('en'); else $$('.lng button')[0].classList.add('on'); } catch (e) { $$('.lng button')[0].classList.add('on'); }
+
+/* ---------- loop ---------- */
+const mouse = { x: 0, y: 0 }, sm = { x: 0, y: 0 };
+const drag = { on: false, x: 0, y: 0, off: 0, v: 0, axis: null };
+const midCol = () => $('.stage .wrap > div:nth-child(2)').getBoundingClientRect();
+const overProduct = e => { if (!inRange || e.target.closest('a,button,.r-list,.panel,nav,.menu')) return false;
+  const r = midCol(); return e.clientX > r.left && e.clientX < r.right && e.clientY > r.top + 40 && e.clientY < r.bottom - 40; };
+addEventListener('pointerdown', e => { if (overProduct(e)) { drag.on = true; drag.x = e.clientX; drag.y = e.clientY; drag.axis = null; drag.v = 0; } });
+addEventListener('pointermove', e => {
+  document.body.classList.toggle('stage-grab', !drag.on && overProduct(e));
+  if (!drag.on) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (!drag.axis && Math.hypot(dx, dy) > 6) drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+  if (drag.axis !== 'x') return;
+  const d = dx * 0.011; drag.off += d; drag.v = d; drag.x = e.clientX; drag.y = e.clientY;
+}, { passive: true });
+['pointerup', 'pointercancel', 'blur'].forEach(ev => addEventListener(ev, () => { drag.on = false; }));
+addEventListener('pointermove', e => { mouse.x = e.clientX / innerWidth - .5; mouse.y = e.clientY / innerHeight - .5; });
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); mapPhoto(); });
+const ease = (rate, dt) => 1 - Math.pow(1 - rate, dt * 60);   // same feel at 30, 60 or 120 fps
+const clock = new THREE.Clock(); let last = 0, first = true;
+const P = { x: 0, y: 0, s: 0.0001, spin: 0, tilt: 0, lean: 0 };
+function tick() {
+  const t = clock.getElapsedTime(), dt = Math.min(0.1, t - last); last = t;
+  if (intro < 1 && window.introDone) intro = reduce ? 1 : Math.min(1, intro + dt / 1.8);
+  const s = shot();
+  // page state
+  const vh = innerHeight, sr = source.getBoundingClientRect();
+  nav.classList.toggle('solid', scrollY > 40);
+  inRange = s.inStage;
+  bgEl.classList.toggle('on', scrollY < range.offsetTop * 0.6 || (sr.top < vh * 0.55 && sr.bottom > vh * 0.45));
+  mark.classList.toggle('on', inRange && !!markText.textContent);
+  setDir(scrollY < range.offsetTop ? 0 : s.dir);
+  // follow the shot with a light damping so Lenis jumps still read as camera moves
+  const k = first || reduce ? 1 : ease(0.16, dt); first = false;
+  for (const key in P) P[key] += (s[key] - P[key]) * k;
+  sm.x += (mouse.x - sm.x) * ease(0.05, dt); sm.y += (mouse.y - sm.y) * ease(0.05, dt);
+  bottle.position.set(P.x + sm.x * 0.2, P.y + Math.sin(t * 1.1) * 0.05, 0);
+  psNow += ((inRange ? productScale : 1) - psNow) * ease(0.1, dt);
+  bottle.scale.setScalar(Math.max(0.0001, P.s * psNow));
+  if (!drag.on) {                                                    // let go: glide on, then come to rest facing the camera
+    drag.off += drag.v; drag.v *= Math.pow(0.92, dt * 60);
+    if (Math.abs(drag.v) < 0.004) { const home = Math.round(drag.off / (Math.PI * 2)) * Math.PI * 2; drag.off += (home - drag.off) * ease(0.06, dt); }
+  }
+  bottle.rotation.set(P.lean + sm.y * 0.12, P.spin + drag.off + Math.sin(t * 0.5) * 0.18 + sm.x * 0.45, 0.05 + P.tilt - sm.x * 0.05);
+  // contact shadow under the product, gone once it leaves the stage
+  const sh = bottle.scale.x;
+  pShadow.position.set(bottle.position.x + 0.04 * sh, bottle.position.y - HB * 0.5 * sh - 0.02, -0.5);
+  pShadow.scale.set(productR * 3.4 * sh, productR * 3.4 * sh, 1);
+  pShadow.material.opacity += (((bottle.visible && s.exit < 0.2 && intro > 0.9) ? 0.75 * (1 - Math.min(1, Math.abs(P.tilt) * 2.2)) : 0) - pShadow.material.opacity) * ease(0.12, dt);
+  bottle.visible = P.y < half().h * 2.2;
+  fogMat.uniforms.uTime.value = t;
+  if (bottle.visible) {                                              // where the product is on screen, for the fog clearing
+    const v = tmpV.copy(bottle.position).project(camera), hh = half().h;
+    fogMat.uniforms.uClear.value.set(v.x * 0.5 + 0.5, v.y * 0.5 + 0.5, RB * bottle.scale.x / (hh * camera.aspect) * 1.2, HB * bottle.scale.x / (2 * hh) * 0.62);
+  }
+  fogMat.uniforms.uAmt.value += ((bgEl.classList.contains('on') ? 1 : 0) - fogMat.uniforms.uAmt.value) * ease(0.05, dt);
+  fog.visible = fogMat.uniforms.uAmt.value > 0.01;
+  items.forEach((li, k) => li.style.setProperty('--p', k === active ? (s.fill * 100).toFixed(1) + '%' : '0%'));
+  updateFruit(dt, t);
+  updateCan(dt, t);
+  if (scrollY < range.offsetTop) flingDroplets(dt, (P.spin - lastSpin) / Math.max(dt, 1e-3)); lastSpin = P.spin;
+  updateParticles(dt);
+  updateAudio(dt);
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+tick();
+addEventListener('load', () => ScrollTrigger.refresh());
+</script>
+</body>
+</html>
