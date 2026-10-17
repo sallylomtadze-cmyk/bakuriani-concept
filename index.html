@@ -54,26 +54,26 @@ h2{font-size:clamp(30px,3.8vw,62px);line-height:1.06;font-weight:900;letter-spac
     radial-gradient(38% 80% at 82% 35%,rgba(140,195,255,.38) 0%,rgba(140,195,255,0) 75%),
     radial-gradient(75% 65% at 50% 118%,rgba(255,255,255,1) 0%,rgba(255,255,255,.6) 35%,rgba(255,255,255,0) 80%),
     linear-gradient(180deg,#DDEBFF 0%,#F4F9FF 100%);
-  box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(30,110,220,.14),0 16px 30px -16px rgba(30,110,220,.65);
+  box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 2px rgba(10,35,72,.08),0 6px 14px -6px rgba(30,100,200,.22),0 18px 32px -20px rgba(30,100,200,.3);
   transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s,filter .5s,color .4s}
-.btn::before,.btn::after{content:"";position:absolute;left:-6px;right:-6px;bottom:-4px;z-index:-1;pointer-events:none;filter:blur(3px);transition:height 1.2s cubic-bezier(.25,.6,.2,1),transform 1s cubic-bezier(.2,.7,.2,1),opacity .6s}
+.btn::before,.btn::after{content:"";position:absolute;left:0;right:0;bottom:0;z-index:-1;pointer-events:none;border-radius:inherit;transition:height 1.2s cubic-bezier(.25,.6,.2,1),transform 1s cubic-bezier(.2,.7,.2,1),opacity .6s}
 .btn::before{height:38%;opacity:.45;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C20 3.2 40 3.2 60 6 S100 8.8 120 6 V12 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") 0 0/240px 10px repeat-x,linear-gradient(#fff,#fff) 0 9px/100% 100% no-repeat;animation:wave 11s linear infinite}
 .btn::after{height:26%;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C15 3.8 30 3.8 45 6 S75 8.2 90 6 V12 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") 0 0/180px 8px repeat-x,linear-gradient(#fff,#fff) 0 7px/100% 100% no-repeat;animation:wave2 7.5s linear infinite reverse}
 @keyframes wave{to{background-position:240px 0,0 9px}}
 @keyframes wave2{to{background-position:180px 0,0 7px}}
-.btn:hover{transform:translateY(-1px);filter:saturate(1.08) brightness(1.03);box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(30,110,220,.16),0 20px 36px -16px rgba(30,110,220,.72)}
+.btn:hover{transform:translateY(-1px);filter:saturate(1.08) brightness(1.03);box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 2px rgba(10,35,72,.08),0 8px 18px -8px rgba(30,100,200,.28),0 22px 38px -22px rgba(30,100,200,.38)}
 .btn:hover::before{height:48%}
 .btn:hover::after{height:36%}
 .btn:active{transform:translateY(0) scale(.985)}
 .btn.ghost{border-radius:12px 29px 29px 29px;color:var(--navy);
   background:radial-gradient(75% 65% at 50% 104%,rgba(255,255,255,1) 0%,rgba(255,255,255,0) 72%),linear-gradient(180deg,rgba(226,238,252,.78) 0%,rgba(250,252,255,.72) 100%);
   -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
-  box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(10,35,72,.1),0 14px 28px -18px rgba(10,35,72,.35)}
+  box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 2px rgba(10,35,72,.07),0 6px 14px -8px rgba(10,35,72,.14),0 16px 30px -22px rgba(10,35,72,.22)}
 .btn.ghost::before{height:calc(100% + 12px);opacity:1;transform:translateY(102%);
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C20 3.2 40 3.2 60 6 S100 8.8 120 6 V12 H0Z' fill='%238CC2FF'/%3E%3C/svg%3E") 0 0/240px 12px repeat-x,radial-gradient(60% 80% at 50% 30%,rgba(38,136,255,.85),rgba(38,136,255,.35) 60%,rgba(140,194,255,.6)) 0 11px/100% 100% no-repeat;animation:wave3 6s linear infinite}
 .btn.ghost::after{display:none}
 @keyframes wave3{to{background-position:240px 0,0 11px}}
-.btn.ghost:hover{color:#0B2B5E;box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 3px rgba(30,110,220,.14),0 16px 30px -16px rgba(30,110,220,.5)}
+.btn.ghost:hover{color:#0B2B5E;box-shadow:inset 0 0 3px 1.5px rgba(255,255,255,.9),inset 0 3px 8px rgba(255,255,255,.8),inset 0 -8px 18px rgba(255,255,255,.55),0 1px 2px rgba(10,35,72,.08),0 8px 18px -8px rgba(30,100,200,.22),0 20px 34px -22px rgba(30,100,200,.3)}
 .btn.ghost:hover::before{transform:translateY(-12px)}
 .btns{display:flex;flex-wrap:wrap;gap:14px}
 .sq svg{width:18px;height:18px}
@@ -169,7 +169,7 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 .panel .prod{margin-top:32px;height:clamp(140px,22vh,220px);width:auto;max-width:100%;object-fit:contain;object-position:left bottom;filter:drop-shadow(0 18px 24px rgba(10,35,72,.14))}
 .progress{display:none}
 @media(max-width:800px){
-  .stage .wrap{grid-template-columns:1fr;align-items:end;padding-bottom:28px}
+  .stage .wrap{grid-template-columns:1fr;align-items:start;padding-top:57svh;padding-bottom:0}
   .r-list{display:none}
   .r-panels{grid-column:1}
   .panel{position:relative}
@@ -201,7 +201,7 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 #buy{background:var(--card)}
 .buy{display:grid;grid-template-columns:6fr 6fr;gap:48px;align-items:start}
 /* additions after the clean-up */
-.concept{position:fixed;left:16px;bottom:16px;z-index:8;padding:8px 14px;border-radius:6px 16px 16px 16px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 6px 18px -10px rgba(10,35,72,.3);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--mute);pointer-events:none}
+.concept{position:absolute;left:calc(max(0px, (100vw - var(--max)) / 2) + var(--gut));bottom:22px;z-index:3;padding:8px 14px;border-radius:6px 16px 16px 16px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 6px 18px -10px rgba(10,35,72,.3);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--mute);pointer-events:none}
 .lng{display:flex;gap:18px}.lng button{border:0;background:none;padding:0;font:500 15px/1.75 "Noto Sans Georgian",sans-serif;color:var(--mute);cursor:pointer}.lng button.on{font-weight:700;color:var(--navy)}.lng button:hover{color:var(--blue)}
 html[lang=en] .mt{text-transform:uppercase}
 .ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}.ln>span{display:block}
@@ -295,9 +295,9 @@ html.intro-on{overflow:hidden}
   </div>
 </div>
 
-<div class="concept">დიზაინის კონცეფცია · არაოფიციალური</div>
 <main>
   <section class="hero" id="top">
+    <div class="concept">დიზაინის კონცეფცია · არაოფიციალური</div>
     <div class="wrap">
       <div class="copy">
         <h1 class="mt"><span>მთის წყალი</span><span class="l2">1700 მეტრიდან</span></h1>
@@ -438,7 +438,7 @@ html.intro-on{overflow:hidden}
         </div>
         <p class="hotline"><span class="mt">ცხელი ხაზი</span><a href="tel:+995322484484">(995 32) 248-44-84</a></p>
       </div>
-      <figure class="buy-ph"><img src="assets/family.jpg" alt="ოჯახი სახლში, ბაკურიანის ბოთლით" loading="lazy"></figure>
+      <figure class="buy-ph"><img src="assets/classic.jpg" alt="ბაკურიანის ბოთლები" loading="lazy"></figure>
     </div>
   </section>
 </main>
@@ -456,7 +456,7 @@ html.intro-on{overflow:hidden}
       <div><h4 class="mt">სოციალური</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li></ul></div>
     </div>
     <div class="f-word mt" aria-hidden="true">ბაკურიანი</div>
-    <div class="f-bot"><span>© 2026 IDS ბორჯომი საქართველო</span><span class="f-links"><a href="#">წესები და პირობები</a><a href="#">კონფიდენციალურობა</a><span>ფოტო: Agshin Osmanov / Unsplash</span></span></div>
+    <div class="f-bot"><span>© 2026 IDS ბორჯომი საქართველო · დიზაინის კონცეფცია, არაოფიციალური</span><span class="f-links"><a href="#">წესები და პირობები</a><a href="#">კონფიდენციალურობა</a><span>ფოტო: Agshin Osmanov / Unsplash</span></span></div>
   </div>
 </footer>
 
@@ -660,10 +660,11 @@ const PRODUCT = {
   'სპრეი': { v: 'can', r: HB * 0.13,  s: 0.8 }
 };
 let productScale = 1, psNow = 1, productR = RB;
+const softEllipse = (g, cx, cy, rx, ry, a) => { g.save(); g.translate(cx, cy); g.scale(1, ry / rx); const r = g.createRadialGradient(0, 0, 0, 0, 0, rx);
+  r.addColorStop(0, `rgba(25,45,75,${a})`); r.addColorStop(0.45, `rgba(25,45,75,${a * 0.55})`); r.addColorStop(1, 'rgba(25,45,75,0)'); g.fillStyle = r; g.fillRect(-rx, -rx, rx * 2, rx * 2); g.restore(); };
 const pShC = document.createElement('canvas'); pShC.width = 256; pShC.height = 128;
 { const g = pShC.getContext('2d');
-  g.filter = 'blur(14px)'; g.fillStyle = 'rgba(25,45,75,.30)'; g.beginPath(); g.ellipse(128, 64, 96, 24, 0, 0, Math.PI * 2); g.fill();
-  g.filter = 'blur(6px)'; g.fillStyle = 'rgba(25,45,75,.42)'; g.beginPath(); g.ellipse(128, 64, 58, 10, 0, 0, Math.PI * 2); g.fill(); }
+  softEllipse(g, 128, 64, 124, 34, 0.26); softEllipse(g, 128, 64, 70, 13, 0.34); }
 const pShadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 0.5), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(pShC), transparent: true, depthWrite: false, opacity: 0 }));
 pShadow.renderOrder = 0; scene.add(pShadow);
 function setProduct(name) {
@@ -848,8 +849,8 @@ const cap = new THREE.Mesh(new THREE.LatheGeometry([[0,0.92],[0.3,0.9],[0.48,0.8
 const CAP0 = 3.12 - 2.31; cap.position.y = CAP0; can.add(cap);
 const shc = document.createElement('canvas'); shc.width = shc.height = 256;
 { const g = shc.getContext('2d');
-  g.filter = 'blur(26px)'; g.fillStyle = 'rgba(30,45,70,.3)'; g.beginPath(); g.ellipse(128, 128, 86, 40, 0, 0, Math.PI * 2); g.fill();   // wide ambient shade
-  g.filter = 'blur(10px)'; g.fillStyle = 'rgba(30,45,70,.45)'; g.beginPath(); g.ellipse(128, 128, 52, 16, 0, 0, Math.PI * 2); g.fill(); } // contact under the base
+  softEllipse(g, 128, 128, 124, 56, 0.3);   // wide ambient shade
+  softEllipse(g, 128, 128, 66, 20, 0.4); }   // contact under the base
 const canShadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(shc), transparent: true, depthWrite: false }));
 canShadow.renderOrder = 0; scene.add(canShadow);
 
@@ -1238,7 +1239,7 @@ if (!reduce) {
 
 
 /* ---------- language: Georgian / English ---------- */
-const EN = {"კლასიკა": "Classic", "ასორტიმენტი": "Range", "წყარო": "Source", "სად ვიყიდო": "Where to buy", "ბლოგი": "Blog", "კონტაქტი": "Contact", "ბიძინა კვერნაძის 10, თბილისი": "10 Bidzina Kvernadze St, Tbilisi", "სოციალური": "Social", "ენა": "Language", "მთის წყალი": "Mountain water", "1700 მეტრიდან": "from 1,700 metres", "წყარო ბორჯომ-ბაკურიანის ხეობაშია. წყალი რბილი და სუფთაა, ზუსტად ისეთი, როგორიც მთაში.": "The spring lies in the Borjomi-Bakuriani valley. The water is soft and clean, just as it is in the mountains.", "ბავშვები": "Kids", "ოჯახი": "Family", "სპორტი": "Sport", "ციტრუსის მიქსი": "Citrus mix", "ლიმონი": "Lemon", "ატამი": "Peach", "სპრეი": "Spray", "ბუნებრივი მინერალური წყალი ბაკურიანის წყაროდან. გაზიანი და უგაზო.": "Natural mineral water from the Bakuriani spring. Still and sparkling.", "0.5 ლ": "0.5 L", "1 ლ": "1 L", "1.5 ლ": "1.5 L", "0.33 ლ": "0.33 L", "5 ლ": "5 L", "19 ლ": "19 L", "0.75 ლ": "0.75 L", "150 მლ": "150 ml", "მინა": "Glass", "დაბალი მინერალიზაცია პირველი დღიდან. ჩვილის საკვებისთვის და დასალევად.": "Low in minerals from day one. For preparing baby food and for drinking.", "0+ თვე": "0+ months", "დაბალი მინერალიზაცია": "Low mineral content", "პატარა ბოთლი, სპორტული ხუფი და საყვარელი გმირები.": "A small bottle, a sport cap and their favourite heroes.", "სპორტული ხუფი": "Sport cap", "დიდი ბოთლები სახლისა და ოფისისთვის. მიწოდებით კართან.": "Big bottles for home and office, delivered to your door.", "მიწოდება": "Delivery", "სპორტული ხუფი ერთი ხელით. ვარჯიშზე, მატჩზე, მთაში.": "A sport cap that opens with one hand. At training, at the match, in the mountains.", "მთის წყალი ლიმონის, ლაიმისა და ფორთოხლის გემოთი.": "Mountain water with lemon, lime and orange.", "0 შაქარი და კალორია": "0 sugar, 0 calories", "მთის წყალი ლიმონის გემოთი. მსუბუქი და გამაგრილებელი.": "Mountain water with a hint of lemon. Light and refreshing.", "მთის წყალი ნაზი ატმის გემოთი.": "Mountain water with a soft peach flavour.", "მთის წყალი კანისთვის. ნაზი ნისლი, რომელიც აგრილებს და ატენიანებს.": "Mountain water for your skin. A fine mist that cools and hydrates.", "ყველა ტიპის კანი": "All skin types", "ბაკურიანი": "Bakuriani", "ყოველ დღეს": "every day", "ბაღში": "In the garden", "მატჩის შემდეგ": "After the match", "პირველი წყალი": "First water", "სამზარეულოში": "In the kitchen", "კორტზე": "On the court", "სიგრილე": "Cool down", "სკოლის გზაზე": "On the way to school", "პიკნიკზე": "At the picnic", "დაბადებული": "Born in", "ბაკურიანში": "Bakuriani", "წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.": "For years the water travels through mountain rock. That is how it is filtered and gains its natural minerals.", "მეტრი ზღვის": "metres above", "დონიდან": "sea level", "ბაკურიანი ყველა სუპერმარკეტშია. 5 და 19 ლიტრიან ბოთლებს სახლში ან ოფისში მოგიტანთ.": "Bakuriani is in every supermarket. We deliver 5 and 19 litre bottles to your home or office.", "მიწოდების შეკვეთა": "Order delivery", "მაღაზიების რუკა": "Store map", "ცხელი ხაზი": "Hotline", "ბუნებრივი მინერალური წყალი": "Natural mineral water", "ბორჯომ-ბაკურიანის ხეობიდან.": "from the Borjomi-Bakuriani valley.", "ნავიგაცია": "Navigation", "© 2026 IDS ბორჯომი საქართველო": "© 2026 IDS Borjomi Georgia", "წესები და პირობები": "Terms and conditions", "კონფიდენციალურობა": "Privacy", "ფოტო: Agshin Osmanov / Unsplash": "Photo: Agshin Osmanov / Unsplash", "ხმა": "Sound", "მენიუ": "Menu", "ბაკურიანი კლასიკა 0.5, 1 და 1.5 ლიტრი": "Bakuriani Classic, 0.5, 1 and 1.5 litres", "ბაკურიანი 0+": "Bakuriani 0+", "ბაკურიანი ბავშვებისთვის": "Bakuriani for kids", "ბაკურიანი 19 ლიტრი": "Bakuriani 19 litres", "ბაკურიანი სპორტი": "Bakuriani Sport", "ბაკურიანი ციტრუსის მიქსი": "Bakuriani Citrus mix", "ბაკურიანი ლიმონი": "Bakuriani Lemon", "ბაკურიანი ატამი": "Bakuriani Peach", "ბაკურიანი მინერალური წყლის სპრეი": "Bakuriani mineral water spray", "ოჯახი სახლში, ბაკურიანის ბოთლით": "A family at home with a bottle of Bakuriani", "ბაკურიანი. მთის მინერალური წყალი": "Bakuriani. Mountain mineral water", "დიზაინის კონცეფცია · არაოფიციალური": "Design concept · unofficial"};
+const EN = {"კლასიკა": "Classic", "ასორტიმენტი": "Range", "წყარო": "Source", "სად ვიყიდო": "Where to buy", "ბლოგი": "Blog", "კონტაქტი": "Contact", "ბიძინა კვერნაძის 10, თბილისი": "10 Bidzina Kvernadze St, Tbilisi", "სოციალური": "Social", "ენა": "Language", "მთის წყალი": "Mountain water", "1700 მეტრიდან": "from 1,700 metres", "წყარო ბორჯომ-ბაკურიანის ხეობაშია. წყალი რბილი და სუფთაა, ზუსტად ისეთი, როგორიც მთაში.": "The spring lies in the Borjomi-Bakuriani valley. The water is soft and clean, just as it is in the mountains.", "ბავშვები": "Kids", "ოჯახი": "Family", "სპორტი": "Sport", "ციტრუსის მიქსი": "Citrus mix", "ლიმონი": "Lemon", "ატამი": "Peach", "სპრეი": "Spray", "ბუნებრივი მინერალური წყალი ბაკურიანის წყაროდან. გაზიანი და უგაზო.": "Natural mineral water from the Bakuriani spring. Still and sparkling.", "0.5 ლ": "0.5 L", "1 ლ": "1 L", "1.5 ლ": "1.5 L", "0.33 ლ": "0.33 L", "5 ლ": "5 L", "19 ლ": "19 L", "0.75 ლ": "0.75 L", "150 მლ": "150 ml", "მინა": "Glass", "დაბალი მინერალიზაცია პირველი დღიდან. ჩვილის საკვებისთვის და დასალევად.": "Low in minerals from day one. For preparing baby food and for drinking.", "0+ თვე": "0+ months", "დაბალი მინერალიზაცია": "Low mineral content", "პატარა ბოთლი, სპორტული ხუფი და საყვარელი გმირები.": "A small bottle, a sport cap and their favourite heroes.", "სპორტული ხუფი": "Sport cap", "დიდი ბოთლები სახლისა და ოფისისთვის. მიწოდებით კართან.": "Big bottles for home and office, delivered to your door.", "მიწოდება": "Delivery", "სპორტული ხუფი ერთი ხელით. ვარჯიშზე, მატჩზე, მთაში.": "A sport cap that opens with one hand. At training, at the match, in the mountains.", "მთის წყალი ლიმონის, ლაიმისა და ფორთოხლის გემოთი.": "Mountain water with lemon, lime and orange.", "0 შაქარი და კალორია": "0 sugar, 0 calories", "მთის წყალი ლიმონის გემოთი. მსუბუქი და გამაგრილებელი.": "Mountain water with a hint of lemon. Light and refreshing.", "მთის წყალი ნაზი ატმის გემოთი.": "Mountain water with a soft peach flavour.", "მთის წყალი კანისთვის. ნაზი ნისლი, რომელიც აგრილებს და ატენიანებს.": "Mountain water for your skin. A fine mist that cools and hydrates.", "ყველა ტიპის კანი": "All skin types", "ბაკურიანი": "Bakuriani", "ყოველ დღეს": "every day", "ბაღში": "In the garden", "მატჩის შემდეგ": "After the match", "პირველი წყალი": "First water", "სამზარეულოში": "In the kitchen", "კორტზე": "On the court", "სიგრილე": "Cool down", "სკოლის გზაზე": "On the way to school", "პიკნიკზე": "At the picnic", "დაბადებული": "Born in", "ბაკურიანში": "Bakuriani", "წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.": "For years the water travels through mountain rock. That is how it is filtered and gains its natural minerals.", "მეტრი ზღვის": "metres above", "დონიდან": "sea level", "ბაკურიანი ყველა სუპერმარკეტშია. 5 და 19 ლიტრიან ბოთლებს სახლში ან ოფისში მოგიტანთ.": "Bakuriani is in every supermarket. We deliver 5 and 19 litre bottles to your home or office.", "მიწოდების შეკვეთა": "Order delivery", "მაღაზიების რუკა": "Store map", "ცხელი ხაზი": "Hotline", "ბუნებრივი მინერალური წყალი": "Natural mineral water", "ბორჯომ-ბაკურიანის ხეობიდან.": "from the Borjomi-Bakuriani valley.", "ნავიგაცია": "Navigation", "© 2026 IDS ბორჯომი საქართველო · დიზაინის კონცეფცია, არაოფიციალური": "© 2026 IDS Borjomi Georgia · design concept, unofficial", "წესები და პირობები": "Terms and conditions", "კონფიდენციალურობა": "Privacy", "ფოტო: Agshin Osmanov / Unsplash": "Photo: Agshin Osmanov / Unsplash", "ხმა": "Sound", "მენიუ": "Menu", "ბაკურიანი კლასიკა 0.5, 1 და 1.5 ლიტრი": "Bakuriani Classic, 0.5, 1 and 1.5 litres", "ბაკურიანი 0+": "Bakuriani 0+", "ბაკურიანი ბავშვებისთვის": "Bakuriani for kids", "ბაკურიანი 19 ლიტრი": "Bakuriani 19 litres", "ბაკურიანი სპორტი": "Bakuriani Sport", "ბაკურიანი ციტრუსის მიქსი": "Bakuriani Citrus mix", "ბაკურიანი ლიმონი": "Bakuriani Lemon", "ბაკურიანი ატამი": "Bakuriani Peach", "ბაკურიანი მინერალური წყლის სპრეი": "Bakuriani mineral water spray", "ბაკურიანის ბოთლები": "Bakuriani bottles", "ბაკურიანი. მთის მინერალური წყალი": "Bakuriani. Mountain mineral water", "დიზაინის კონცეფცია · არაოფიციალური": "Design concept · unofficial"};
 const fromMt = t => t.replace(/[\u1C90-\u1CBA\u1CBD-\u1CBF]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xBC0));
 const trName = n => lang === 'en' ? (EN[n] || n) : n;
 const kaText = new Map(), kaAttr = new Map(), kaTitle = document.title;   // originals, restored when switching back
