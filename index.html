@@ -1652,114 +1652,39 @@ let kukuMoving = false;
     const x1 = cx - len * 0.34, x2 = cx + len * 0.34, y1 = trackY(x1), y2 = trackY(x2);
     g.save(); const [sx, sy] = W2S(cx, (y1 + y2) / 2); g.translate(sx, sy - 2); g.rotate(Math.atan2(y2 - y1, x2 - x1)); draw(len); g.restore();
   }
-  function wheel(x, y, r) {
-    g.save(); g.translate(x, y);
-    g.fillStyle = '#161E25'; g.beginPath(); g.arc(0, 0, r, 0, 6.283); g.fill();
-    g.fillStyle = '#56636E'; g.beginPath(); g.arc(0, 0, r * 0.86, 0, 6.283); g.fill();
-    const dg = g.createRadialGradient(-r * 0.25, -r * 0.3, r * 0.1, 0, 0, r * 0.78); dg.addColorStop(0, '#6E7B86'); dg.addColorStop(1, '#2A353F');
-    g.fillStyle = dg; g.beginPath(); g.arc(0, 0, r * 0.74, 0, 6.283); g.fill();
-    g.rotate(dist / r); g.fillStyle = '#1D262E';
-    for (let k = 0; k < 6; k++) { const a = k * 1.047; g.beginPath(); g.arc(Math.cos(a) * r * 0.45, Math.sin(a) * r * 0.45, r * 0.12, 0, 6.283); g.fill(); }
-    g.fillStyle = '#AEB9C2'; g.beginPath(); g.arc(0, 0, r * 0.2, 0, 6.283); g.fill();
-    g.restore();
+  // the festive Kukushka: Blender renders of the loco and a wagon, drawn along the track
+  const KU = 28;                                         // canvas units per metre of the 3D train
+  function sprite(m, wm) { if (!ready(m)) return 0; const w = wm * KU, h = w * m.naturalHeight / m.naturalWidth; g.drawImage(m, -w / 2, -h + 3, w, h); return h; }
+  function wagonAt(cx, logo) {
+    body(cx, 158, () => { const h = sprite(WAGON, 5.63); if (!h || !logo || !ready(logoImg)) return;
+      const pw = h * 0.46, ph = h * 0.15, py = 3 - h * 0.3 - ph / 2;      // white name plate under the windows
+      g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(-pw / 2, py, pw, ph, 3); g.fill();
+      const lh = ph * 0.66, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, -lw / 2, py + (ph - lh) / 2, lw, lh); });
   }
-  function bogies(len) {
-    [-len * 0.34, len * 0.34].forEach(bx => {
-      [-11, 11].forEach(o => wheel(bx + o, -8.5, 8.5));
-      const fr = g.createLinearGradient(0, -19, 0, -9); fr.addColorStop(0, '#46525D'); fr.addColorStop(1, '#262F37');
-      g.fillStyle = fr; g.beginPath(); g.roundRect(bx - 23, -17, 46, 6.5, 2.5); g.fill();
-      [-11, 11].forEach(o => { g.fillStyle = '#C9A55A'; g.fillRect(bx + o - 3, -15.5, 6, 4); g.fillStyle = '#20282F'; g.fillRect(bx + o + (o < 0 ? 6 : -8), -12, 2, 6); });
-      g.strokeStyle = '#8A96A0'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(bx - 7, -18.5); g.quadraticCurveTo(bx, -15, bx + 7, -18.5); g.moveTo(bx - 6, -17.3); g.quadraticCurveTo(bx, -14.4, bx + 6, -17.3); g.stroke();
-      g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(bx - 21, -16.6, 42, 0.8);
-    });
-    g.fillStyle = '#2A343D'; g.fillRect(-len / 2 + 6, -21, len - 12, 4);
-  }
-  // body between the platforms: cream upper, deep red lower, thin gold line, arched roof with overhang
-  let kSnow = 0;
-  function coach(x0, x1, h, round) {
-    const top = -20 - h, mid = -20 - h * 0.44, L = x1 - x0;
-    g.fillStyle = 'rgba(15,25,35,.14)'; g.beginPath(); g.roundRect(x0 + 1, top + 4, L, h, [round, round, 3, 3]); g.fill();
-    const cream = g.createLinearGradient(0, top, 0, mid); cream.addColorStop(0, '#FFFFFF'); cream.addColorStop(1, '#E8ECEF');
-    g.fillStyle = cream; g.beginPath(); g.roundRect(x0, top, L, h, [round, round, 3, 3]); g.fill();
-    const red = g.createLinearGradient(0, mid, 0, -20); red.addColorStop(0, '#C53C34'); red.addColorStop(0.55, '#A92D27'); red.addColorStop(1, '#8A221D');
-    g.fillStyle = red; g.beginPath(); g.roundRect(x0, mid, L, -20 - mid, [0, 0, 3, 3]); g.fill();
-    g.fillStyle = '#FFFFFF'; g.fillRect(x0, mid - 1.2, L, 1.6);
-    g.fillStyle = 'rgba(255,255,255,.22)'; g.fillRect(x0 + 2, mid + 2.5, L - 4, 1);
-    g.fillStyle = 'rgba(40,30,20,.18)'; g.fillRect(x0, top + 2, L, 2.5);
-    const rf = g.createLinearGradient(0, top - 7, 0, top + 2); rf.addColorStop(0, '#FFFFFF'); rf.addColorStop(0.7, '#E9EEF2'); rf.addColorStop(1, '#C9D2DA');
-    g.fillStyle = rf; g.beginPath(); g.moveTo(x0 - 3, top + 2); g.quadraticCurveTo(x0 - 3, top - 6, x0 + 9, top - 7); g.lineTo(x1 - 9, top - 7); g.quadraticCurveTo(x1 + 3, top - 6, x1 + 3, top + 2); g.closePath(); g.fill();
-    if (kSnow > 0.05) { g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(x0 + 2, top - 6); g.quadraticCurveTo(x0 + 4, top - 7 - 3 * kSnow, x0 + 14, top - 7 - 3 * kSnow);
-      for (let sx2 = x0 + 14; sx2 <= x1 - 14; sx2 += 7) g.lineTo(sx2, top - 7 - 3 * kSnow - Math.sin(sx2 * 0.6) * 0.7);
-      g.quadraticCurveTo(x1 - 4, top - 7 - 3 * kSnow, x1 - 2, top - 6); g.closePath(); g.fill();
-      g.fillStyle = 'rgba(150,175,200,.35)'; g.fillRect(x0 + 6, top - 6.5, L - 12, 1); }
-    return { top, mid };
-  }
-  function windowAt(x, y, w, h) {
-    const gl = g.createLinearGradient(x, y, x + w, y + h); gl.addColorStop(0, '#E9F3FA'); gl.addColorStop(0.5, '#C6DDEC'); gl.addColorStop(1, '#F6E7C8');
-    g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(x - 1.5, y - 1.5, w + 3, h + 3, 5); g.fill();
-    g.fillStyle = gl; g.beginPath(); g.roundRect(x, y, w, h, 4); g.fill();
-    g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.moveTo(x + 2, y + h); g.lineTo(x + w * 0.45, y); g.lineTo(x + w * 0.62, y); g.lineTo(x + w * 0.17, y + h); g.fill();
-    g.fillStyle = 'rgba(60,80,100,.18)'; g.fillRect(x, y + h * 0.48, w, 1);
-  }
-  const pane = (x, y, w, h) => windowAt(x, y, w, h);
-  function platform(xe, dir) {   // open end platform with railing and a step, like the Kukushka coaches
-    g.fillStyle = '#3A4550'; g.fillRect(Math.min(xe, xe + dir * 14), -21, 14, 3);
-    g.strokeStyle = '#4A5662'; g.lineWidth = 1.2; g.beginPath();
-    for (let k = 0; k <= 2; k++) { const px = xe + dir * (2 + k * 5.5); g.moveTo(px, -21); g.lineTo(px, -40); }
-    g.moveTo(xe + dir * 1, -40); g.lineTo(xe + dir * 13, -40); g.moveTo(xe + dir * 1, -31); g.lineTo(xe + dir * 13, -31); g.stroke();
-    g.fillStyle = '#3A4550'; g.fillRect(Math.min(xe + dir * 4, xe + dir * 12), -14, 8, 2);
-  }
-  function car(len, logo) {
-    bogies(len);
-    const x0 = -len / 2 + 12, x1 = len / 2 - 12;
-    platform(x0, -1); platform(x1, 1);
-    const { top } = coach(x0, x1, 54, 7);
-    const n = 7, gap = 3, ww = (x1 - x0 - 12 - gap * (n - 1)) / n;
-    for (let k = 0; k < n; k++) { const x = x0 + 6 + k * (ww + gap), y = top + 8, h = 18;
-      const gl = g.createLinearGradient(x, y, x, y + h); gl.addColorStop(0, '#5D7385'); gl.addColorStop(1, '#3A4D5C');
-      g.fillStyle = gl; g.beginPath(); g.roundRect(x, y, ww, h, 3); g.fill();
-      g.fillStyle = 'rgba(255,255,255,.35)'; g.beginPath(); g.moveTo(x + 2, y + h); g.lineTo(x + ww * 0.5, y); g.lineTo(x + ww * 0.68, y); g.lineTo(x + ww * 0.2, y + h); g.fill(); }
-    if (logo) { g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(-42, -39, 84, 15, [4, 8, 8, 8]); g.fill();
-      if (logoImg.complete && logoImg.naturalWidth) { const lh = 11, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, -lw / 2, -37, lw, lh); } }
-    g.fillStyle = '#2A343D'; g.fillRect(len / 2 - 3, -17, 8, 3);
-  }
-  function tail(len) { const x0 = -len / 2 + 12; const tl = g.createRadialGradient(x0 - 15, -28, 0, x0 - 15, -28, 8); tl.addColorStop(0, 'rgba(255,90,70,.9)'); tl.addColorStop(1, 'rgba(255,90,70,0)'); g.fillStyle = tl; g.fillRect(x0 - 23, -36, 16, 16); }
-  function loco(len, t) {
-    bogies(len);
-    const x0 = -len / 2 + 4, x1 = len / 2 - 2, h = 50, top = -20 - h;
-    g.fillStyle = 'rgba(15,25,35,.14)'; g.beginPath(); g.roundRect(x0 + 1, top + 4, x1 - x0, h, [10, 14, 3, 3]); g.fill();
-    const red = g.createLinearGradient(0, top, 0, -20); red.addColorStop(0, '#D04A3F'); red.addColorStop(0.5, '#B3322A'); red.addColorStop(1, '#8C231D');
-    g.fillStyle = red; g.beginPath(); g.roundRect(x0, top, x1 - x0, h, [10, 14, 3, 3]); g.fill();
-    g.fillStyle = '#FFFFFF'; g.fillRect(x0, top + h * 0.56, x1 - x0, 4);
-    g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(x0 + 3, top + 3, x1 - x0 - 8, 1.2);
-    const rf = g.createLinearGradient(0, top - 5, 0, top + 1); rf.addColorStop(0, '#F4F7FA'); rf.addColorStop(1, '#C9D2DA');
-    g.fillStyle = rf; g.beginPath(); g.roundRect(x0 + 6, top - 4, x1 - x0 - 16, 5, 3); g.fill();
-    const glass = (x, y, w, hh, r) => { const gl = g.createLinearGradient(x, y, x, y + hh); gl.addColorStop(0, '#5D7385'); gl.addColorStop(1, '#3A4D5C'); g.fillStyle = gl; g.beginPath(); g.roundRect(x, y, w, hh, r); g.fill(); g.strokeStyle = '#FFFFFF'; g.lineWidth = 1.4; g.stroke(); };
-    glass(x0 + 8, top + 8, 18, 16, 3);
-    const wx = x1 - 30, wy = top + 7, ww = 24, wh = 18;
-    glass(wx, wy, ww, wh, [3, 8, 3, 3]);
-    if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 34, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 0.8;
-      g.save(); g.beginPath(); g.roundRect(wx, wy, ww, wh, [3, 8, 3, 3]); g.clip();
-      g.fillStyle = '#2F4150'; g.fillRect(wx, wy, ww, wh);
-      g.drawImage(bottleImg, wx + ww / 2 - bw / 2, wy + 3 + bob, bw, bh);
-      const rf = g.createLinearGradient(wx, wy, wx + ww, wy + wh); rf.addColorStop(0, 'rgba(255,255,255,.28)'); rf.addColorStop(0.45, 'rgba(255,255,255,.05)'); rf.addColorStop(0.55, 'rgba(255,255,255,.18)'); rf.addColorStop(1, 'rgba(255,255,255,0)');
-      g.fillStyle = rf; g.fillRect(wx, wy, ww, wh); g.restore();
-      g.strokeStyle = '#FFFFFF'; g.lineWidth = 1.4; g.beginPath(); g.roundRect(wx, wy, ww, wh, [3, 8, 3, 3]); g.stroke(); }
-    g.fillStyle = '#2E3A44'; g.beginPath(); g.roundRect(x1 - 7, -36, 7, 9, 2); g.fill();
-    const lens = g.createRadialGradient(x1 - 2, -31.5, 0, x1 - 2, -31.5, 4); lens.addColorStop(0, '#FFFFFF'); lens.addColorStop(0.5, '#FFF1C8'); lens.addColorStop(1, '#E9C476');
-    g.fillStyle = lens; g.beginPath(); g.arc(x1 - 2.5, -31.5, 3.2, 0, 6.283); g.fill();
-    const halo = g.createRadialGradient(x1 - 2, -31.5, 0, x1 - 2, -31.5, 12); halo.addColorStop(0, 'rgba(255,240,205,.55)'); halo.addColorStop(1, 'rgba(255,240,205,0)'); g.fillStyle = halo; g.fillRect(x1 - 14, -44, 24, 24);
-    g.fillStyle = '#8B97A2'; g.fillRect(-18, top - 8, 5, 4); g.fillRect(4, top - 8, 5, 4);
-    g.strokeStyle = '#3B4A57'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(-15, top - 8); g.lineTo(-5, top - 30); g.lineTo(7, top - 8); g.moveTo(-15, top - 30); g.lineTo(6, top - 30); g.stroke();
-    g.fillStyle = '#2A343D'; g.fillRect(x0 - 6, -17, 8, 3);
+  function locoAt(cx, t) {
+    body(cx, 190, () => { const w = 6.82 * KU, h = sprite(LOCO, 6.82); if (!h) return;
+      // the bottle rides in the cab window (window rect measured from the render)
+      const rx = -w / 2 + 0.1141 * w, ry = -h + 3 + 0.2895 * h, rw = 0.1173 * w, rh = 0.1961 * h;
+      if (ready(bottleImg)) { const bh = rh * 2.1, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 0.6;
+        g.save(); g.beginPath(); g.roundRect(rx, ry, rw, rh, 2); g.clip();
+        g.drawImage(bottleImg, rx + rw / 2 - bw / 2, ry + 1 + bob, bw, bh);
+        const rf = g.createLinearGradient(rx, ry, rx + rw, ry + rh); rf.addColorStop(0, 'rgba(255,240,220,.3)'); rf.addColorStop(0.5, 'rgba(255,240,220,0)'); rf.addColorStop(1, 'rgba(255,240,220,.15)');
+        g.fillStyle = rf; g.fillRect(rx, ry, rw, rh); g.restore(); }
+      // steam from the chimney, trailing back as the train speeds up
+      const chx = -w / 2 + 0.7285 * w, chy = -h + 3 + 0.126 * h, sp = Math.min(1, v / 300), now = performance.now() / 1000;
+      for (let i = 0; i < 10; i++) { const u = (now * (0.35 + sp * 0.5) + i / 10) % 1, r = 5 + u * 20, a = 0.62 * Math.sin(Math.PI * Math.min(1, u * 1.4 + 0.08)) * (1 - u * 0.6);
+        const x = chx - u * (14 + sp * 70) + Math.sin(u * 6 + i) * 3, y = chy - 3 - u * (46 - sp * 18);
+        const sm = g.createRadialGradient(x, y, 0, x, y, r); sm.addColorStop(0, `rgba(250,251,253,${a})`); sm.addColorStop(0.6, `rgba(232,237,244,${a * 0.5})`); sm.addColorStop(1, 'rgba(232,237,244,0)');
+        g.fillStyle = sm; g.fillRect(x - r, y - r, r * 2, r * 2); } });
   }
   const loadImgs = (n, f) => Array.from({ length: n }, (_, i) => { const m = new Image(); m.src = f(i); return m; });
   const HOUSES = loadImgs(3, i => `assets/house-${i}.webp`);
+  const [LOCO, WAGON, SKIS, ARCH] = ['kuku-loco', 'kuku-wagon', 'skis', 'finish-arch'].map(n => { const m = new Image(); m.src = `assets/${n}.webp`; return m; });
   const CHIMNEY = [0.704, 0.45, 0.334];          // chimney x as a share of each house render's width
   const ready = m => m.complete && m.naturalWidth;
-  function house(k, hx, h) {
+  function house(k, hx, h, y) {
     const m = HOUSES[k]; if (!ready(m)) return;
-    const w = h * m.naturalWidth / m.naturalHeight, [px, py] = W2S(hx, trackY(hx) - 8);
+    const w = h * m.naturalWidth / m.naturalHeight, [px, py] = W2S(hx, y ?? trackY(hx) - 8);
     const sh = g.createRadialGradient(px, py, 0, px, py, w * 0.75); sh.addColorStop(0, 'rgba(120,140,165,.28)'); sh.addColorStop(1, 'rgba(120,140,165,0)');
     g.save(); g.translate(px, py); g.scale(1, 0.12); g.fillStyle = sh; g.fillRect(-w, -w, w * 2, w * 2); g.restore();
     g.drawImage(m, px - w / 2, py - h, w, h);
@@ -1831,8 +1756,7 @@ let kukuMoving = false;
     g.strokeStyle = '#C6D1DB'; g.lineWidth = 9; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 6) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) + 4 - camY) : g.lineTo(sx, trackY(wx) + 4 - camY); } g.stroke();
     g.fillStyle = '#7B6A5C'; for (let wx = Math.floor(camX / 15) * 15; wx < camX + VW + 15; wx += 15) { const [a, b] = W2S(wx, trackY(wx)); g.fillRect(a - 4, b - 1, 8, 4); }
     g.strokeStyle = '#475866'; g.lineWidth = 2.4; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) - 2 - camY) : g.lineTo(sx, trackY(wx) - 2 - camY); } g.stroke();
-    kSnow = Math.min(1, Math.max(0, (train - START) / (END - START)) * 1.15);
-    body(train - 340, 150, len => { car(len); tail(len); }); body(train - 186, 150, len => car(len, true)); body(train - 32, 150, car); body(train + 92, 92, len => loco(len, t));
+    wagonAt(train - 410); wagonAt(train - 248, true); wagonAt(train - 86); locoAt(train + 90, t);
     if (bubble > 0) { const [a, b] = W2S(train + 110, trackY(train + 110) - 120), al = Math.min(1, bubble * 2), lift = (1.8 - bubble) * 6;
       g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - lift, 76, 30, [12, 12, 12, 4]); g.fill();
       g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - lift); g.globalAlpha = 1; }
@@ -1858,12 +1782,7 @@ let kukuMoving = false;
   function skier(t) {
     const [sx, sy] = W2S(sk.x, sk.y);
     g.save(); g.translate(sx, sy); if (phase === 'tow') g.scale(-1, 1); g.save(); g.rotate(phase === 'tow' ? -sk.rot : sk.rot);
-    const ski = (dy, c1, c2) => {
-      g.fillStyle = c1; g.beginPath(); g.moveTo(-38, dy); g.lineTo(28, dy); g.quadraticCurveTo(40, dy, 44, dy - 9); g.quadraticCurveTo(45, dy - 11, 42, dy - 9); g.quadraticCurveTo(38, dy - 3, 28, dy - 3); g.lineTo(-38, dy - 3); g.quadraticCurveTo(-41, dy - 1.5, -38, dy); g.fill();
-      g.fillStyle = c2; g.fillRect(-30, dy - 2.2, 50, 0.9);
-    };
-    ski(-1, '#0F5FB0', '#FFFFFF'); ski(-5, '#1C7FD6', '#FFFFFF');
-    g.fillStyle = '#1D2833'; g.beginPath(); g.roundRect(-11, -11, 22, 5, 2); g.fill();
+    if (ready(SKIS)) g.drawImage(SKIS, -40, -9, 86, 86 * SKIS.naturalHeight / SKIS.naturalWidth);
     g.restore();
     g.rotate(sk.rot * 0.25 + (sk.air ? -0.12 : 0.06) * Math.min(1, sk.vx / 300));
     if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 70, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight; g.drawImage(bottleImg, -bw / 2, -bh - 8, bw, bh); }
@@ -1901,10 +1820,11 @@ let kukuMoving = false;
     for (let i = 0; i < 9; i++) { const wx = TOW_B + ((i * 150 + dist * (phase === 'tow' ? 0 : 0)) % (TOW_A - TOW_B)); if (phase === 'tow' && Math.abs(wx - sk.x) < 70) continue; const [a, b] = W2S(wx, towY(wx)); g.strokeStyle = '#5F6E7C'; g.lineWidth = 1.4; g.beginPath(); g.moveTo(a, b); g.lineTo(a, b + 60); g.moveTo(a - 9, b + 60); g.lineTo(a + 9, b + 60); g.stroke(); }
     if (phase === 'tow') { const [a, b] = W2S(sk.x, towY(sk.x)); g.strokeStyle = '#5F6E7C'; g.lineWidth = 1.4; g.beginPath(); g.moveTo(a, b); g.lineTo(a + 6, sk.y - camY - 40); g.moveTo(a - 3, sk.y - camY - 40); g.lineTo(a + 15, sk.y - camY - 40); g.stroke(); }
     // start hut at the top and the finish arch with the brand
-    { const [a, b] = W2S(TOW_B - 90, skiY(TOW_B - 90)); g.fillStyle = '#F1EADB'; g.fillRect(a - 40, b - 44, 80, 44); g.fillStyle = '#A82C27'; g.beginPath(); g.moveTo(a - 50, b - 42); g.lineTo(a, b - 70); g.lineTo(a + 50, b - 42); g.fill(); pane(a - 9, b - 32, 18, 16, 3); }
-    { const [a, b] = W2S(FIN, skiY(FIN)); g.fillStyle = '#6E7E8C'; g.fillRect(a - 72, b - 110, 4, 110); g.fillRect(a + 68, b - 110, 4, 110);
-      g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 78, b - 134, 156, 30, [6, 14, 14, 14]); g.fill(); g.fillStyle = '#C23A33'; g.fillRect(a - 70, b - 134, 140, 3);
-      if (logoImg.complete && logoImg.naturalWidth) { const lh = 20, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, a - lw / 2, b - 129, lw, lh); } }
+    house(0, TOW_B - 110, 96, skiY(TOW_B - 110) + 4);
+    if (ready(ARCH)) { const [a, b] = W2S(FIN, skiY(FIN)), aw = 176, ah = aw * ARCH.naturalHeight / ARCH.naturalWidth, ax = a - aw / 2, ay = b + 6 - ah;
+      g.drawImage(ARCH, ax, ay, aw, ah);
+      if (ready(logoImg)) { const bx = ax + 0.0962 * aw, by = ay + 0.0897 * ah, bw = 0.8077 * aw, bh = 0.2744 * ah, lh = bh * 0.5, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight;
+        g.drawImage(logoImg, bx + bw / 2 - lw / 2, by + bh * 0.36, lw, lh); } }
     // snowflakes to collect
     if (phase !== 'tow') STARS.forEach((s, i) => { if (s.got) return; const [a, b] = W2S(s.x, skiY(s.x) - s.h + Math.sin(t * 2 + i) * 5); if (a < -40 || a > VW + 40) return;
       const gr = g.createRadialGradient(a, b, 0, a, b, 26); gr.addColorStop(0, 'rgba(255,255,255,.95)'); gr.addColorStop(0.4, 'rgba(190,225,255,.45)'); gr.addColorStop(1, 'rgba(190,225,255,0)'); g.fillStyle = gr; g.fillRect(a - 26, b - 26, 52, 52);
