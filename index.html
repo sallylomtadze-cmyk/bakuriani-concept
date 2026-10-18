@@ -1569,6 +1569,7 @@ let kukuMoving = false;
       g.save(); g.translate(x, y); g.scale(1, 0.22); g.translate(-x, -y); g.fillStyle = gr; g.fillRect(x - rw, y - rw, rw * 2, rw * 2); g.restore(); }
   }
   function glint(x, y, s, a) { g.globalAlpha = a; g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(x, y - s); g.lineTo(x + s * 0.18, y); g.lineTo(x, y + s); g.lineTo(x - s * 0.18, y); g.closePath(); g.moveTo(x - s, y); g.lineTo(x, y + s * 0.18); g.lineTo(x + s, y); g.lineTo(x, y - s * 0.18); g.closePath(); g.fill(); g.globalAlpha = 1; }
+  const photo = new Image(); photo.src = 'assets/bakuriani-hero.jpg';
   function backdrop(t, snowAmt) {
     const sky = g.createLinearGradient(0, 0, 0, VH); sky.addColorStop(0, '#CFE2F4'); sky.addColorStop(0.55, '#EAF1F8'); sky.addColorStop(0.8, '#F8EEF2'); sky.addColorStop(1, '#FBF7F5');
     g.fillStyle = sky; g.fillRect(0, 0, VW, VH);
@@ -1580,16 +1581,19 @@ let kukuMoving = false;
     soft(sx - VH * 0.35, sy + VH * 0.3, VH * 0.75, VH * 0.07, 2.35 + Math.sin(t * 0.07) * 0.03, 0.16);
     soft(sx - VH * 0.1, sy + VH * 0.38, VH * 0.7, VH * 0.05, 1.95 + Math.sin(t * 0.05 + 1) * 0.03, 0.12);
     const lift = camY - (camY0 ?? camY);
-    // the backdrop is laid out from where the line meets the view, so mountains and forest always sit behind it
     const hz = Math.min(VH * 0.7, (phase === 'rail' ? trackY(camX + VW * 0.5) : skiY(camX + VW * 0.35)) - camY);
-    ridge(0.08, hz - VH * 0.06, VH * 0.32, 760, '#C4D8EA', '#FFFFFF', 3.1);
-    mist(hz - VH * 0.06, 0.55, 0.1, t);
-    ridge(0.2, hz + VH * 0.03, VH * 0.24, 520, '#B0C9DD', '#F6F9FC', 7.7);
-    mist(hz + VH * 0.03, 0.5, 0.2, t);
-    // distant green forest on the far slopes
-    { const f = 0.4, ox = camX * f, base = hz + VH * 0.07, x0 = Math.floor((ox - 60) / 18) * 18;
-      for (let wx = x0; wx < ox + VW + 60; wx += 18) { const r = hash(wx * 0.013 + 1.7); if (r < 0.15) continue; fir('far', wx - ox + (hash(wx) - 0.5) * 12, base + (fbm(wx / 300 + 1.7) - 0.5) * 40, 0.55 + r * 0.45, snowAmt, wx); } }
-    mist(hz + VH * 0.09, 0.35, 0.4, t);
+    if (photo.complete && photo.naturalWidth) {
+      const pw = photo.naturalWidth, ph = photo.naturalHeight, sc2 = Math.max((VW + 520) / pw, VH * 1.15 / ph), dw = pw * sc2, dh = ph * sc2;
+      const ox = -Math.min(dw - VW, Math.max(0, camX * 0.08 + 60)), oy = hz - dh * 0.88;
+      g.drawImage(photo, ox, oy, dw, dh);
+      if (oy > 0) { g.fillStyle = '#E9EEF2'; g.fillRect(0, 0, VW, oy + 1); }
+      g.save(); g.globalCompositeOperation = 'soft-light';
+      const sg = g.createLinearGradient(0, 0, 0, hz + VH * 0.1); sg.addColorStop(0, '#7E6FC0'); sg.addColorStop(0.55, '#E9A7B4'); sg.addColorStop(1, '#F6C08E');
+      g.fillStyle = sg; g.fillRect(0, 0, VW, VH); g.restore();
+      g.save(); g.globalCompositeOperation = 'screen'; const glow = g.createRadialGradient(VW * 0.82, VH * 0.18, 0, VW * 0.82, VH * 0.18, VH * 0.75);
+      glow.addColorStop(0, 'rgba(255,214,170,.55)'); glow.addColorStop(0.4, 'rgba(255,190,160,.18)'); glow.addColorStop(1, 'rgba(255,190,160,0)'); g.fillStyle = glow; g.fillRect(0, 0, VW, VH); g.restore();
+    }
+    mist(hz + VH * 0.02, 0.35, 0.3, t);
     return lift;
   }
   function foreground(f, p) {
@@ -1778,7 +1782,6 @@ let kukuMoving = false;
   function drawRail(t) {
     const p = Math.min(1, Math.max(0, (train - START) / (END - START)));
     backdrop(t, p);
-    grove((wx) => groundY(wx), wx => Math.min(1, Math.max(0, (wx - START) / (END - START))), wx => Math.abs(wx - BR) < 260 || STOPS.some(s2 => Math.abs(wx - s2.x - 60) < 110));
     const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, mixC('#DCE9DC', '#F5F9FC', p)); gc.addColorStop(1, mixC('#E9F1E8', '#FFFFFF', p));
     g.fillStyle = gc; g.beginPath(); g.moveTo(-10, VH + 10); for (let sx = -10; sx <= VW + 10; sx += 6) g.lineTo(sx, groundY(camX + sx) - camY); g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
     for (let wx = Math.floor(camX / 23) * 23; wx < camX + VW; wx += 23) { if (Math.abs(wx - BR) < 260) continue; const r = hash(wx * 0.31); if (r < 0.7) continue; const [a, b] = W2S(wx, groundY(wx) + 14 + r * 60); glint(a, b, 2.5 + r * 2.5, (Math.sin(t * 3 + wx) * 0.5 + 0.5) * p); }
@@ -1803,7 +1806,6 @@ let kukuMoving = false;
       g.fillStyle = dg; g.beginPath(); g.moveTo(-10, VH + 10);
       for (let sx = -10; sx <= VW + 10; sx += 8) { const wx = camX * 1.25 + sx; g.lineTo(sx, Math.max(groundY(camX + sx) - camY + 120, VH * 0.82 - fbm(wx / 260 + 5) * 70)); }
       g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill(); }
-    foreground(1.35, p);
     frontFx(t, p);
   }
   // ---- the mountain: gondolas in the background, the tow, firs, the run and the finish arch
@@ -1839,7 +1841,7 @@ let kukuMoving = false;
     const lift = backdrop(t, 1);
     gondolas(t, lift);
     // trees standing on the slope behind the run
-    grove(wx => skiY(wx), () => 1, wx => Math.abs(wx - FIN) < 160 || Math.abs(wx - (TOW_B - 90)) < 70);
+    
     const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, '#FFFFFF'); gc.addColorStop(1, '#E6EEF5');
     g.fillStyle = gc; g.beginPath(); g.moveTo(-10, VH + 10); for (let sx = -10; sx <= VW + 10; sx += 5) g.lineTo(sx, skiY(camX + sx) - camY); g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
     g.strokeStyle = 'rgba(150,180,205,.5)'; g.lineWidth = 2; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const y = skiY(camX + sx) - camY + 3; sx === -10 ? g.moveTo(sx, y) : g.lineTo(sx, y); } g.stroke();
@@ -1864,7 +1866,6 @@ let kukuMoving = false;
     puffs.forEach(p => { const [a, b] = W2S(p.x, p.y), al = 1 - p.life / p.max; g.globalAlpha = al * 0.85; g.fillStyle = '#FFFFFF'; g.beginPath(); g.arc(a, b, p.r * (1 + p.life), 0, 6.283); g.fill(); });
     g.globalAlpha = 1;
     skier(t);
-    foreground(1.35, 1);
     frontFx(t, 1);
   }
   function loop(now) {
