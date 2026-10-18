@@ -209,6 +209,7 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 .kuku-ui{position:absolute;inset:0;pointer-events:none}
 .kuku-head{position:absolute;top:clamp(104px,13vh,136px);left:var(--edge);max-width:440px}
 .kuku-head .lead{margin-top:14px}
+.kuku-head{transition:opacity .6s}.kuku.moving .kuku-head{opacity:0}
 .kuku-alt{position:absolute;top:clamp(116px,14vh,148px);right:var(--edge);display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;color:var(--mute)}
 .kuku-alt i{position:relative;width:150px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
 .kuku-alt b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue)}
@@ -1427,6 +1428,7 @@ let kukuMoving = false;
     bubble = Math.max(0, bubble - dt);
     if (lastLang !== lang) renderCard();
     hint.style.opacity = !atStop && v < 4 ? 1 : 0;
+    sec.classList.toggle('moving', !atStop);
     altBar.style.width = (Math.min(1, (train - START) / (END - START)) * 100).toFixed(1) + '%';
   }
 
