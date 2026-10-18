@@ -212,7 +212,7 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 .kuku-alt{position:absolute;top:clamp(116px,14vh,148px);right:var(--edge);display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;color:var(--mute)}
 .kuku-alt i{position:relative;width:150px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
 .kuku-alt b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue)}
-.kuku-card{position:absolute;left:var(--edge);bottom:clamp(28px,5vh,48px);width:min(410px,calc(100% - 2 * var(--gut)));padding:22px 26px;border-radius:14px 30px 30px 30px;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 1px 2px rgba(10,35,72,.06),0 18px 40px -24px rgba(10,35,72,.35);opacity:0;transform:translateY(14px);transition:opacity .45s,transform .55s cubic-bezier(.2,.7,.2,1)}
+.kuku-card{position:absolute;left:var(--edge);bottom:clamp(28px,5vh,48px);width:min(410px,58%);padding:22px 26px;border-radius:14px 30px 30px 30px;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 1px 2px rgba(10,35,72,.06),0 18px 40px -24px rgba(10,35,72,.35);opacity:0;transform:translateY(14px);transition:opacity .45s,transform .55s cubic-bezier(.2,.7,.2,1)}
 .kuku-card.on{opacity:1;transform:none;pointer-events:auto}
 .kuku-tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--blue)}
 .kuku-card h3{margin:6px 0 10px;font-size:22px;font-weight:900;color:var(--navy)}
@@ -221,11 +221,11 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 .kuku-more[hidden]{display:none}.kuku-more{display:block;margin-top:12px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
 .kuku-go{position:absolute;right:var(--edge);bottom:clamp(28px,5vh,48px);min-width:190px;pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .kuku-hint{position:absolute;right:var(--edge);bottom:calc(clamp(28px,5vh,48px) + 72px);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--mute);transition:opacity .35s}
-@media(max-width:800px){
+@media(max-width:600px){
   .kuku-stage{height:94svh;min-height:620px}
   .kuku-head{top:88px;right:var(--gut)}.kuku-head .lead{font-size:14px;margin-top:10px}
-  .kuku-alt{right:auto;left:var(--gut);top:236px}
-  .kuku-card{left:var(--gut);bottom:92px;padding:18px 20px}.kuku-card h3{font-size:19px}.kuku-card p{font-size:14px}
+  .kuku-alt{display:none}
+  .kuku-card{left:var(--gut);bottom:92px;width:calc(100% - 2 * var(--gut));padding:18px 20px}.kuku-card h3{font-size:19px}.kuku-card p{font-size:14px}
   .kuku-go{left:var(--gut);right:var(--gut);bottom:22px}
   .kuku-hint{display:none}}
 
@@ -1407,7 +1407,7 @@ let kukuMoving = false;
   addEventListener('keydown', e => { if (!visible || e.repeat || !(e.code === 'Space' || e.code === 'ArrowRight')) return; if (e.target.closest && e.target.closest('input,textarea')) return; e.preventDefault(); press(); });
   addEventListener('keyup', e => { if (e.code === 'Space' || e.code === 'ArrowRight') release(); });
 
-  function camTarget() { return { x: train - VW * (W < 800 ? 0.36 : 0.4), y: trackY(train) - VH * (W < 800 ? 0.56 : 0.64) }; }
+  function camTarget() { return { x: train - VW * (W < 800 ? 0.36 : 0.4), y: trackY(train) - VH * (W < 800 ? (H > W * 1.4 ? 0.45 : 0.52) : 0.64) }; }
   function snap() { const c = camTarget(); camX = c.x; camY = c.y; }
 
   function step(dt) {
@@ -1469,30 +1469,40 @@ let kukuMoving = false;
       g.rotate(dist / 8); g.strokeStyle = '#7C8C9A'; g.lineWidth = 1.2; g.beginPath(); for (let a = 0; a < 3; a++) { g.moveTo(Math.cos(a * 2.094) * 6, Math.sin(a * 2.094) * 6); g.lineTo(-Math.cos(a * 2.094) * 6, -Math.sin(a * 2.094) * 6); } g.stroke();
       g.fillStyle = '#9AA8B5'; g.beginPath(); g.arc(0, 0, 2, 0, 6.283); g.fill(); g.restore(); }));
   }
+  // the renewed Kukushka: cream upper body, deep red lower body, big windows
   function shell(len, h) {
-    const gr = g.createLinearGradient(0, -16 - h, 0, -16); gr.addColorStop(0, '#4A8A71'); gr.addColorStop(1, '#2C624F');
-    g.fillStyle = gr; g.beginPath(); g.roundRect(-len / 2, -16 - h, len, h, [12, 12, 4, 4]); g.fill();
-    g.fillStyle = '#F2EAD3'; g.fillRect(-len / 2, -16 - h * 0.42, len, 6);
-    g.fillStyle = '#244F40'; g.beginPath(); g.roundRect(-len / 2 + 6, -22 - h, len - 12, 9, 5); g.fill();
-    g.fillStyle = 'rgba(255,255,255,.16)'; g.fillRect(-len / 2 + 4, -14 - h, len - 8, 2);
+    const top = -16 - h, mid = -16 - h * 0.46;
+    const red = g.createLinearGradient(0, mid, 0, -16); red.addColorStop(0, '#B8322D'); red.addColorStop(1, '#93241F');
+    g.fillStyle = '#F3ECDD'; g.beginPath(); g.roundRect(-len / 2, top, len, h, [12, 12, 4, 4]); g.fill();
+    g.fillStyle = red; g.beginPath(); g.roundRect(-len / 2, mid, len, -16 - mid, [0, 0, 4, 4]); g.fill();
+    g.fillStyle = '#7E1D19'; g.fillRect(-len / 2, mid, len, 2.5);
+    g.fillStyle = '#DCD3C1'; g.beginPath(); g.roundRect(-len / 2 + 5, top - 6, len - 10, 9, 5); g.fill();
+    g.fillStyle = 'rgba(255,255,255,.5)'; g.fillRect(-len / 2 + 6, top + 2, len - 12, 1.5);
   }
-  function car(len, t) {
-    wheels(len); shell(len, 58);
-    const win = (x, w) => { g.fillStyle = '#D6EAF7'; g.beginPath(); g.roundRect(x - w / 2, -66, w, 26, 5); g.fill(); g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.moveTo(x - w / 2 + 4, -42); g.lineTo(x - w / 2 + 12, -64); g.lineTo(x - w / 2 + 18, -64); g.lineTo(x - w / 2 + 10, -42); g.fill(); };
-    win(-48, 26); win(48, 26);
-    // the open middle window, the passenger looking out
-    g.save(); g.beginPath(); g.roundRect(-20, -70, 40, 32, 6); g.fillStyle = '#1F4537'; g.fill(); g.clip();
-    if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 66, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 1.6;
-      g.drawImage(bottleImg, -bw / 2, -66 + bob, bw, bh); }
+  const glass = (x, y, w, h, r = 5) => { g.fillStyle = '#CFE4F2'; g.beginPath(); g.roundRect(x, y, w, h, r); g.fill();
+    g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.moveTo(x + 4, y + h - 2); g.lineTo(x + 10, y + 2); g.lineTo(x + 16, y + 2); g.lineTo(x + 10, y + h - 2); g.fill();
+    g.strokeStyle = '#FFFFFF'; g.lineWidth = 1.5; g.beginPath(); g.roundRect(x, y, w, h, r); g.stroke(); };
+  function car(len) {
+    wheels(len); shell(len, 60);
+    for (let k = 0; k < 5; k++) glass(-len / 2 + 10 + k * 27, -70, 22, 24);
+    // Bakuriani banner on the red lower body
+    g.fillStyle = '#F3ECDD'; g.beginPath(); g.roundRect(-46, -39, 92, 19, [4, 9, 9, 9]); g.fill();
+    if (logoImg.complete && logoImg.naturalWidth) { const lh = 15, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, -lw / 2, -37, lw, lh); }
+  }
+  function loco(len, t) {
+    wheels(len); shell(len, 56);
+    glass(-len / 2 + 10, -66, 20, 22); glass(-len / 2 + 36, -66, 20, 22);
+    // the driver's windscreen at the front: the bottle sits up front and looks ahead
+    const wx = len / 2 - 44, wy = -70, ww = 38, wh = 30;
+    g.save(); g.beginPath(); g.roundRect(wx, wy, ww, wh, [5, 11, 4, 4]); g.fillStyle = '#2B3A46'; g.fill(); g.clip();
+    if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 64, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 1.4;
+      g.drawImage(bottleImg, wx + ww / 2 - bw / 2, wy + 3 + bob, bw, bh); }
+    g.fillStyle = 'rgba(255,255,255,.22)'; g.beginPath(); g.moveTo(wx + 6, wy + wh); g.lineTo(wx + 16, wy); g.lineTo(wx + 22, wy); g.lineTo(wx + 12, wy + wh); g.fill();
     g.restore();
-    g.strokeStyle = '#F2EAD3'; g.lineWidth = 2; g.beginPath(); g.roundRect(-20, -70, 40, 32, 6); g.stroke();
-  }
-  function loco(len) {
-    wheels(len); shell(len, 54);
-    g.fillStyle = '#D6EAF7'; g.beginPath(); g.roundRect(len / 2 - 30, -62, 22, 22, [4, 9, 4, 4]); g.fill(); g.beginPath(); g.roundRect(-len / 2 + 10, -62, 20, 20, 4); g.fill();
-    g.fillStyle = '#FFF6D8'; g.beginPath(); g.arc(len / 2 - 4, -28, 3.2, 0, 6.283); g.fill();
-    const gl = g.createRadialGradient(len / 2 + 2, -28, 0, len / 2 + 2, -28, 26); gl.addColorStop(0, 'rgba(255,246,214,.55)'); gl.addColorStop(1, 'rgba(255,246,214,0)'); g.fillStyle = gl; g.fillRect(len / 2 - 20, -54, 50, 50);
-    g.strokeStyle = '#3B4A57'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(-14, -76); g.lineTo(0, -98); g.lineTo(14, -76); g.moveTo(-10, -98); g.lineTo(10, -98); g.stroke();
+    g.strokeStyle = '#FFFFFF'; g.lineWidth = 2; g.beginPath(); g.roundRect(wx, wy, ww, wh, [5, 11, 4, 4]); g.stroke();
+    g.fillStyle = '#FFF6D8'; g.beginPath(); g.arc(len / 2 - 4, -26, 3.2, 0, 6.283); g.fill();
+    const gl = g.createRadialGradient(len / 2 + 2, -26, 0, len / 2 + 2, -26, 26); gl.addColorStop(0, 'rgba(255,246,214,.55)'); gl.addColorStop(1, 'rgba(255,246,214,0)'); g.fillStyle = gl; g.fillRect(len / 2 - 20, -52, 50, 50);
+    g.strokeStyle = '#3B4A57'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(-34, -78); g.lineTo(-20, -98); g.lineTo(-6, -78); g.moveTo(-30, -98); g.lineTo(-10, -98); g.stroke();
   }
   function station(st) {
     const x = st.x, [sx] = W2S(x, 0);
@@ -1575,8 +1585,8 @@ let kukuMoving = false;
     g.fillStyle = '#7B6A5C'; for (let wx = Math.floor(camX / 15) * 15; wx < camX + VW + 15; wx += 15) { const [a, b] = W2S(wx, trackY(wx)); g.fillRect(a - 4, b - 1, 8, 4); }
     g.strokeStyle = '#475866'; g.lineWidth = 2.4; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) - 2 - camY) : g.lineTo(sx, trackY(wx) - 2 - camY); } g.stroke();
     // the train: the bottle's carriage, then the locomotive in front
-    body(train, 150, len => car(len, t));
-    body(train + 144, 118, loco);
+    body(train, 150, car);
+    body(train + 144, 118, len => loco(len, t));
     if (bubble > 0) { const [a, b] = W2S(train + 170, trackY(train + 170) - 128), al = Math.min(1, bubble * 2);
       g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - (1.8 - bubble) * 6, 76, 30, [12, 12, 12, 4]); g.fill();
       g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - (1.8 - bubble) * 6); g.globalAlpha = 1; }
