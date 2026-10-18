@@ -1679,7 +1679,7 @@ let kukuMoving = false;
   }
   const loadImgs = (n, f) => Array.from({ length: n }, (_, i) => { const m = new Image(); m.src = f(i); return m; });
   const HOUSES = loadImgs(3, i => `assets/house-${i}.webp`);
-  const [LOCO, WAGON, PLAIN, SKIS, ARCH] = ['kuku-loco', 'kuku-wagon', 'kuku-wagon-plain', 'skis', 'finish-arch'].map(n => { const m = new Image(); m.src = `assets/${n}.webp`; return m; });
+  const [LOCO, WAGON, PLAIN, SKIS, ARCH] = ['kuku-car', 'kuku-coach', 'kuku-wagon-plain', 'skis', 'finish-arch'].map(n => { const m = new Image(); m.src = `assets/${n}.webp`; return m; });
   const logoW = new Image(); logoW.src = 'assets/logo-train.svg';
   const CHIMNEY = [0.704, 0.45, 0.334];          // chimney x as a share of each house render's width
   const ready = m => m.complete && m.naturalWidth;
