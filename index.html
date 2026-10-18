@@ -1750,7 +1750,7 @@ let kukuMoving = false;
     g.strokeStyle = '#C6D1DB'; g.lineWidth = 9; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 6) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) + 4 - camY) : g.lineTo(sx, trackY(wx) + 4 - camY); } g.stroke();
     g.fillStyle = '#7B6A5C'; for (let wx = Math.floor(camX / 15) * 15; wx < camX + VW + 15; wx += 15) { const [a, b] = W2S(wx, trackY(wx)); g.fillRect(a - 4, b - 1, 8, 4); }
     g.strokeStyle = '#475866'; g.lineWidth = 2.4; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) - 2 - camY) : g.lineTo(sx, trackY(wx) - 2 - camY); } g.stroke();
-    wagonAt(train - 263); wagonAt(train - 108, true); locoAt(train + 50, t);
+    wagonAt(train - 418); wagonAt(train - 263); wagonAt(train - 108, true); locoAt(train + 50, t);
     if (bubble > 0) { const [a, b] = W2S(train + 110, trackY(train + 110) - 120), al = Math.min(1, bubble * 2), lift = (1.8 - bubble) * 6;
       g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - lift, 76, 30, [12, 12, 12, 4]); g.fill();
       g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - lift); g.globalAlpha = 1; }
