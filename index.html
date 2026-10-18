@@ -202,6 +202,17 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 .buy{display:grid;grid-template-columns:6fr 6fr;gap:48px;align-items:start}
 /* additions after the clean-up */
 /* kukushka */
+/* the game is not part of the scroll: it opens fullscreen from the window seat, like entering a 3D game */
+.kuku{display:none}
+.kuku.open{display:block;position:fixed;inset:0;z-index:250}
+.kuku.open .kuku-stage{height:100svh;min-height:0}
+.kuku.open .kuku-head{top:clamp(40px,7vh,72px)}
+.kuku.open .kuku-alt{top:clamp(52px,8vh,84px);right:calc(var(--edge) + 64px)}
+.kuku-close{position:absolute;top:clamp(26px,4.5vh,40px);right:var(--edge);width:48px;height:48px;border:0;border-radius:14px 24px 24px 24px;display:grid;place-items:center;cursor:pointer;pointer-events:auto;color:var(--navy);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 6px 18px -8px rgba(10,35,72,.35)}
+.kuku-close svg{width:18px;height:18px}
+.whiteout{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:0;background:radial-gradient(70% 60% at 50% 45%,#FFFFFF 0%,#F2F7FC 55%,#E3EDF6 100%)}
+html.gaming{overflow:hidden}
+nav{transition:background .3s,box-shadow .3s,opacity .6s}html.gaming nav{opacity:0;pointer-events:none}
 /* the window seat: Bakuriani slides past the Kukushka window (interior rendered in Blender, windows left transparent) */
 .win{position:relative;height:min(100svh,1000px);min-height:620px;overflow:hidden;background:#0E1B23}
 .win-view{position:absolute;inset:0;overflow:hidden}
@@ -458,22 +469,6 @@ html.intro-on{overflow:hidden}
       </div>
     </div>
   </section>
-  <section class="sec" id="moments">
-    <div class="wrap">
-      <h2 class="mt moments-h">ბაკურიანი<br>ყოველ დღეს</h2>
-      <div class="grid">
-        <figure><div class="ph"><img src="assets/girls.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">ბაღში</figcaption></figure>
-        <figure><div class="ph"><img src="assets/team.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">მატჩის შემდეგ</figcaption></figure>
-        <figure><div class="ph"><img src="assets/baby.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">პირველი წყალი</figcaption></figure>
-        <figure><div class="ph"><img src="assets/kitchen.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სამზარეულოში</figcaption></figure>
-        <figure><div class="ph"><img src="assets/sport.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">კორტზე</figcaption></figure>
-        <figure><div class="ph"><img src="assets/spray.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სიგრილე</figcaption></figure>
-        <figure><div class="ph"><img src="assets/kids.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სკოლის გზაზე</figcaption></figure>
-        <figure><div class="ph"><img src="assets/picnic.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">პიკნიკზე</figcaption></figure>
-      </div>
-      <div class="grid-pad"></div>
-    </div>
-  </section>
   <section class="win" id="window">
     <div class="win-view" aria-hidden="true"><div class="win-strip"><img src="assets/bakuriani-hero.jpg" alt=""><img src="assets/bakuriani-hero.jpg" alt=""><img src="assets/bakuriani-hero.jpg" alt=""><img src="assets/bakuriani-hero.jpg" alt=""></div></div>
     <div class="win-glass" aria-hidden="true"></div>
@@ -498,7 +493,24 @@ html.intro-on{overflow:hidden}
         <div class="kuku-card" data-noi18n aria-live="polite"><span class="kuku-ico" aria-hidden="true"></span><small class="kuku-tag"></small><h3></h3><p></p><a class="kuku-src" target="_blank" rel="noopener"></a><a class="kuku-more" href="#range" hidden></a></div>
         <p class="kuku-hint">დააჭირე და გეჭიროს</p>
         <button class="btn kuku-go" type="button" data-noi18n><span class="mt">გასწიე</span></button>
+        <button class="kuku-close" type="button" aria-label="დახურვა" data-noi18n><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       </div>
+    </div>
+  </section>
+  <section class="sec" id="moments">
+    <div class="wrap">
+      <h2 class="mt moments-h">ბაკურიანი<br>ყოველ დღეს</h2>
+      <div class="grid">
+        <figure><div class="ph"><img src="assets/girls.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">ბაღში</figcaption></figure>
+        <figure><div class="ph"><img src="assets/team.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">მატჩის შემდეგ</figcaption></figure>
+        <figure><div class="ph"><img src="assets/baby.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">პირველი წყალი</figcaption></figure>
+        <figure><div class="ph"><img src="assets/kitchen.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სამზარეულოში</figcaption></figure>
+        <figure><div class="ph"><img src="assets/sport.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">კორტზე</figcaption></figure>
+        <figure><div class="ph"><img src="assets/spray.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სიგრილე</figcaption></figure>
+        <figure><div class="ph"><img src="assets/kids.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">სკოლის გზაზე</figcaption></figure>
+        <figure><div class="ph"><img src="assets/picnic.jpg" alt="" loading="lazy"></div><figcaption class="cap mt">პიკნიკზე</figcaption></figure>
+      </div>
+      <div class="grid-pad"></div>
     </div>
   </section>
   <section id="source">
@@ -1300,9 +1312,40 @@ function setMenu(open) {
 burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
 $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
   const id = a.getAttribute('href'); if (id === '#') return;
+  if (id === '#kukushka') { e.preventDefault(); enterGame(); return; }
   const t = $(id); if (!t) return; e.preventDefault(); setMenu(false);
   lenis ? lenis.scrollTo(t, { offset: id === '#range' ? 0 : -64, duration: 1.6 }) : t.scrollIntoView();
 }));
+
+/* ---------- into the game: push through the window, a snowy whiteout, the game sharpens into view ---------- */
+const kukuSec = $('#kukushka'), winSec = $('#window'), whiteout = document.createElement('div'); whiteout.className = 'whiteout'; document.body.appendChild(whiteout);
+let gaming = false;
+function enterGame() {
+  if (gaming) return; gaming = true;
+  lenis && (lenis.scrollTo(winSec, { immediate: true }), lenis.stop()); document.documentElement.classList.add('gaming');
+  const fr = '.win-frame img';
+  gsap.timeline()
+    .set(fr, { animation: 'none' })
+    .to('.win-copy', { opacity: 0, y: -28, filter: 'blur(8px)', duration: reduce ? 0.2 : 0.6, ease: 'power2.in' }, 0)
+    .to(fr, { scale: 3.4, transformOrigin: '50% 41%', duration: reduce ? 0.3 : 1.5, ease: 'power3.in' }, 0.1)
+    .to('.win-view', { scale: 1.4, transformOrigin: '50% 45%', duration: reduce ? 0.3 : 1.5, ease: 'power2.in' }, 0.1)
+    .to(whiteout, { opacity: 1, duration: 0.45, ease: 'power1.in' }, reduce ? 0.2 : 1.15)
+    .add(() => { kukuSec.classList.add('open'); window.kukuEnter && window.kukuEnter(); })
+    .fromTo('.kuku-stage', { scale: 1.16, filter: 'blur(10px)' }, { scale: 1, filter: 'blur(0px)', duration: reduce ? 0.3 : 1.6, ease: 'power3.out', clearProps: 'transform,filter' })
+    .to(whiteout, { opacity: 0, duration: 1.1, ease: 'power2.out' }, '<0.1')
+    .fromTo('.kuku-ui', { opacity: 0 }, { opacity: 1, duration: 0.8, clearProps: 'opacity' }, '<0.6')
+    .set(['.win-copy', fr, '.win-view'], { clearProps: 'all' });
+}
+function exitGame() {
+  if (!gaming) return;
+  gsap.timeline()
+    .to(whiteout, { opacity: 1, duration: 0.4, ease: 'power1.in' })
+    .add(() => { kukuSec.classList.remove('open'); document.documentElement.classList.remove('gaming'); lenis && (lenis.scrollTo(winSec, { immediate: true }), lenis.start()); gaming = false; })
+    .fromTo('.win-copy', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', clearProps: 'all' })
+    .to(whiteout, { opacity: 0, duration: 0.8, ease: 'power2.out' }, '<');
+}
+$('.kuku-close').addEventListener('click', exitGame);
+addEventListener('keydown', e => { if (e.key === 'Escape') exitGame(); });
 
 /* ---------- entrance + reveals ---------- */
 if (!reduce) {
@@ -1471,6 +1514,7 @@ let kukuMoving = false;
 
   function size() {
     const r = cv.getBoundingClientRect(), nd = Math.min(1.5, devicePixelRatio || 1);
+    if (r.width < 2) return;                          // hidden until the game is opened
     if (Math.round(r.width * nd) === cv.width && Math.round(r.height * nd) === cv.height && W > 1) return;
     dpr = nd;
     W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
@@ -1877,6 +1921,7 @@ let kukuMoving = false;
   new IntersectionObserver(es => es.forEach(e => { const was = visible; visible = e.isIntersecting; if (visible && !was) { size(); if (camY0 === null) snap(); last = performance.now(); const id = ++loopId; requestAnimationFrame(n => loop(n, id)); } }), { rootMargin: '120px' }).observe(sec);
   addEventListener('resize', () => { if (visible) size(); });
   document.fonts.ready.then(() => { size(); snap(); renderCard(); });
+  window.kukuEnter = () => { size(); snap(); renderCard(); if (typeof initAudio === 'function' && soundOn) initAudio(); setTimeout(cuckoo, 700); };
   show(STOPS[0].pages[0]);
 }
 
