@@ -1443,7 +1443,9 @@ let kukuMoving = false;
   let got = 0;
 
   function size() {
-    const r = cv.getBoundingClientRect(); dpr = Math.min(1.5, devicePixelRatio || 1);
+    const r = cv.getBoundingClientRect(), nd = Math.min(1.5, devicePixelRatio || 1);
+    if (Math.round(r.width * nd) === cv.width && Math.round(r.height * nd) === cv.height && W > 1) return;
+    dpr = nd;
     W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     S = W < 800 ? Math.min(1, W / 500) : Math.max(0.6, Math.min(1, W / 1150)); VW = W / S; VH = H / S;
   }
@@ -1510,7 +1512,7 @@ let kukuMoving = false;
   addEventListener('keyup', e => { if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'ArrowUp') release(); });
 
   function camTarget() {
-    if (phase === 'rail') return { x: train - VW * (W < 800 ? 0.62 : 0.7), y: trackY(train) - VH * (W < 800 ? (H > W * 1.4 ? 0.45 : 0.52) : 0.64) };
+    if (phase === 'rail') return { x: train - VW * (atStop ? (W < 800 ? 0.62 : 0.68) : 0.38), y: trackY(train) - VH * (W < 800 ? (H > W * 1.4 ? 0.45 : 0.52) : 0.64) };
     return { x: sk.x - VW * (W < 800 ? 0.36 : 0.42), y: sk.y - VH * (W < 800 ? (H > W * 1.4 ? 0.44 : 0.5) : 0.6) };
   }
   function snap() { const c = camTarget(); camX = c.x; camY = c.y; camY0 = camY; }
@@ -1551,7 +1553,7 @@ let kukuMoving = false;
     camX += (c.x - camX) * k; camY += (c.y - camY) * k; if (camY0 === null) camY0 = camY;
     bubble = Math.max(0, bubble - dt);
     if (lastLang !== lang) renderCard();
-    hint.style.opacity = phase === 'rail' && !atStop && v < 4 ? 1 : 0;
+    hintOn = phase === 'rail' && !atStop && (hintOn ? v < 30 : v < 2 && !hold); hint.style.opacity = hintOn ? 1 : 0;
     sec.classList.toggle('moving', phase !== 'rail' || !atStop || (started && W < 1000));
     altBar.parentNode.parentNode.style.opacity = phase === 'rail' ? '' : 0;
     altBar.style.width = (phase === 'rail' ? Math.min(1, (train - START) / (END - START)) * 100 : 100).toFixed(1) + '%';
@@ -1568,11 +1570,12 @@ let kukuMoving = false;
     gr.addColorStop(0, cap); gr.addColorStop(0.36, cap); gr.addColorStop(0.55, col); gr.addColorStop(1, '#EEF4F8'); g.fillStyle = gr; g.fill();
   }
   function mist(y, alpha, f, t) {
-    for (let i = 0; i < 6; i++) { const x = ((hash(i * 3.1 + y) * VW * 1.6 - camX * f + t * (6 + i * 2)) % (VW * 1.6) + VW * 1.6) % (VW * 1.6) - VW * 0.3;
+    const span = VW + 1100; for (let i = 0; i < 6; i++) { const x = ((hash(i * 3.1 + y) * span - camX * f + t * (6 + i * 2)) % span + span) % span - 550;
       const rw = 220 + hash(i + y) * 260, gr = g.createRadialGradient(x, y, 0, x, y, rw); gr.addColorStop(0, `rgba(255,255,255,${alpha})`); gr.addColorStop(1, 'rgba(255,255,255,0)');
       g.save(); g.translate(x, y); g.scale(1, 0.22); g.translate(-x, -y); g.fillStyle = gr; g.fillRect(x - rw, y - rw, rw * 2, rw * 2); g.restore(); }
   }
   function glint(x, y, s, a) { g.globalAlpha = a; g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(x, y - s); g.lineTo(x + s * 0.18, y); g.lineTo(x, y + s); g.lineTo(x - s * 0.18, y); g.closePath(); g.moveTo(x - s, y); g.lineTo(x, y + s * 0.18); g.lineTo(x + s, y); g.lineTo(x, y - s * 0.18); g.closePath(); g.fill(); g.globalAlpha = 1; }
+  let veil = 1;
   const photo = new Image(); photo.src = 'assets/bakuriani-hero.jpg';
   function backdrop(t, snowAmt) {
     const sky = g.createLinearGradient(0, 0, 0, VH); sky.addColorStop(0, '#CFE2F4'); sky.addColorStop(0.55, '#EAF1F8'); sky.addColorStop(0.8, '#F8EEF2'); sky.addColorStop(1, '#FBF7F5');
@@ -1599,8 +1602,9 @@ let kukuMoving = false;
     }
     mist(hz + VH * 0.02, 0.35, 0.3, t);
     // a soft veil behind the heading so the text reads cleanly over the photo
-    if (!sec.classList.contains('moving')) { const vg = g.createRadialGradient(VW * 0.12, VH * 0.18, 0, VW * 0.12, VH * 0.18, VW * 0.42);
-      vg.addColorStop(0, 'rgba(246,249,252,.82)'); vg.addColorStop(0.6, 'rgba(246,249,252,.45)'); vg.addColorStop(1, 'rgba(246,249,252,0)'); g.fillStyle = vg; g.fillRect(0, 0, VW, VH); }
+    veil += ((sec.classList.contains('moving') ? 0 : 1) - veil) * 0.06;
+    if (veil > 0.01) { const vg = g.createRadialGradient(VW * 0.12, VH * 0.18, 0, VW * 0.12, VH * 0.18, VW * 0.42);
+      vg.addColorStop(0, `rgba(246,249,252,${0.82 * veil})`); vg.addColorStop(0.6, `rgba(246,249,252,${0.45 * veil})`); vg.addColorStop(1, 'rgba(246,249,252,0)'); g.fillStyle = vg; g.fillRect(0, 0, VW, VH); }
     return lift;
   }
   function foreground(f, p) {
@@ -1778,11 +1782,14 @@ let kukuMoving = false;
     for (let wx = x + 150; wx >= x - 150; wx -= 10) { const [a, b] = W2S(wx, trackY(wx) + 15); g.lineTo(a, b); }
     g.fill();
     const bx = x + 190, [qx, qy] = W2S(bx, trackY(bx));
-    g.fillStyle = '#5B6B79'; g.fillRect(qx - 1.5, qy - 74, 3, 74);
-    g.font = '900 13px "Noto Sans Georgian", sans-serif'; const name = mt(T(st.sign[0], st.sign[1])), tw = g.measureText(name).width + 26;
-    g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(qx - tw / 2, qy - 104, tw, 32, [6, 12, 12, 12]); g.fill();
-    g.fillStyle = '#1C7FD6'; g.fillRect(qx - tw / 2 + 8, qy - 104, tw - 16, 3);
-    g.fillStyle = '#0A2348'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(name, qx, qy - 87);
+    g.font = '800 13px "Noto Sans Georgian", sans-serif'; const name = mt(T(st.sign[0], st.sign[1])), tw = g.measureText(name).width + 30;
+    g.fillStyle = '#4E5A64'; g.fillRect(qx - tw / 2 + 8, qy - 74, 3, 74); g.fillRect(qx + tw / 2 - 11, qy - 74, 3, 74);
+    g.fillStyle = 'rgba(20,30,45,.18)'; g.fillRect(qx - tw / 2 + 2, qy - 99, tw, 30);
+    const sb = g.createLinearGradient(0, qy - 102, 0, qy - 72); sb.addColorStop(0, '#24508E'); sb.addColorStop(1, '#173A6C');
+    g.fillStyle = sb; g.beginPath(); g.roundRect(qx - tw / 2, qy - 102, tw, 30, 3); g.fill();
+    g.strokeStyle = 'rgba(255,255,255,.85)'; g.lineWidth = 1.2; g.beginPath(); g.roundRect(qx - tw / 2 + 3, qy - 99, tw - 6, 24, 2); g.stroke();
+    g.fillStyle = '#FFFFFF'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(name, qx, qy - 86.5);
+    g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(qx - tw / 2 - 1, qy - 101); g.quadraticCurveTo(qx - tw / 2, qy - 107, qx - tw / 2 + 10, qy - 107); g.lineTo(qx + tw / 2 - 10, qy - 106); g.quadraticCurveTo(qx + tw / 2, qy - 106, qx + tw / 2 + 1, qy - 101); g.closePath(); g.fill();
     if (st.alt) { g.font = '700 11px "Noto Sans Georgian", sans-serif'; g.fillStyle = '#4D5F76'; g.fillText(T(st.alt[0], st.alt[1]), qx, qy - 60); }
   }
   function bridge(p) {
@@ -1906,7 +1913,7 @@ let kukuMoving = false;
     skier(t);
     frontFx(t, 1);
   }
-  let loopId = 0;
+  let loopId = 0, hintOn = false;
   function loop(now, id) {
     if (!visible || id !== loopId) return;
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
