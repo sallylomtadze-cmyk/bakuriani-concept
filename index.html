@@ -209,23 +209,28 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 .kuku-ui{position:absolute;inset:0;pointer-events:none}
 .kuku-head{position:absolute;top:clamp(104px,13vh,136px);left:var(--edge);max-width:440px}
 .kuku-head .lead{margin-top:14px}
-.kuku-head{transition:opacity .6s}.kuku.moving .kuku-head{opacity:0}
+.kuku-head,.kuku-alt{transition:opacity .6s}.kuku.moving .kuku-head{opacity:0}
 .kuku-alt{position:absolute;top:clamp(116px,14vh,148px);right:var(--edge);display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;color:var(--mute)}
 .kuku-alt i{position:relative;width:150px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
 .kuku-alt b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue)}
 .kuku-card{position:absolute;left:var(--edge);bottom:clamp(28px,5vh,48px);width:min(410px,58%);padding:22px 26px;border-radius:14px 30px 30px 30px;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 1px 2px rgba(10,35,72,.06),0 18px 40px -24px rgba(10,35,72,.35);opacity:0;transform:translateY(14px);transition:opacity .45s,transform .55s cubic-bezier(.2,.7,.2,1)}
 .kuku-card.on{opacity:1;transform:none;pointer-events:auto}
+.kuku-ico{position:absolute;top:18px;right:20px;width:52px;height:52px;border-radius:12px 26px 26px 26px;display:grid;place-items:center;color:var(--blue);background:radial-gradient(80% 70% at 50% 0%,rgba(78,160,255,.28),rgba(78,160,255,0) 75%),linear-gradient(180deg,#E6F0FC,#F7FAFF);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.95),0 6px 14px -8px rgba(30,100,200,.35)}
+.kuku-ico:empty{display:none}.kuku-ico svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.kuku-card h3{padding-right:62px}
 .kuku-tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--blue)}
 .kuku-card h3{margin:6px 0 10px;font-size:22px;font-weight:900;color:var(--navy)}
 .kuku-card p{font-size:15px;line-height:1.65;color:#3E5068}
 .kuku-src{display:inline-block;margin-top:12px;font-size:12px;color:var(--mute)}
 .kuku-more[hidden]{display:none}.kuku-more{display:block;margin-top:12px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
 .kuku-go{position:absolute;right:var(--edge);bottom:clamp(28px,5vh,48px);min-width:190px;pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.kuku-score{position:absolute;top:clamp(110px,13vh,142px);right:var(--edge);display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:6px 16px 16px 16px;background:rgba(255,255,255,.85);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 8px 20px -12px rgba(10,35,72,.3);font-size:15px;font-weight:700;color:var(--navy)}.kuku-score[hidden]{display:none}.kuku-score svg{width:18px;height:18px;color:var(--blue)}.kuku-score span{color:var(--mute);font-weight:500}
+.kuku-src[hidden]{display:none}
 .kuku-hint{position:absolute;right:var(--edge);bottom:calc(clamp(28px,5vh,48px) + 72px);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--mute);transition:opacity .35s}
 @media(max-width:600px){
   .kuku-stage{height:94svh;min-height:620px}
   .kuku-head{top:88px;right:var(--gut)}.kuku-head .lead{font-size:14px;margin-top:10px}
-  .kuku-alt{display:none}
+  .kuku-alt{display:none}.kuku-score{top:88px;right:var(--gut)}
   .kuku-card{left:var(--gut);bottom:92px;width:calc(100% - 2 * var(--gut));padding:18px 20px}.kuku-card h3{font-size:19px}.kuku-card p{font-size:14px}
   .kuku-go{left:var(--gut);right:var(--gut);bottom:22px}
   .kuku-hint{display:none}}
@@ -453,13 +458,6 @@ html.intro-on{overflow:hidden}
       <div class="grid-pad"></div>
     </div>
   </section>
-  <section id="source">
-    <div class="wrap">
-      <h2 class="mt"><span>დაბადებული</span><br><span class="l2">ბაკურიანში</span></h2>
-      <p class="lead">წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.</p>
-      <div class="alt-num"><b>1700</b><span>მეტრი ზღვის<br>დონიდან</span></div>
-    </div>
-  </section>
   <section class="kuku" id="kukushka">
     <div class="kuku-stage">
       <canvas aria-hidden="true"></canvas>
@@ -469,10 +467,18 @@ html.intro-on{overflow:hidden}
           <p class="lead">ბორჯომიდან ბაკურიანამდე 1902 წლიდან ვიწროლიანდაგიანი მატარებელი დადის. გაიყოლე ბოთლი მთაში.</p>
         </div>
         <div class="kuku-alt"><span>820 მ</span><i><b></b></i><span>1700 მ</span></div>
-        <div class="kuku-card" data-noi18n aria-live="polite"><small class="kuku-tag"></small><h3></h3><p></p><a class="kuku-src" target="_blank" rel="noopener"></a><a class="kuku-more" href="#range" hidden></a></div>
+        <div class="kuku-score" data-noi18n hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M3.3 17l17.4-10M9 4l3 2 3-2M9 20l3-2 3 2"/></svg><b>0</b><span>/ 16</span></div>
+        <div class="kuku-card" data-noi18n aria-live="polite"><span class="kuku-ico" aria-hidden="true"></span><small class="kuku-tag"></small><h3></h3><p></p><a class="kuku-src" target="_blank" rel="noopener"></a><a class="kuku-more" href="#range" hidden></a></div>
         <p class="kuku-hint">დააჭირე და გეჭიროს</p>
         <button class="btn kuku-go" type="button" data-noi18n><span class="mt">გასწიე</span></button>
       </div>
+    </div>
+  </section>
+  <section id="source">
+    <div class="wrap">
+      <h2 class="mt"><span>დაბადებული</span><br><span class="l2">ბაკურიანში</span></h2>
+      <p class="lead">წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.</p>
+      <div class="alt-num"><b>1700</b><span>მეტრი ზღვის<br>დონიდან</span></div>
     </div>
   </section>
   <section class="sec" id="buy">
@@ -1314,89 +1320,180 @@ $$('.lang').forEach(b => b.addEventListener('click', () => setLang(lang === 'en'
 $$('.lng button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l)));
 try { if (localStorage.getItem('bk-lang') === 'en') setLang('en'); else $$('.lng button')[0].classList.add('on'); } catch (e) { $$('.lng button')[0].classList.add('on'); }
 
-/* ---------- the Kukushka: hold to drive the narrow-gauge train from Borjomi up to Bakuriani, stopping at real places ---------- */
+/* ---------- the Kukushka: drive the train up to Bakuriani, ride the tow up Kokhta, then ski back down ---------- */
 let kukuMoving = false;
 {
   const sec = $('#kukushka'), cv = sec.querySelector('canvas'), g = cv.getContext('2d');
   const card = sec.querySelector('.kuku-card'), goBtn = sec.querySelector('.kuku-go'), goLbl = goBtn.querySelector('span');
-  const hint = sec.querySelector('.kuku-hint'), altBar = sec.querySelector('.kuku-alt b');
+  const hint = sec.querySelector('.kuku-hint'), altBar = sec.querySelector('.kuku-alt b'), score = sec.querySelector('.kuku-score'), scoreN = score.querySelector('b');
   const bottleImg = new Image(); bottleImg.src = 'assets/kuku-bottle.png';
-  const T = (ka, en) => lang === 'en' ? en : ka;
-  const RAIL = 'https://en.wikipedia.org/wiki/Borjomi%E2%80%93Bakuriani_railway';
+  const T = (ka, en) => lang === 'en' ? en : ka, mt = t => lang === 'en' ? t : toMt(t);
+  const RAIL = 'https://en.wikipedia.org/wiki/Borjomi%E2%80%93Bakuriani_railway', ENC = 'https://georgianencyclopedia.ge/ka/form/26357';
+  const KAW = 'https://ka.wikipedia.org/wiki/%E1%83%91%E1%83%90%E1%83%99%E1%83%A3%E1%83%A0%E1%83%98%E1%83%90%E1%83%9C%E1%83%98', ENW = 'https://en.wikipedia.org/wiki/Bakuriani';
   const STOPS = [
     { x: 420, sign: ['ბორჯომი', 'Borjomi'], alt: ['820 მ', '820 m'], pages: [
-      { tag: '1902', title: ['ბორჯომი', 'Borjomi'], src: ['Wikipedia', RAIL],
+      { icon: 'train', tag: '1902', title: ['ბორჯომი', 'Borjomi'], src: ['Wikipedia', RAIL],
         text: ['1902 წლის იანვარში აქედან ბაკურიანისკენ პირველი მატარებელი გავიდა. გზა 37 კილომეტრია, ლიანდაგი კი 900 მილიმეტრი.', 'In January 1902 the first train left here for Bakuriani. The line is 37 kilometres long on a 900 mm gauge.'] }] },
     { x: 1750, bridge: true, sign: ['წაღვერი', 'Tsaghveri'], pages: [
-      { tag: '1902', title: ['ეიფელის ხიდი', 'The Eiffel bridge'], src: ['Wikipedia', 'https://en.wikipedia.org/wiki/Eiffel_Bridge,_Tsagveri'],
+      { icon: 'bridge', tag: '1902', title: ['ეიფელის ხიდი', 'The Eiffel bridge'], src: ['Wikipedia', 'https://en.wikipedia.org/wiki/Eiffel_Bridge,_Tsagveri'],
         text: ['წაღვერთან მდინარეზე გადებული რკინის ხიდი გუსტავ ეიფელს მიეწერება. ის კულტურული მემკვიდრეობის ძეგლადაა აღრიცხული.', 'The iron bridge over the river near Tsaghveri is attributed to Gustave Eiffel. It is listed as a cultural heritage monument.'] }] },
     { x: 3150, sign: ['საკოჭავი', 'Sakochavi'], pages: [
-      { tag: T('ნეოლითი', 'Neolithic'), tagKa: 'ნეოლითი', tagEn: 'Neolithic', title: ['საკოჭავი', 'Sakochavi'], src: ['საქართველოს ენციკლოპედია', 'https://georgianencyclopedia.ge/ka/form/26357'],
+      { icon: 'stone', tag: 'ნეოლითი', tagEn: 'Neolithic', title: ['საკოჭავი', 'Sakochavi'], src: ['საქართველოს ენციკლოპედია', ENC],
         text: ['აქ ნაპოვნი უძველესი ძეგლები, ანდეზიტის კარიერები, ნეოლითის ბოლოთი თარიღდება. ანდეზიტს ეს მატარებელი 1991 წლამდე ზიდავდა.', 'The oldest sites found here, andesite quarries, date to the end of the Neolithic. This train carried andesite until 1991.'] }] },
     { x: 4600, final: true, sign: ['ბაკურიანი', 'Bakuriani'], alt: ['1700 მ', '1700 m'], pages: [
-      { tag: 'VII–XVIII ს.', tagEn: '7th–18th c.', title: ['ბაკურიანი', 'Bakuriani'], src: ['საქართველოს ენციკლოპედია', 'https://georgianencyclopedia.ge/ka/form/26357'],
+      { icon: 'scroll', tag: 'VII–XVIII ს.', tagEn: '7th–18th c.', title: ['ბაკურიანი', 'Bakuriani'], src: ['საქართველოს ენციკლოპედია', ENC],
         text: ['სახელი VII–VIII საუკუნის ქართლის ერისთავს, ბაკურიანს ძე ბალდადისას უკავშირდება. ვახუშტი ბატონიშვილი წერდა: „შავ-წყალი გამოსდის ბაკულიანისა და კოდიანის მთასა“.', 'The name is linked to Bakuriani son of Baldad, a great eristavi of Kartli in the 7th–8th centuries. Vakhushti Batonishvili wrote that the Shavtskali flows from the mountains of Bakuliani and Kodiani.'] },
-      { tag: '1935', title: ['საბჭოთა დავოსი', 'The Soviet Davos'], src: ['ვიკიპედია', 'https://ka.wikipedia.org/wiki/%E1%83%91%E1%83%90%E1%83%99%E1%83%A3%E1%83%A0%E1%83%98%E1%83%90%E1%83%9C%E1%83%98'],
-        text: ['1935 წლის 6 იანვარს აქ სათხილამურო სკოლა გაიხსნა, 1954 წელს კი საბჭოთა კავშირის პირველი საბაგირო-ბუქსირი. ამ მთებში ყალიბდება ბაკურიანის წყალი.', 'On 6 January 1935 a ski school opened here, and in 1954 the first ski tow in the Soviet Union. These are the mountains where Bakuriani water is formed.'] }] }
+      { icon: 'ski', tag: '1935', title: ['საბჭოთა დავოსი', 'The Soviet Davos'], src: ['ვიკიპედია', KAW],
+        text: ['1935 წლის 6 იანვარს აქ სათხილამურო სკოლა გაიხსნა. საბჭოთა პრესა ბაკურიანს „საბჭოთა დავოსს“ უწოდებდა. ამ მთებში ყალიბდება ბაკურიანის წყალი.', 'On 6 January 1935 a ski school opened here, and the Soviet press called Bakuriani "the Soviet Davos". These are the mountains where Bakuriani water is formed.'] }] }
   ];
-  const START = STOPS[0].x, END = STOPS[STOPS.length - 1].x, BR = STOPS[1].x;
+  const TOW = { icon: 'tow', tag: '1954', title: ['პირველი ბუქსირი', 'The first ski tow'], src: ['ვიკიპედია', KAW],
+    text: ['1954 წელს ბაკურიანში საბჭოთა კავშირის პირველი საბაგირო-ბუქსირი აშენდა. ახლა ბოთლსაც ის აჰყავს მთაზე.', 'In 1954 the first ski tow in the Soviet Union was built in Bakuriani. Now it pulls the bottle up the mountain.'] };
+  const TOP = { icon: 'peak', tag: '2269 მ', tagEn: '2,269 m', title: ['კოხტა', 'Kokhta'], src: ['Wikipedia', ENW],
+    text: ['კოხტას სათხილამურო ზონის უმაღლესი წერტილი 2269 მეტრია. დააჭირე „სრიალს“, გეჭიროს აჩქარებისთვის და შეაგროვე ფიფქები.', 'The top of the Kokhta ski area is 2,269 m. Press Ski, hold to speed up, tap to jump and collect the snowflakes.'] };
+  const ICONS = {
+    train: '<svg viewBox="0 0 24 24"><path d="M9 6.5 12 3.5l3 3M7 6.5h10a3 3 0 0 1 3 3V15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9.5a3 3 0 0 1 3-3z"/><path d="M7 10h3.5M13.5 10H17M4 13.5h16"/><circle cx="8" cy="19.3" r="1.6"/><circle cx="16" cy="19.3" r="1.6"/></svg>',
+    bridge: '<svg viewBox="0 0 24 24"><path d="M2 8h20M3 13.5h18M3 8l3.5 5.5L10 8l3.5 5.5L17 8l3.5 5.5"/><path d="M6.5 13.5V21M17.5 13.5V21M2 21h20"/><path d="M4 18.5c2 1 3-.6 5 .4s3 .6 6-.4 3.5.4 5 0" opacity=".6"/></svg>',
+    stone: '<svg viewBox="0 0 24 24"><path d="M12 2.8c3.4 3 6.2 7.2 6.2 11.2a6.2 6.2 0 0 1-12.4 0C5.8 10 8.6 5.8 12 2.8z"/><path d="M10 9.5l1.6 1.4M13.6 12.6l1.8.8M9.2 14.6l1.8-.9M12 17.2v1.4"/></svg>',
+    scroll: '<svg viewBox="0 0 24 24"><path d="M8 4h9.5A2.5 2.5 0 0 1 20 6.5V17a3 3 0 0 1-3 3H7"/><path d="M8 4a2.5 2.5 0 0 0-2.5 2.5V8H10V6.5A2.5 2.5 0 0 0 8 4zM7 20a2.5 2.5 0 0 1-2.5-2.5V16H9.5v1.5"/><path d="M12 9h5M12 12h5M12 15h3"/></svg>',
+    ski: '<svg viewBox="0 0 24 24"><path d="M3.5 18.5 18 4.5c.8-.8 2-.9 2.6-.2"/><path d="M6.5 20.5 20.8 7c.8-.8 2-.8 2.4-.1"/><path d="M8.5 13.2l2.3 2.3M12 9.8l2.3 2.3"/></svg>',
+    tow: '<svg viewBox="0 0 24 24"><path d="M2 5.5 22 8.5"/><circle cx="12" cy="7" r="1.3"/><path d="M12 8.3V16M8 16h8"/><path d="M4 21l16-3" opacity=".6"/></svg>',
+    peak: '<svg viewBox="0 0 24 24"><path d="M2 20 9 8.5l3.6 5.4 2.9-3.9L22 20z"/><path d="M9 8.5V3l4.2 1.6L9 6.2"/><path d="M7.2 11.5l1.8 1.2 1.6-1" opacity=".6"/></svg>',
+    flag: '<svg viewBox="0 0 24 24"><path d="M5 21V3.5"/><path d="M5 4h13l-2.6 4L18 12H5"/><path d="M9 4v8M13 4v8M5 8h11.4" opacity=".55"/></svg>'
+  };
+  const START = STOPS[0].x, END = STOPS[3].x, BR = STOPS[1].x;
   const hash = n => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
   const noise = x => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return hash(i) * (1 - u) + hash(i + 1) * u; };
   const fbm = x => noise(x) * 0.55 + noise(x * 2.1 + 9) * 0.27 + noise(x * 4.3 + 3) * 0.13 + noise(x * 8.7 + 1) * 0.05;
+  const sstep = u => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
   const trackY = x => -x * 0.085 - 26 * Math.sin(x / 640) - 9 * Math.sin(x / 230 + 1.3);
   const bell = u => Math.abs(u) < 1 ? (1 - u * u) ** 2 : 0;
   const groundY = x => trackY(x) + 10 + 300 * bell((x - BR) / 240);
   const mixC = (a, b, k) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const A = p(a), B = p(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * k)).join(',')})`; };
-  const flakes = Array.from({ length: 110 }, (_, i) => ({ x: hash(i + 0.3), y: hash(i + 7.1), r: 0.7 + hash(i + 3.3) * 1.7, v: 0.25 + hash(i + 5.7) * 0.6, w: hash(i + 9.9) * 6.28 }));
-  let W = 1, H = 1, S = 1, dpr = 1, VW = 1, VH = 1, train = START, v = 0, hold = false, stop = 0, page = 0, atStop = true, dist = 0, joint = 0;
-  let camX = 0, camY = 0, camY0 = null, visible = false, last = 0, bubble = 0, lastLang = null, started = false;
+
+  // ---- firs painted branch by branch: drooping needled sprays, back and front layers, snow resting on the branches
+  function makeFir(h, snow, pal, seed) {
+    const w = Math.round(h * 0.64), R = 2, c = document.createElement('canvas'); c.width = w * R; c.height = Math.round(h * 1.05) * R;
+    const x = c.getContext('2d'); x.scale(R, R); x.lineCap = 'round';
+    let k = 0; const rnd = () => hash(seed * 13.7 + (k++) * 1.618);
+    const cx = w / 2, top = h * 0.03, base = h * 0.9, levels = Math.max(10, Math.round(h / 6.5));
+    x.strokeStyle = '#4B3A2D'; x.lineWidth = Math.max(1.2, h * 0.022); x.beginPath(); x.moveTo(cx, h * 1.02); x.lineTo(cx, top + h * 0.05); x.stroke();
+    const sprays = [];
+    for (let pass = 0; pass < 2; pass++) for (let i = 0; i < levels; i++) {
+      const t = i / (levels - 1), y = top + (base - top) * t, maxL = w * 0.5 * (0.1 + 0.9 * Math.pow(t, 0.8));
+      for (const sd of [-1, 1]) {
+        if (rnd() < (pass ? 0.18 : 0.08)) continue;
+        const L = maxL * (0.68 + rnd() * 0.42) * (pass ? 0.82 : 1), droop = (0.12 + 0.38 * t) * L * (0.8 + rnd() * 0.4), lift = -0.18 * L * (1 - t);
+        const th = Math.max(1.6, L * (0.2 + rnd() * 0.06)), yy = y + (rnd() - 0.5) * h * 0.012;
+        const P0 = [cx, yy - th * 0.4], C = [cx + sd * L * 0.55, yy - th * 0.6 + droop * 0.25 + lift], P2 = [cx + sd * L, yy + droop + lift];
+        x.fillStyle = pass ? pal.front[Math.floor(rnd() * pal.front.length)] : pal.back;
+        x.beginPath(); x.moveTo(...P0); x.quadraticCurveTo(...C, ...P2);
+        const n = Math.max(6, Math.round(L / 2));
+        for (let j = n; j >= 0; j--) { const u = j / n, bx = cx + sd * L * u, by = yy + droop * u * u + lift * u + th * (0.3 + 0.3 * (1 - u)), nd = j % 2 ? th * (0.35 + rnd() * 0.45) : 0; x.lineTo(bx + sd * nd * 0.35, by + nd); }
+        x.closePath(); x.fill();
+        if (pass) { x.strokeStyle = pal.hl; x.globalAlpha = 0.7; x.lineWidth = Math.max(0.5, h * 0.005); x.beginPath();
+          for (let j = 1; j < n; j += 2) { const u = j / n, q = (1 - u) * (1 - u), r2 = 2 * u * (1 - u), uu = u * u, bx = q * P0[0] + r2 * C[0] + uu * P2[0], by = q * P0[1] + r2 * C[1] + uu * P2[1]; x.moveTo(bx, by + 0.6); x.lineTo(bx + sd * th * 0.35, by + th * 0.5); }
+          x.stroke(); x.globalAlpha = 1; }
+        sprays.push({ P0, C, P2, th, sd, pass });
+      }
+    }
+    if (snow > 0) sprays.forEach(sp => { if (hash(sp.P2[0] * 3.1 + sp.P2[1]) < 0.18) return;
+      const end = 0.25 + 0.7 * snow, rr = sp.th * (0.32 + 0.3 * snow);
+      for (let u = 0.12; u < end; u += 0.09) { const q = (1 - u) * (1 - u), r2 = 2 * u * (1 - u), uu = u * u, bx = q * sp.P0[0] + r2 * sp.C[0] + uu * sp.P2[0], by = q * sp.P0[1] + r2 * sp.C[1] + uu * sp.P2[1];
+        const r = rr * (0.75 + hash(bx * 7.7 + by) * 0.5) * (1 - u * 0.35);
+        x.fillStyle = 'rgba(120,150,185,.28)'; x.beginPath(); x.arc(bx + 0.6, by + r * 0.5, r, 0, 6.283); x.fill();
+        x.fillStyle = sp.pass ? '#FFFFFF' : '#EEF4FA'; x.beginPath(); x.arc(bx, by - r * 0.15, r, 0, 6.283); x.fill(); } });
+    x.strokeStyle = pal.back; x.lineWidth = Math.max(1, h * 0.012); x.beginPath(); x.moveTo(cx, top + h * 0.06); x.lineTo(cx, 0); x.stroke();
+    if (snow > 0.4) { x.fillStyle = '#FFFFFF'; x.beginPath(); x.arc(cx, top + h * 0.02, h * 0.012, 0, 6.283); x.fill(); }
+    return c;
+  }
+  const FIR = {};
+  [['near', 180, { back: '#183D28', front: ['#24563A', '#2A6142', '#225033'], hl: '#5E9C68' }],
+   ['mid', 116, { back: '#244C33', front: ['#336B47', '#3A7650', '#2F6442'], hl: '#73AD7C' }],
+   ['far', 74, { back: '#6F889C', front: ['#7E98AD', '#88A1B5', '#7690A6'], hl: '#B6C8D5' }]].forEach(([kk, h, pal]) => {
+    FIR[kk] = [0, 0.45, 0.8, 1].map(sn => [0, 1, 2].map(sd => makeFir(h, sn, pal, sd * 3.3 + h)));
+  });
+  const fir = (layer, x, y, scale, snow, seed) => {
+    const set = FIR[layer][Math.round(Math.max(0, Math.min(1, snow)) * 3)], img = set[Math.floor(hash(seed) * 3) % 3];
+    const w = img.width / 2 * scale, h = img.height / 2 * scale; g.drawImage(img, x - w / 2, y - h, w, h);
+  };
+
+  const flakes = Array.from({ length: 170 }, (_, i) => { const z = i < 90 ? 0 : i < 145 ? 1 : 2; return { x: hash(i + 0.3), y: hash(i + 7.1), z, r: [1.1, 2, 3.6][z] * (0.75 + hash(i + 3.3) * 0.5), v: [14, 24, 40][z] * (0.8 + hash(i + 5.7) * 0.4), w: hash(i + 9.9) * 6.28, sw: 8 + hash(i + 2.2) * 16 }; });
+  const flakeImg = (() => { const c = document.createElement('canvas'); c.width = c.height = 32; const x = c.getContext('2d'), gr = x.createRadialGradient(16, 16, 0, 16, 16, 16);
+    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.45, 'rgba(255,255,255,.85)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = gr; x.fillRect(0, 0, 32, 32); return c; })();
+  const bokeh = Array.from({ length: 7 }, (_, i) => ({ x: hash(i + 41), y: hash(i + 53), r: 10 + hash(i + 61) * 18, v: 0.2 + hash(i + 71) * 0.3 }));
+  let W = 1, H = 1, S = 1, dpr = 1, VW = 1, VH = 1, visible = false, last = 0, lastLang = null, bubble = 0;
+  let phase = 'rail', train = START, v = 0, hold = false, stop = 0, page = 0, atStop = true, dist = 0, joint = 0, started = false;
+  let camX = 0, camY = 0, camY0 = null, cardData = null;
+
+  // ---- the ski mountain: a precomputed profile with kickers, flat at the top and in the finish area
+  const SKI_LEN = 5800, SK = new Float32Array(SKI_LEN / 2 + 4), KICK = [1000, 1700, 2450, 3150, 3900, 4550], FIN = 5150;
+  { let y = 0; for (let i = 0; i < SK.length; i++) { const x = i * 2; let d = 0.42 * sstep((x - 160) / 260) * (1 - sstep((x - 4900) / 500));
+      KICK.forEach(b => { const u = (x - b) / 80; d += 64 * 2 * u * Math.exp(-u * u) / 80; }); y += d * 2; SK[i] = y; } }
+  const skiY = x => { const f = Math.max(0, Math.min(SKI_LEN, x)) / 2, i = Math.floor(f), t = f - i; return SK[i] * (1 - t) + SK[Math.min(SK.length - 1, i + 1)] * t; };
+  const skiD = x => (skiY(x + 2) - skiY(x - 2)) / 4;
+  const TOW_A = 1450, TOW_B = 210;                       // the tow runs up from here to the top
+  const towY = x => { const a = skiY(TOW_A) - 150, b = skiY(TOW_B) - 150, u = (x - TOW_B) / (TOW_A - TOW_B); return b + (a - b) * u - 18 * Math.sin(u * Math.PI); };
+  const STARS = Array.from({ length: 16 }, (_, k) => { const x = 520 + k * 300 + (k % 3) * 40, near = KICK.some(b => x > b && x < b + 260); return { x, h: near ? 120 + (k % 2) * 30 : 46 + (k % 3) * 18, got: false }; });
+  const sk = { x: TOW_A, y: 0, vx: 0, vy: 0, air: false, rot: 0 };
+  const puffs = [];
+  let got = 0;
 
   function size() {
     const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
     W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     S = W < 800 ? Math.min(1, W / 500) : Math.max(0.6, Math.min(1, W / 1150)); VW = W / S; VH = H / S;
   }
-  const mt = t => lang === 'en' ? t : toMt(t);
   function label() {
+    if (phase === 'tow') return T('ზევით…', 'Going up…');
+    if (phase === 'top') return T('სრიალი', 'Ski');
+    if (phase === 'ski') return T('ხტომა', 'Jump');
+    if (phase === 'finish') return T('თავიდან', 'Start over');
     const st = STOPS[stop];
     if (!atStop) return T('გასწიე', 'Go');
     if (page < st.pages.length - 1) return T('შემდეგი', 'Next');
-    if (st.final) return T('თავიდან', 'Start over');
+    if (st.final) return T('მთაზე', 'Up the mountain');
     return started ? T('გააგრძელე', 'Continue') : T('გასწიე', 'Go');
   }
-  function renderCard() {
-    const st = STOPS[stop], pg = st.pages[page];
-    card.querySelector('.kuku-tag').textContent = lang === 'en' ? (pg.tagEn || pg.tag) : (pg.tagKa || pg.tag);
-    card.querySelector('h3').textContent = mt(T(pg.title[0], pg.title[1]));
-    card.querySelector('p').textContent = T(pg.text[0], pg.text[1]);
-    const a = card.querySelector('.kuku-src'); a.textContent = T('წყარო: ', 'Source: ') + pg.src[0]; a.href = pg.src[1];
-    const more = card.querySelector('.kuku-more'); more.hidden = !(st.final && page === st.pages.length - 1); more.textContent = mt(T('ასორტიმენტი', 'Range'));
-    goLbl.textContent = mt(label()); lastLang = lang;
+  function show(d) {
+    cardData = d;
+    card.querySelector('.kuku-ico').innerHTML = ICONS[d.icon] || '';
+    card.querySelector('.kuku-tag').textContent = lang === 'en' ? (d.tagEn || d.tag) : d.tag;
+    card.querySelector('h3').textContent = mt(T(d.title[0], d.title[1]));
+    card.querySelector('p').textContent = typeof d.text === 'function' ? d.text() : T(d.text[0], d.text[1]);
+    const a = card.querySelector('.kuku-src'); a.hidden = !d.src; if (d.src) { a.textContent = T('წყარო: ', 'Source: ') + d.src[0]; a.href = d.src[1]; }
+    const more = card.querySelector('.kuku-more'); more.hidden = !d.more; more.textContent = mt(T('ასორტიმენტი', 'Range'));
+    card.classList.add('on'); goLbl.textContent = mt(label()); lastLang = lang;
   }
-  // sounds: rail joints ta-tak, and a two-note "ku-ku" whistle when it leaves a stop
-  function clack(k) {
-    if (!actx || !soundOn || !whiteBuf || k < 0.05) return; actx.resume(); const t = actx.currentTime;
+  const renderCard = () => phase === 'rail' ? show(STOPS[stop].pages[page]) : cardData && show(cardData);
+  // sounds: rail joints, the two-note "ku-ku" whistle, a chime for snowflakes, a soft hiss on skis
+  const tone = (f, at, dur, vol, type = 'sine') => { const os = actx.createOscillator(), gn = actx.createGain(); os.type = type; os.frequency.setValueAtTime(f, at);
+    gn.gain.setValueAtTime(0.0001, at); gn.gain.exponentialRampToValueAtTime(vol, at + 0.02); gn.gain.exponentialRampToValueAtTime(0.0001, at + dur); os.connect(gn).connect(master); os.start(at); os.stop(at + dur + 0.02); };
+  const ok = () => actx && soundOn && (actx.resume(), true);
+  function clack(k) { if (!ok() || !whiteBuf || k < 0.05) return; const t = actx.currentTime;
     [0, 0.085].forEach((o, i) => { const sN = actx.createBufferSource(); sN.buffer = whiteBuf; const bp = actx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = i ? 1750 : 1250; bp.Q.value = 3.2;
       const gn = actx.createGain(); gn.gain.setValueAtTime(0.0001, t + o); gn.gain.exponentialRampToValueAtTime(0.18 * k, t + o + 0.004); gn.gain.exponentialRampToValueAtTime(0.0001, t + o + 0.07);
-      sN.connect(bp).connect(gn).connect(master); sN.start(t + o, Math.random() * 2); sN.stop(t + o + 0.09); });
-  }
-  function cuckoo() {
-    if (!actx || !soundOn) return; actx.resume(); const t = actx.currentTime + 0.05;
-    [[659, 0], [523, 0.34]].forEach(([f, o]) => { const os = actx.createOscillator(), gn = actx.createGain(); os.type = 'sine';
-      os.frequency.setValueAtTime(f, t + o); os.frequency.exponentialRampToValueAtTime(f * 0.97, t + o + 0.26);
-      gn.gain.setValueAtTime(0.0001, t + o); gn.gain.exponentialRampToValueAtTime(0.11, t + o + 0.03); gn.gain.exponentialRampToValueAtTime(0.0001, t + o + 0.3);
-      os.connect(gn).connect(master); os.start(t + o); os.stop(t + o + 0.32); });
-  }
-  function restart() {
-    sec.classList.add('reset');
-    setTimeout(() => { train = START; v = 0; stop = 0; page = 0; atStop = true; dist = 0; started = false; camY0 = null; snap(); renderCard(); sec.classList.remove('reset'); }, 460);
-  }
+      sN.connect(bp).connect(gn).connect(master); sN.start(t + o, Math.random() * 2); sN.stop(t + o + 0.09); }); }
+  function cuckoo() { if (!ok()) return; const t = actx.currentTime + 0.05; tone(659, t, 0.3, 0.11); tone(523, t + 0.34, 0.3, 0.11); }
+  function chime() { if (!ok()) return; const t = actx.currentTime; tone(1568, t, 0.35, 0.07); tone(2093, t + 0.07, 0.4, 0.05); }
+  function fade(fn) { sec.classList.add('reset'); setTimeout(() => { fn(); snap(); sec.classList.remove('reset'); }, 460); }
+  function restart() { fade(() => { phase = 'rail'; train = START; v = 0; stop = 0; page = 0; atStop = true; dist = 0; started = false; camY0 = null; score.hidden = true; show(STOPS[0].pages[0]); }); }
+  function startTow() { card.classList.remove('on'); fade(() => { phase = 'tow'; sk.x = TOW_A; sk.y = skiY(TOW_A); sk.vx = 0; sk.air = false; camY0 = null; show(TOW); }); }
+  function startSki() { phase = 'ski'; card.classList.remove('on'); STARS.forEach(s => s.got = false); got = 0; scoreN.textContent = '0'; score.hidden = false; sk.vx = 60; goLbl.textContent = mt(label()); cuckoo(); }
+  function finish() { phase = 'finish'; hold = false; show({ icon: 'flag', tag: T('ფინიში', 'Finish'), title: ['ბაკურიანი', 'Bakuriani'], more: true,
+    text: () => T(`ჩამოსრიალდი! შეაგროვე ${got} ფიფქი ${STARS.length}-დან.`, `You made it down! You caught ${got} of ${STARS.length} snowflakes.`) }); }
+  function jump() { if (sk.air) return; sk.air = true; sk.vy = skiD(sk.x) * sk.vx - 430; for (let i = 0; i < 10; i++) puff(sk.x - 10, sk.y, -60 - Math.random() * 80, -60 - Math.random() * 80); }
+  function puff(x, y, vx, vy) { puffs.push({ x, y, vx, vy, life: 0, max: 0.6 + Math.random() * 0.5, r: 2 + Math.random() * 3 }); if (puffs.length > 260) puffs.shift(); }
+
   function press() {
     if (typeof initAudio === 'function' && soundOn) initAudio();
+    if (phase === 'tow') return;
+    if (phase === 'top') { startSki(); hold = true; return; }
+    if (phase === 'ski') { jump(); hold = true; return; }
+    if (phase === 'finish') { restart(); return; }
     const st = STOPS[stop];
     if (atStop) {
-      if (page < st.pages.length - 1) { page++; renderCard(); return; }
-      if (st.final) { restart(); return; }
+      if (page < st.pages.length - 1) { page++; show(st.pages[page]); return; }
+      if (st.final) { startTow(); return; }
       atStop = false; started = true; stop++; page = 0; card.classList.remove('on'); bubble = 1.8; cuckoo(); goLbl.textContent = mt(label());
     }
     hold = true;
@@ -1405,120 +1502,247 @@ let kukuMoving = false;
   goBtn.addEventListener('pointerdown', e => { e.preventDefault(); goBtn.setPointerCapture?.(e.pointerId); press(); });
   ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => goBtn.addEventListener(ev, release));
   goBtn.addEventListener('contextmenu', e => e.preventDefault());
-  addEventListener('keydown', e => { if (!visible || e.repeat || !(e.code === 'Space' || e.code === 'ArrowRight')) return; if (e.target.closest && e.target.closest('input,textarea')) return; e.preventDefault(); press(); });
-  addEventListener('keyup', e => { if (e.code === 'Space' || e.code === 'ArrowRight') release(); });
+  addEventListener('keydown', e => { if (!visible || e.repeat || !(e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'ArrowUp')) return; if (e.target.closest && e.target.closest('input,textarea')) return; e.preventDefault(); press(); });
+  addEventListener('keyup', e => { if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'ArrowUp') release(); });
 
-  function camTarget() { return { x: train - VW * (W < 800 ? 0.36 : 0.4), y: trackY(train) - VH * (W < 800 ? (H > W * 1.4 ? 0.45 : 0.52) : 0.64) }; }
-  function snap() { const c = camTarget(); camX = c.x; camY = c.y; }
+  function camTarget() {
+    if (phase === 'rail') return { x: train - VW * (W < 800 ? 0.36 : 0.4), y: trackY(train) - VH * (W < 800 ? (H > W * 1.4 ? 0.45 : 0.52) : 0.64) };
+    return { x: sk.x - VW * (W < 800 ? 0.36 : 0.42), y: sk.y - VH * (W < 800 ? (H > W * 1.4 ? 0.44 : 0.5) : 0.6) };
+  }
+  function snap() { const c = camTarget(); camX = c.x; camY = c.y; camY0 = camY; }
 
   function step(dt) {
-    if (!atStop) {
+    if (phase === 'rail' && !atStop) {
       const target = STOPS[stop].x, d = target - train, B = 240;
-      if (d <= v * v / (2 * B) + 2) v = Math.max(7, Math.min(v, Math.sqrt(2 * B * Math.max(d, 0))));   // assisted braking into the platform
+      if (d <= v * v / (2 * B) + 2) v = Math.max(7, Math.min(v, Math.sqrt(2 * B * Math.max(d, 0))));
       else if (hold) v = Math.min(250, v + 150 * dt);
       else v = Math.max(0, v - 110 * dt);
       const before = train; train = Math.min(target, train + v * dt); dist += train - before;
-      if (target - train < 1) { train = target; v = 0; atStop = true; hold = false; page = 0; renderCard(); card.classList.add('on'); }
+      if (target - train < 1) { train = target; v = 0; atStop = true; hold = false; page = 0; show(STOPS[stop].pages[0]); }
+      const j = Math.floor(dist / 74); if (j !== joint) { joint = j; clack(Math.min(1, v / 250)); }
     }
-    kukuMoving = v > 1;
-    const j = Math.floor(dist / 74); if (j !== joint) { joint = j; clack(Math.min(1, v / 250)); }
+    if (phase === 'tow') {
+      sk.x = Math.max(TOW_B, sk.x - 270 * dt); sk.y = skiY(sk.x); sk.rot += (Math.atan(skiD(sk.x)) - sk.rot) * Math.min(1, dt * 8); dist += 270 * dt;
+      if (sk.x <= TOW_B) { phase = 'top'; show(TOP); }
+    }
+    if (phase === 'ski' || phase === 'finish') {
+      if (!sk.air) {
+        const d = skiD(sk.x), ang = Math.atan(d);
+        sk.vx += (560 * Math.sin(ang) * Math.cos(ang) + (hold && phase === 'ski' ? 120 : -25) - 0.16 * sk.vx - (phase === 'finish' ? 1.8 * sk.vx + 60 : 0)) * dt;
+        sk.vx = Math.max(phase === 'finish' ? 0 : 30, Math.min(720, sk.vx));
+        const nx = Math.min(SKI_LEN - 80, sk.x + sk.vx * dt), ny = skiY(nx), vyG = (ny - sk.y) / dt;
+        if (vyG > sk.vy + 980 * dt * 1.08 && sk.vx > 160) { sk.air = true; sk.vy += 980 * dt; sk.x = nx; sk.y += sk.vy * dt; }
+        else { sk.vy = vyG; sk.x = nx; sk.y = ny; sk.rot += (ang - sk.rot) * Math.min(1, dt * 14); }
+        if (sk.vx > 140 && Math.random() < 0.9) puff(sk.x - 22, sk.y - 2, -sk.vx * 0.25 - Math.random() * 40, -40 - Math.random() * 70);
+      } else {
+        sk.vy += 980 * dt; sk.x += sk.vx * dt; sk.y += sk.vy * dt; sk.vx *= 1 - 0.03 * dt; sk.rot += (-0.25 - sk.rot) * Math.min(1, dt * 1.5);
+        const gy = skiY(sk.x); if (sk.y >= gy) { sk.y = gy; sk.air = false; sk.vy = skiD(sk.x) * sk.vx; for (let i = 0; i < 18; i++) puff(sk.x + (Math.random() - 0.5) * 40, gy, (Math.random() - 0.3) * 160, -50 - Math.random() * 120); }
+      }
+      STARS.forEach(s => { if (!s.got && Math.hypot(s.x - sk.x, skiY(s.x) - s.h - (sk.y - 38)) < 38) { s.got = true; got++; scoreN.textContent = got; chime(); for (let i = 0; i < 12; i++) puff(s.x, skiY(s.x) - s.h, (Math.random() - 0.5) * 220, (Math.random() - 0.5) * 220); } });
+      if (phase === 'ski' && sk.x > FIN) finish();
+    }
+    for (let i = puffs.length - 1; i >= 0; i--) { const p = puffs[i]; p.life += dt; if (p.life > p.max) { puffs.splice(i, 1); continue; } p.vy += 260 * dt; p.vx *= 1 - 1.6 * dt; p.x += p.vx * dt; p.y += p.vy * dt; }
+    kukuMoving = (phase === 'rail' && v > 1) || phase === 'tow' || phase === 'ski';
     const c = camTarget(), k = 1 - Math.pow(0.0015, dt);
-    camX += (c.x - camX) * k; camY += (c.y - camY) * k;
-    if (camY0 === null) camY0 = camY;
+    camX += (c.x - camX) * k; camY += (c.y - camY) * k; if (camY0 === null) camY0 = camY;
     bubble = Math.max(0, bubble - dt);
     if (lastLang !== lang) renderCard();
-    hint.style.opacity = !atStop && v < 4 ? 1 : 0;
-    sec.classList.toggle('moving', !atStop);
-    altBar.style.width = (Math.min(1, (train - START) / (END - START)) * 100).toFixed(1) + '%';
+    hint.style.opacity = phase === 'rail' && !atStop && v < 4 ? 1 : 0;
+    sec.classList.toggle('moving', phase !== 'rail' || !atStop || (started && W < 1000));
+    altBar.parentNode.parentNode.style.opacity = phase === 'rail' ? '' : 0;
+    altBar.style.width = (phase === 'rail' ? Math.min(1, (train - START) / (END - START)) * 100 : 100).toFixed(1) + '%';
   }
 
   // ---- drawing (world units; the screen shows VW x VH of them)
+  const W2S = (x, y) => [x - camX, y - camY];
   function ridge(f, base, amp, period, col, cap, seed) {
     const ox = camX * f, top = base - amp;
     g.beginPath(); g.moveTo(0, VH);
     for (let sx = -8; sx <= VW + 8; sx += 6) g.lineTo(sx, base - fbm((ox + sx) / period + seed) * amp);
     g.lineTo(VW, VH); g.closePath();
-    const gr = g.createLinearGradient(0, top, 0, base + 40);
-    if (cap) { gr.addColorStop(0, cap); gr.addColorStop(0.32, cap); gr.addColorStop(0.5, col); } else gr.addColorStop(0, col);
-    gr.addColorStop(1, mixC(col.length === 7 ? col : '#C9DCEC', '#EEF5FA', 0.55)); g.fillStyle = gr; g.fill();
+    const gr = g.createLinearGradient(0, top, 0, base + 60);
+    gr.addColorStop(0, cap); gr.addColorStop(0.36, cap); gr.addColorStop(0.55, col); gr.addColorStop(1, '#EEF4F8'); g.fillStyle = gr; g.fill();
   }
-  function pine(x, y, h, col, snow) {
-    const w = h * 0.42;
-    g.fillStyle = col; g.beginPath();
-    for (let k = 0; k < 3; k++) { const ty = y - h * (0.3 + k * 0.28), bw = w * (1 - k * 0.24); g.moveTo(x - bw, ty + h * 0.34); g.lineTo(x, ty - h * 0.12); g.lineTo(x + bw, ty + h * 0.34); }
-    g.fill(); g.fillRect(x - 1.2, y - h * 0.08, 2.4, h * 0.1);
-    if (snow > 0.02) { g.fillStyle = `rgba(255,255,255,${0.85 * snow})`; g.beginPath();
-      for (let k = 0; k < 3; k++) { const ty = y - h * (0.3 + k * 0.28), bw = w * (1 - k * 0.24) * 0.55; g.moveTo(x - bw, ty + h * 0.06); g.lineTo(x, ty - h * 0.12); g.lineTo(x + bw, ty + h * 0.06); }
-      g.fill(); }
+  function mist(y, alpha, f, t) {
+    for (let i = 0; i < 6; i++) { const x = ((hash(i * 3.1 + y) * VW * 1.6 - camX * f + t * (6 + i * 2)) % (VW * 1.6) + VW * 1.6) % (VW * 1.6) - VW * 0.3;
+      const rw = 220 + hash(i + y) * 260, gr = g.createRadialGradient(x, y, 0, x, y, rw); gr.addColorStop(0, `rgba(255,255,255,${alpha})`); gr.addColorStop(1, 'rgba(255,255,255,0)');
+      g.save(); g.translate(x, y); g.scale(1, 0.22); g.translate(-x, -y); g.fillStyle = gr; g.fillRect(x - rw, y - rw, rw * 2, rw * 2); g.restore(); }
   }
-  function forest(f, base, snow, col, step0, hMin, hVar, seed) {
-    const ox = camX * f, x0 = Math.floor((ox - 60) / step0) * step0;
-    for (let wx = x0; wx < ox + VW + 60; wx += step0) {
-      const r = hash(wx * 0.013 + seed); if (r < 0.18) continue;
-      const sx = wx - ox + (hash(wx + seed) - 0.5) * step0 * 0.8, y = base + (fbm(wx / 300 + seed) - 0.5) * 40;
-      pine(sx, y, hMin + r * hVar, col, snow);
+  function glint(x, y, s, a) { g.globalAlpha = a; g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(x, y - s); g.lineTo(x + s * 0.18, y); g.lineTo(x, y + s); g.lineTo(x - s * 0.18, y); g.closePath(); g.moveTo(x - s, y); g.lineTo(x, y + s * 0.18); g.lineTo(x + s, y); g.lineTo(x, y - s * 0.18); g.closePath(); g.fill(); g.globalAlpha = 1; }
+  function backdrop(t, snowAmt) {
+    const sky = g.createLinearGradient(0, 0, 0, VH); sky.addColorStop(0, '#CFE2F4'); sky.addColorStop(0.55, '#EAF1F8'); sky.addColorStop(0.8, '#F8EEF2'); sky.addColorStop(1, '#FBF7F5');
+    g.fillStyle = sky; g.fillRect(0, 0, VW, VH);
+    const sx = VW * 0.8, sy = VH * 0.16, sun = g.createRadialGradient(sx, sy, 0, sx, sy, VH * 0.8); sun.addColorStop(0, 'rgba(255,251,240,.95)'); sun.addColorStop(0.25, 'rgba(255,246,232,.45)'); sun.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = sun; g.fillRect(0, 0, VW, VH);
+    const soft = (cx, cy, rx, ry, rot, a) => { g.save(); g.translate(cx, cy); g.rotate(rot); g.scale(1, ry / rx); const gr = g.createRadialGradient(0, 0, 0, 0, 0, rx);
+      gr.addColorStop(0, `rgba(255,249,236,${a})`); gr.addColorStop(0.5, `rgba(255,249,236,${a * 0.35})`); gr.addColorStop(1, 'rgba(255,249,236,0)'); g.fillStyle = gr; g.fillRect(-rx, -rx, rx * 2, rx * 2); g.restore(); };
+    soft(sx, sy, VH * 0.35, VH * 0.35, 0, 0.5);
+    soft(sx - VH * 0.35, sy + VH * 0.3, VH * 0.75, VH * 0.07, 2.35 + Math.sin(t * 0.07) * 0.03, 0.16);
+    soft(sx - VH * 0.1, sy + VH * 0.38, VH * 0.7, VH * 0.05, 1.95 + Math.sin(t * 0.05 + 1) * 0.03, 0.12);
+    const lift = camY - (camY0 ?? camY);
+    // the backdrop is laid out from where the line meets the view, so mountains and forest always sit behind it
+    const hz = Math.min(VH * 0.7, (phase === 'rail' ? trackY(camX + VW * 0.5) : skiY(camX + VW * 0.35)) - camY);
+    ridge(0.08, hz - VH * 0.06, VH * 0.32, 760, '#C4D8EA', '#FFFFFF', 3.1);
+    mist(hz - VH * 0.06, 0.55, 0.1, t);
+    ridge(0.2, hz + VH * 0.03, VH * 0.24, 520, '#B0C9DD', '#F6F9FC', 7.7);
+    mist(hz + VH * 0.03, 0.5, 0.2, t);
+    // distant green forest on the far slopes
+    { const f = 0.4, ox = camX * f, base = hz + VH * 0.07, x0 = Math.floor((ox - 60) / 18) * 18;
+      for (let wx = x0; wx < ox + VW + 60; wx += 18) { const r = hash(wx * 0.013 + 1.7); if (r < 0.15) continue; fir('far', wx - ox + (hash(wx) - 0.5) * 12, base + (fbm(wx / 300 + 1.7) - 0.5) * 40, 0.55 + r * 0.45, snowAmt, wx); } }
+    mist(hz + VH * 0.09, 0.35, 0.4, t);
+    return lift;
+  }
+  function foreground(f, p) {
+    const ox = camX * f, base = VH * 0.9;
+    const ridgeY = sx => base - fbm((ox + sx) / 340 + 11) * VH * 0.12;
+    const fg = g.createLinearGradient(0, base - VH * 0.25, 0, VH); fg.addColorStop(0, mixC('#2E5A44', '#2C4F4A', p)); fg.addColorStop(1, mixC('#1C3A2C', '#1B3236', p));
+    g.fillStyle = fg; g.beginPath(); g.moveTo(-10, VH + 10);
+    for (let sx = -10; sx <= VW + 10; sx += 8) g.lineTo(sx, ridgeY(sx));
+    g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
+    const x0 = Math.floor((ox - 80) / 46) * 46;
+    for (let wx = x0; wx < ox + VW + 80; wx += 46) { const r = hash(wx * 0.033 + 7.7); if (r < 0.35) continue;
+      const sx = wx - ox, by = ridgeY(sx) + 6, h = 70 + r * 90, w = h * 0.34;
+      g.beginPath(); g.moveTo(sx, by - h);
+      for (let k = 1; k <= 5; k++) { const yy = by - h + h * k / 5, ww = w * (0.35 + 0.65 * k / 5); g.lineTo(sx + ww, yy); g.lineTo(sx + ww * 0.45, yy - h * 0.06); }
+      g.lineTo(sx + w * 0.45, by); g.lineTo(sx - w * 0.45, by);
+      for (let k = 5; k >= 1; k--) { const yy = by - h + h * k / 5, ww = w * (0.35 + 0.65 * k / 5); g.lineTo(sx - ww * 0.45, yy - h * 0.06); g.lineTo(sx - ww, yy); }
+      g.closePath(); g.fill();
+      if (p > 0.15) { g.strokeStyle = `rgba(255,255,255,${0.75 * p})`; g.lineWidth = 2; g.lineCap = 'round'; g.beginPath();
+        for (let k = 1; k <= 5; k++) { const yy = by - h + h * k / 5, ww = w * (0.35 + 0.65 * k / 5); g.moveTo(sx - ww * 0.5, yy - h * 0.09); g.lineTo(sx, yy - h * 0.2); g.lineTo(sx + ww * 0.5, yy - h * 0.09); }
+        g.stroke(); }
     }
+    if (p > 0.15) { g.strokeStyle = `rgba(255,255,255,${0.6 * p})`; g.lineWidth = 2.5; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 8) { const y = ridgeY(sx) + 1; sx === -10 ? g.moveTo(sx, y) : g.lineTo(sx, y); } g.stroke(); }
   }
-  const W2S = (x, y) => [x - camX, y - camY];
+  function frontFx(t, p) {
+    const dens = 0.35 + 0.65 * p, par = [0.25, 0.55, 1.1];
+    flakes.forEach((f, i) => { if (hash(i + 0.77) > dens) return;
+      const H2 = VH + 40, y = ((f.y * H2 + t * f.v + camY * par[f.z] * -0.0) % H2 + H2) % H2 - 20;
+      const x = ((f.x * (VW + 60) + Math.sin(t * 0.8 + f.w) * f.sw - t * (6 + f.z * 5) - camX * par[f.z]) % (VW + 60) + (VW + 60)) % (VW + 60) - 30;
+      g.globalAlpha = [0.55, 0.7, 0.5][f.z]; const d = f.r * 2.4; g.drawImage(flakeImg, x - d / 2, y - d / 2, d, d); });
+    bokeh.forEach(b => { const y = ((b.y * VH + t * 16 * b.v) % (VH + 80)) - 40, x = ((b.x * VW - camX * 0.9) % VW + VW) % VW, gr = g.createRadialGradient(x, y, 0, x, y, b.r);
+      gr.addColorStop(0, `rgba(255,255,255,${0.28 * p + 0.06})`); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.globalAlpha = 1; g.fillStyle = gr; g.fillRect(x - b.r, y - b.r, b.r * 2, b.r * 2); });
+    g.globalAlpha = 1;
+  }
+  // ---- the train
   function body(cx, len, draw) {
-    const x1 = cx - len * 0.36, x2 = cx + len * 0.36, y1 = trackY(x1), y2 = trackY(x2);
-    g.save(); const [sx, sy] = W2S(cx, (y1 + y2) / 2); g.translate(sx, sy - 3); g.rotate(Math.atan2(y2 - y1, x2 - x1)); draw(len); g.restore();
+    const x1 = cx - len * 0.34, x2 = cx + len * 0.34, y1 = trackY(x1), y2 = trackY(x2);
+    g.save(); const [sx, sy] = W2S(cx, (y1 + y2) / 2); g.translate(sx, sy - 2); g.rotate(Math.atan2(y2 - y1, x2 - x1)); draw(len); g.restore();
   }
-  function wheels(len) {
-    g.fillStyle = '#33424F'; g.fillRect(-len / 2 + 10, -21, len - 20, 7);
-    [-len * 0.36, len * 0.36].forEach(bx => [-11, 11].forEach(o => {
-      g.save(); g.translate(bx + o, -9); g.fillStyle = '#26333F'; g.beginPath(); g.arc(0, 0, 8, 0, 6.283); g.fill();
-      g.rotate(dist / 8); g.strokeStyle = '#7C8C9A'; g.lineWidth = 1.2; g.beginPath(); for (let a = 0; a < 3; a++) { g.moveTo(Math.cos(a * 2.094) * 6, Math.sin(a * 2.094) * 6); g.lineTo(-Math.cos(a * 2.094) * 6, -Math.sin(a * 2.094) * 6); } g.stroke();
-      g.fillStyle = '#9AA8B5'; g.beginPath(); g.arc(0, 0, 2, 0, 6.283); g.fill(); g.restore(); }));
+  function wheel(x, y, r) {
+    g.save(); g.translate(x, y);
+    g.fillStyle = '#161E25'; g.beginPath(); g.arc(0, 0, r, 0, 6.283); g.fill();
+    g.fillStyle = '#56636E'; g.beginPath(); g.arc(0, 0, r * 0.86, 0, 6.283); g.fill();
+    const dg = g.createRadialGradient(-r * 0.25, -r * 0.3, r * 0.1, 0, 0, r * 0.78); dg.addColorStop(0, '#6E7B86'); dg.addColorStop(1, '#2A353F');
+    g.fillStyle = dg; g.beginPath(); g.arc(0, 0, r * 0.74, 0, 6.283); g.fill();
+    g.rotate(dist / r); g.fillStyle = '#1D262E';
+    for (let k = 0; k < 6; k++) { const a = k * 1.047; g.beginPath(); g.arc(Math.cos(a) * r * 0.45, Math.sin(a) * r * 0.45, r * 0.12, 0, 6.283); g.fill(); }
+    g.fillStyle = '#AEB9C2'; g.beginPath(); g.arc(0, 0, r * 0.2, 0, 6.283); g.fill();
+    g.restore();
   }
-  // the renewed Kukushka: cream upper body, deep red lower body, big windows
-  function shell(len, h) {
-    const top = -16 - h, mid = -16 - h * 0.46;
-    const red = g.createLinearGradient(0, mid, 0, -16); red.addColorStop(0, '#B8322D'); red.addColorStop(1, '#93241F');
-    g.fillStyle = '#F3ECDD'; g.beginPath(); g.roundRect(-len / 2, top, len, h, [12, 12, 4, 4]); g.fill();
-    g.fillStyle = red; g.beginPath(); g.roundRect(-len / 2, mid, len, -16 - mid, [0, 0, 4, 4]); g.fill();
-    g.fillStyle = '#7E1D19'; g.fillRect(-len / 2, mid, len, 2.5);
-    g.fillStyle = '#DCD3C1'; g.beginPath(); g.roundRect(-len / 2 + 5, top - 6, len - 10, 9, 5); g.fill();
-    g.fillStyle = 'rgba(255,255,255,.5)'; g.fillRect(-len / 2 + 6, top + 2, len - 12, 1.5);
+  function bogies(len) {
+    [-len * 0.34, len * 0.34].forEach(bx => {
+      [-11, 11].forEach(o => wheel(bx + o, -8.5, 8.5));
+      const fr = g.createLinearGradient(0, -19, 0, -9); fr.addColorStop(0, '#46525D'); fr.addColorStop(1, '#262F37');
+      g.fillStyle = fr; g.beginPath(); g.roundRect(bx - 23, -17, 46, 6.5, 2.5); g.fill();
+      [-11, 11].forEach(o => { g.fillStyle = '#C9A55A'; g.fillRect(bx + o - 3, -15.5, 6, 4); g.fillStyle = '#20282F'; g.fillRect(bx + o + (o < 0 ? 6 : -8), -12, 2, 6); });
+      g.strokeStyle = '#8A96A0'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(bx - 7, -18.5); g.quadraticCurveTo(bx, -15, bx + 7, -18.5); g.moveTo(bx - 6, -17.3); g.quadraticCurveTo(bx, -14.4, bx + 6, -17.3); g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(bx - 21, -16.6, 42, 0.8);
+    });
+    g.fillStyle = '#2A343D'; g.fillRect(-len / 2 + 6, -21, len - 12, 4);
   }
-  const glass = (x, y, w, h, r = 5) => { g.fillStyle = '#CFE4F2'; g.beginPath(); g.roundRect(x, y, w, h, r); g.fill();
-    g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.moveTo(x + 4, y + h - 2); g.lineTo(x + 10, y + 2); g.lineTo(x + 16, y + 2); g.lineTo(x + 10, y + h - 2); g.fill();
-    g.strokeStyle = '#FFFFFF'; g.lineWidth = 1.5; g.beginPath(); g.roundRect(x, y, w, h, r); g.stroke(); };
+  // body between the platforms: cream upper, deep red lower, thin gold line, arched roof with overhang
+  let kSnow = 0;
+  function coach(x0, x1, h, round) {
+    const top = -20 - h, mid = -20 - h * 0.44, L = x1 - x0;
+    g.fillStyle = 'rgba(15,25,35,.14)'; g.beginPath(); g.roundRect(x0 + 1, top + 4, L, h, [round, round, 3, 3]); g.fill();
+    const cream = g.createLinearGradient(0, top, 0, mid); cream.addColorStop(0, '#FFFCF4'); cream.addColorStop(1, '#EFE6D4');
+    g.fillStyle = cream; g.beginPath(); g.roundRect(x0, top, L, h, [round, round, 3, 3]); g.fill();
+    const red = g.createLinearGradient(0, mid, 0, -20); red.addColorStop(0, '#C53C34'); red.addColorStop(0.55, '#A92D27'); red.addColorStop(1, '#8A221D');
+    g.fillStyle = red; g.beginPath(); g.roundRect(x0, mid, L, -20 - mid, [0, 0, 3, 3]); g.fill();
+    g.fillStyle = '#E5C27A'; g.fillRect(x0, mid - 1.2, L, 1.6);
+    g.fillStyle = 'rgba(255,255,255,.22)'; g.fillRect(x0 + 2, mid + 2.5, L - 4, 1);
+    g.fillStyle = 'rgba(40,30,20,.18)'; g.fillRect(x0, top + 2, L, 2.5);
+    // lower roof with bull-nose ends
+    const rf = g.createLinearGradient(0, top - 5, 0, top + 2); rf.addColorStop(0, '#7A2A25'); rf.addColorStop(1, '#5C1E1A');
+    g.fillStyle = rf; g.beginPath(); g.moveTo(x0 - 6, top + 2); g.quadraticCurveTo(x0 - 7, top - 4, x0 + 2, top - 5); g.lineTo(x1 - 2, top - 5); g.quadraticCurveTo(x1 + 7, top - 4, x1 + 6, top + 2); g.closePath(); g.fill();
+    g.fillStyle = '#E5C27A'; g.fillRect(x0 - 5, top + 1, L + 10, 1.2);
+    // raised clerestory with small vent windows
+    const cx0 = x0 + L * 0.12, cx1 = x1 - L * 0.12, ct = top - 11;
+    g.fillStyle = '#F3ECDD'; g.fillRect(cx0, ct + 3, cx1 - cx0, 4);
+    for (let wx = cx0 + 4; wx < cx1 - 6; wx += 11) { g.fillStyle = '#B9D3E4'; g.fillRect(wx, ct + 3.6, 6, 2.8); }
+    g.fillStyle = rf; g.beginPath(); g.moveTo(cx0 - 3, ct + 3.5); g.quadraticCurveTo(cx0 - 2, ct, cx0 + 3, ct); g.lineTo(cx1 - 3, ct); g.quadraticCurveTo(cx1 + 2, ct, cx1 + 3, ct + 3.5); g.closePath(); g.fill();
+    // snow settles on the roof as the line climbs, with a few icicles at the top
+    if (kSnow > 0.05) {
+      g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(x0 - 6, top - 3); g.quadraticCurveTo(x0 - 4, top - 5 - 3 * kSnow, x0 + 6, top - 5 - 2.5 * kSnow);
+      for (let sx2 = x0 + 6; sx2 <= x1 - 6; sx2 += 8) g.lineTo(sx2, top - 5 - 2.5 * kSnow - Math.sin(sx2 * 0.7) * 0.8);
+      g.quadraticCurveTo(x1 + 4, top - 5 - 3 * kSnow, x1 + 6, top - 3); g.lineTo(x1 + 6, top - 1); g.lineTo(x0 - 6, top - 1); g.closePath(); g.fill();
+      g.beginPath(); g.moveTo(cx0 - 3, ct + 1); g.quadraticCurveTo(cx0, ct - 2.5 * kSnow, cx0 + 6, ct - 2.2 * kSnow); g.lineTo(cx1 - 6, ct - 2.2 * kSnow); g.quadraticCurveTo(cx1, ct - 2.5 * kSnow, cx1 + 3, ct + 1); g.closePath(); g.fill();
+      if (kSnow > 0.55) { g.fillStyle = 'rgba(225,240,250,.95)'; for (let ix = x0 + 4; ix < x1 - 2; ix += 9) { const il = 2 + hash(ix) * 4 * kSnow; g.beginPath(); g.moveTo(ix - 1.2, top + 2); g.lineTo(ix, top + 2 + il); g.lineTo(ix + 1.2, top + 2); g.fill(); } }
+    }
+    return { top, mid };
+  }
+  function windowAt(x, y, w, h) {
+    const gl = g.createLinearGradient(x, y, x + w, y + h); gl.addColorStop(0, '#E9F3FA'); gl.addColorStop(0.5, '#C6DDEC'); gl.addColorStop(1, '#F6E7C8');
+    g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(x - 1.5, y - 1.5, w + 3, h + 3, 5); g.fill();
+    g.fillStyle = gl; g.beginPath(); g.roundRect(x, y, w, h, 4); g.fill();
+    g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.moveTo(x + 2, y + h); g.lineTo(x + w * 0.45, y); g.lineTo(x + w * 0.62, y); g.lineTo(x + w * 0.17, y + h); g.fill();
+    g.fillStyle = 'rgba(60,80,100,.18)'; g.fillRect(x, y + h * 0.48, w, 1);
+  }
+  const pane = (x, y, w, h) => windowAt(x, y, w, h);
+  function platform(xe, dir) {   // open end platform with railing and a step, like the Kukushka coaches
+    g.fillStyle = '#3A4550'; g.fillRect(Math.min(xe, xe + dir * 14), -21, 14, 3);
+    g.strokeStyle = '#4A5662'; g.lineWidth = 1.2; g.beginPath();
+    for (let k = 0; k <= 2; k++) { const px = xe + dir * (2 + k * 5.5); g.moveTo(px, -21); g.lineTo(px, -40); }
+    g.moveTo(xe + dir * 1, -40); g.lineTo(xe + dir * 13, -40); g.moveTo(xe + dir * 1, -31); g.lineTo(xe + dir * 13, -31); g.stroke();
+    g.fillStyle = '#3A4550'; g.fillRect(Math.min(xe + dir * 4, xe + dir * 12), -14, 8, 2);
+  }
   function car(len) {
-    wheels(len); shell(len, 60);
-    for (let k = 0; k < 5; k++) glass(-len / 2 + 10 + k * 27, -70, 22, 24);
-    // Bakuriani banner on the red lower body
-    g.fillStyle = '#F3ECDD'; g.beginPath(); g.roundRect(-46, -39, 92, 19, [4, 9, 9, 9]); g.fill();
-    if (logoImg.complete && logoImg.naturalWidth) { const lh = 15, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, -lw / 2, -37, lw, lh); }
+    bogies(len);
+    const x0 = -len / 2 + 14, x1 = len / 2 - 14;
+    platform(x0, -1); platform(x1, 1);
+    const { top } = coach(x0, x1, 58, 9);
+    const n = 5, gap = 6, ww = (x1 - x0 - 16 - gap * (n - 1)) / n;
+    for (let k = 0; k < n; k++) windowAt(x0 + 8 + k * (ww + gap), top + 9, ww, 21);
+    g.fillStyle = '#FBF6EA'; g.beginPath(); g.roundRect(-46, -41, 92, 17, [4, 9, 9, 9]); g.fill();
+    if (logoImg.complete && logoImg.naturalWidth) { const lh = 13, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, -lw / 2, -39, lw, lh); }
+    g.fillStyle = '#2A343D'; g.fillRect(len / 2 - 3, -17, 8, 3);
+    const tl = g.createRadialGradient(x0 - 15, -28, 0, x0 - 15, -28, 8); tl.addColorStop(0, 'rgba(255,90,70,.9)'); tl.addColorStop(1, 'rgba(255,90,70,0)'); g.fillStyle = tl; g.fillRect(x0 - 23, -36, 16, 16);
   }
   function loco(len, t) {
-    wheels(len); shell(len, 56);
-    glass(-len / 2 + 10, -66, 20, 22); glass(-len / 2 + 36, -66, 20, 22);
-    // the driver's windscreen at the front: the bottle sits up front and looks ahead
-    const wx = len / 2 - 44, wy = -70, ww = 38, wh = 30;
-    g.save(); g.beginPath(); g.roundRect(wx, wy, ww, wh, [5, 11, 4, 4]); g.fillStyle = '#2B3A46'; g.fill(); g.clip();
-    if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 64, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 1.4;
-      g.drawImage(bottleImg, wx + ww / 2 - bw / 2, wy + 3 + bob, bw, bh); }
-    g.fillStyle = 'rgba(255,255,255,.22)'; g.beginPath(); g.moveTo(wx + 6, wy + wh); g.lineTo(wx + 16, wy); g.lineTo(wx + 22, wy); g.lineTo(wx + 12, wy + wh); g.fill();
-    g.restore();
-    g.strokeStyle = '#FFFFFF'; g.lineWidth = 2; g.beginPath(); g.roundRect(wx, wy, ww, wh, [5, 11, 4, 4]); g.stroke();
-    g.fillStyle = '#FFF6D8'; g.beginPath(); g.arc(len / 2 - 4, -26, 3.2, 0, 6.283); g.fill();
-    const gl = g.createRadialGradient(len / 2 + 2, -26, 0, len / 2 + 2, -26, 26); gl.addColorStop(0, 'rgba(255,246,214,.55)'); gl.addColorStop(1, 'rgba(255,246,214,0)'); g.fillStyle = gl; g.fillRect(len / 2 - 20, -52, 50, 50);
-    g.strokeStyle = '#3B4A57'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(-34, -78); g.lineTo(-20, -98); g.lineTo(-6, -78); g.moveTo(-30, -98); g.lineTo(-10, -98); g.stroke();
+    bogies(len);
+    const x0 = -len / 2 + 6, x1 = len / 2 - 2;
+    platform(x0, -1);
+    const { top } = coach(x0, x1, 56, 12);
+    // rounded nose with the driver's windscreen
+    windowAt(x0 + 8, top + 9, 20, 20); windowAt(x0 + 34, top + 9, 20, 20);
+    const wx = x1 - 34, wy = top + 7, ww = 26, wh = 24;
+    g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(wx - 1.5, wy - 1.5, ww + 3, wh + 3, [5, 10, 5, 5]); g.fill();
+    g.fillStyle = '#2C3B47'; g.beginPath(); g.roundRect(wx, wy, ww, wh, [4, 9, 4, 4]); g.fill();
+    if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 60, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 1.3;
+      g.save(); g.translate(wx + ww / 2 + 4, -24 + bob); g.rotate(0.22);
+      g.fillStyle = 'rgba(20,30,40,.18)'; g.beginPath(); g.ellipse(4, -bh * 0.5, bw * 0.55, bh * 0.48, 0, 0, 6.283); g.fill();
+      g.drawImage(bottleImg, -bw / 2, -bh, bw, bh); g.restore(); }
+    const red = g.createLinearGradient(0, -20 - 56 * 0.44, 0, -20); red.addColorStop(0, '#C53C34'); red.addColorStop(0.55, '#A92D27'); red.addColorStop(1, '#8A221D');
+    g.fillStyle = red; g.fillRect(wx - 3, -20 - 56 * 0.44, ww + 8, 56 * 0.44); g.fillStyle = '#E5C27A'; g.fillRect(wx - 3, -20 - 56 * 0.44 - 1.2, ww + 8, 1.6);
+    // headlight: a small warm lamp
+    g.fillStyle = '#2E3A44'; g.beginPath(); g.roundRect(x1 - 7, -33, 7, 9, 2); g.fill();
+    const lens = g.createRadialGradient(x1 - 2, -28.5, 0, x1 - 2, -28.5, 4); lens.addColorStop(0, '#FFFFFF'); lens.addColorStop(0.5, '#FFF1C8'); lens.addColorStop(1, '#E9C476');
+    g.fillStyle = lens; g.beginPath(); g.arc(x1 - 2.5, -28.5, 3.4, 0, 6.283); g.fill();
+    const halo = g.createRadialGradient(x1 - 2, -28.5, 0, x1 - 2, -28.5, 12); halo.addColorStop(0, 'rgba(255,240,205,.55)'); halo.addColorStop(1, 'rgba(255,240,205,0)'); g.fillStyle = halo; g.fillRect(x1 - 14, -41, 24, 24);
+    // pantograph on insulators
+    g.fillStyle = '#8B97A2'; g.fillRect(-26, top - 15, 5, 4); g.fillRect(-2, top - 15, 5, 4);
+    g.strokeStyle = '#3B4A57'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(-23, top - 15); g.lineTo(-11, top - 36); g.lineTo(1, top - 15); g.moveTo(-23, top - 36); g.lineTo(1, top - 36); g.stroke();
   }
   function station(st) {
-    const x = st.x, [sx] = W2S(x, 0);
-    if (sx < -400 || sx > VW + 400) return;
-    // small station house behind the line
-    const hx = x + 70, hy = trackY(hx) - 4; const [px, py] = W2S(hx, hy);
-    g.fillStyle = '#E4ECF2'; g.fillRect(px - 46, py - 50, 92, 50); g.fillStyle = '#C9D7E2'; g.beginPath(); g.moveTo(px - 54, py - 48); g.lineTo(px, py - 76); g.lineTo(px + 54, py - 48); g.fill();
-    g.fillStyle = '#D6EAF7'; [-26, 0, 26].forEach(o => g.fillRect(px + o - 7, py - 38, 14, 18));
-    // platform along the rails
+    const x = st.x, [sx] = W2S(x, 0); if (sx < -400 || sx > VW + 400) return;
+    const hx = x + 70, [px, py] = W2S(hx, trackY(hx) - 4);
+    g.fillStyle = '#F1EADB'; g.fillRect(px - 46, py - 50, 92, 50); g.fillStyle = '#A82C27'; g.beginPath(); g.moveTo(px - 56, py - 48); g.lineTo(px, py - 78); g.lineTo(px + 56, py - 48); g.fill();
+    g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.moveTo(px - 52, py - 50); g.lineTo(px, py - 78); g.lineTo(px + 52, py - 50); g.lineTo(px + 40, py - 50); g.lineTo(px, py - 70); g.lineTo(px - 40, py - 50); g.fill();
+    [-26, 0, 26].forEach(o => pane(px + o - 7, py - 38, 14, 18, 3));
     g.fillStyle = '#D9E2EA'; g.beginPath();
     for (let wx = x - 150; wx <= x + 150; wx += 10) { const [a, b] = W2S(wx, trackY(wx) + 4); wx === x - 150 ? g.moveTo(a, b) : g.lineTo(a, b); }
     for (let wx = x + 150; wx >= x - 150; wx -= 10) { const [a, b] = W2S(wx, trackY(wx) + 15); g.lineTo(a, b); }
     g.fill();
-    // name board
     const bx = x - 168, [qx, qy] = W2S(bx, trackY(bx));
     g.fillStyle = '#5B6B79'; g.fillRect(qx - 1.5, qy - 74, 3, 74);
     g.font = '900 13px "Noto Sans Georgian", sans-serif'; const name = mt(T(st.sign[0], st.sign[1])), tw = g.measureText(name).width + 26;
@@ -1527,87 +1751,126 @@ let kukuMoving = false;
     g.fillStyle = '#0A2348'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(name, qx, qy - 87);
     if (st.alt) { g.font = '700 11px "Noto Sans Georgian", sans-serif'; g.fillStyle = '#4D5F76'; g.fillText(T(st.alt[0], st.alt[1]), qx, qy - 60); }
   }
-  function bridge() {
+  function bridge(p) {
     const [sx] = W2S(BR, 0); if (sx < -500 || sx > VW + 500) return;
-    const L = 236;
-    // river in the gorge
-    const [rx, ry] = W2S(BR, groundY(BR) - 6);
-    const rv = g.createLinearGradient(rx - 120, 0, rx + 120, 0); rv.addColorStop(0, 'rgba(120,175,215,0)'); rv.addColorStop(0.5, 'rgba(120,175,215,.9)'); rv.addColorStop(1, 'rgba(120,175,215,0)');
+    const [, top] = W2S(BR, trackY(BR) + 10), [, bot] = W2S(BR, groundY(BR));
+    const sh = g.createLinearGradient(0, top, 0, bot); sh.addColorStop(0, 'rgba(140,165,188,0)'); sh.addColorStop(1, 'rgba(110,140,165,.35)');
+    g.fillStyle = sh; g.beginPath(); g.moveTo(...W2S(BR - 250, groundY(BR - 250))); for (let wx = BR - 250; wx <= BR + 250; wx += 6) g.lineTo(...W2S(wx, groundY(wx))); g.closePath(); g.fill();
+    for (let wx = BR - 230; wx <= BR + 230; wx += 34) { const r = hash(wx * 0.07 + 2.3); if (r < 0.4 || Math.abs(wx - BR) < 40) continue; const [a, b] = W2S(wx, groundY(wx) + 2); fir('mid', a, b, 0.35 + r * 0.25, p * 0.8, wx); }
+    const [rx, ry] = W2S(BR, groundY(BR) - 6), rv = g.createLinearGradient(rx - 120, 0, rx + 120, 0); rv.addColorStop(0, 'rgba(120,175,215,0)'); rv.addColorStop(0.5, 'rgba(120,175,215,.9)'); rv.addColorStop(1, 'rgba(120,175,215,0)');
     g.fillStyle = rv; g.beginPath(); g.ellipse(rx, ry, 130, 7, 0, 0, 6.283); g.fill();
-    g.strokeStyle = '#6B7F92'; g.lineWidth = 2;
-    // piers
     [-118, 118].forEach(o => { const [a, b] = W2S(BR + o, trackY(BR + o) + 40); const [, c] = W2S(BR + o, groundY(BR + o)); g.fillStyle = '#8899A8'; g.fillRect(a - 7, b, 14, c - b); });
-    // lattice truss under the deck
-    g.beginPath();
+    g.strokeStyle = '#5F7386'; g.lineWidth = 2; g.beginPath(); const L = 236;
     for (let wx = BR - L; wx <= BR + L; wx += 4) { const [a, b] = W2S(wx, trackY(wx) + 40); wx === BR - L ? g.moveTo(a, b) : g.lineTo(a, b); }
-    for (let wx = BR - L, k = 0; wx < BR + L; wx += 32, k++) {
-      const [a1, b1] = W2S(wx, trackY(wx) + 4), [a2, b2] = W2S(wx + 32, trackY(wx + 32) + 40), [a3, b3] = W2S(wx + 32, trackY(wx + 32) + 4), [a4, b4] = W2S(wx, trackY(wx) + 40);
-      g.moveTo(a1, b1); g.lineTo(a2, b2); g.moveTo(a4, b4); g.lineTo(a3, b3); g.moveTo(a1, b1); g.lineTo(a4, b4);
-    }
+    for (let wx = BR - L; wx < BR + L; wx += 32) { const [a1, b1] = W2S(wx, trackY(wx) + 4), [a2, b2] = W2S(wx + 32, trackY(wx + 32) + 40), [a3, b3] = W2S(wx + 32, trackY(wx + 32) + 4), [a4, b4] = W2S(wx, trackY(wx) + 40);
+      g.moveTo(a1, b1); g.lineTo(a2, b2); g.moveTo(a4, b4); g.lineTo(a3, b3); g.moveTo(a1, b1); g.lineTo(a4, b4); }
     g.stroke();
   }
-  function draw(t) {
+  function drawRail(t) {
     const p = Math.min(1, Math.max(0, (train - START) / (END - START)));
-    g.setTransform(dpr * S, 0, 0, dpr * S, 0, 0);
-    const sky = g.createLinearGradient(0, 0, 0, VH); sky.addColorStop(0, '#DDEBF6'); sky.addColorStop(0.7, '#F1F6FB'); sky.addColorStop(1, '#F6FAFD');
-    g.fillStyle = sky; g.fillRect(0, 0, VW, VH);
-    const sun = g.createRadialGradient(VW * 0.8, VH * 0.2, 0, VW * 0.8, VH * 0.2, VH * 0.7); sun.addColorStop(0, 'rgba(255,255,255,.95)'); sun.addColorStop(1, 'rgba(255,255,255,0)');
-    g.fillStyle = sun; g.fillRect(0, 0, VW, VH);
-    const lift = camY - (camY0 ?? camY);
-    ridge(0.1, VH * 0.5 - lift * 0.05, VH * 0.3, 760, '#C8DAEA', '#FFFFFF', 3.1);
-    ridge(0.22, VH * 0.6 - lift * 0.12, VH * 0.26, 520, '#AFC6DA', '#F4F8FC', 7.7);
-    forest(0.42, VH * 0.7 - lift * 0.3, p * 0.9, 'rgba(126,152,173,.75)', 22, 26, 22, 1.7);
-    // ground + near trees, in world space
-    const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, mixC('#DCE7DD', '#F4F8FC', p)); gc.addColorStop(1, mixC('#E8EFE9', '#FFFFFF', p));
-    g.fillStyle = gc; g.beginPath(); g.moveTo(-10, VH + 10);
-    for (let sx = -10; sx <= VW + 10; sx += 6) g.lineTo(sx, groundY(camX + sx) - camY);
-    g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
-    // the gorge under the bridge: shaded walls and a tree line down to the river
-    { const [gx] = W2S(BR, 0); if (gx > -400 && gx < VW + 400) {
-      const [, top] = W2S(BR, trackY(BR) + 10), [, bot] = W2S(BR, groundY(BR));
-      const sh = g.createLinearGradient(0, top, 0, bot); sh.addColorStop(0, 'rgba(140,165,188,0)'); sh.addColorStop(1, 'rgba(120,150,175,.38)');
-      g.fillStyle = sh; g.beginPath(); g.moveTo(...W2S(BR - 250, groundY(BR - 250)));
-      for (let wx = BR - 250; wx <= BR + 250; wx += 6) g.lineTo(...W2S(wx, groundY(wx)));
-      g.closePath(); g.fill();
-      for (let wx = BR - 230; wx <= BR + 230; wx += 17) { const r = hash(wx * 0.07 + 2.3); if (r < 0.3 || Math.abs(wx - BR) < 40) continue; const [a, b] = W2S(wx, groundY(wx) + 2); pine(a, b, 22 + r * 18, mixC('#557560', '#6A8699', p), p * 0.8); } } }
-    // trees standing on the slope behind the line
-    { const x0 = Math.floor((camX - 80) / 30) * 30;
-      for (let wx = x0; wx < camX + VW + 80; wx += 30) { if (Math.abs(wx - BR) < 300) continue; const r = hash(wx * 0.021 + 4.2); if (r < 0.45) continue;
-        const [a, b] = W2S(wx, trackY(wx) - 18 - r * 20); pine(a, b, 36 + r * 34, mixC('#5E7E68', '#6F8BA0', p), p); } }
-    bridge(); STOPS.forEach(st => { if (!st.bridge) station(st); });
-    // catenary: poles and the wire the pantograph touches
-    g.strokeStyle = 'rgba(70,85,100,.55)'; g.lineWidth = 1;
+    backdrop(t, p);
+    { const x0 = Math.floor((camX - 80) / 64) * 64;
+      for (let wx = x0; wx < camX + VW + 80; wx += 64) { if (Math.abs(wx - BR) < 300) continue; const r = hash(wx * 0.021 + 4.2); if (r < 0.5) continue;
+        const sn = Math.min(1, Math.max(0, (wx - START) / (END - START))); const [a, b] = W2S(wx, groundY(wx) + 4); fir('mid', a, b, 0.5 + r * 0.25, sn, wx); } }
+    const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, mixC('#DCE9DC', '#F5F9FC', p)); gc.addColorStop(1, mixC('#E9F1E8', '#FFFFFF', p));
+    g.fillStyle = gc; g.beginPath(); g.moveTo(-10, VH + 10); for (let sx = -10; sx <= VW + 10; sx += 6) g.lineTo(sx, groundY(camX + sx) - camY); g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
+    for (let wx = Math.floor(camX / 23) * 23; wx < camX + VW; wx += 23) { if (Math.abs(wx - BR) < 260) continue; const r = hash(wx * 0.31); if (r < 0.7) continue; const [a, b] = W2S(wx, groundY(wx) + 14 + r * 60); glint(a, b, 2.5 + r * 2.5, (Math.sin(t * 3 + wx) * 0.5 + 0.5) * p); }
+    bridge(p);
+    STOPS.forEach(st => { if (!st.bridge) station(st); });
+    g.strokeStyle = 'rgba(70,85,100,.5)'; g.lineWidth = 1;
     { const x0 = Math.floor((camX - 100) / 210) * 210; g.beginPath();
       for (let wx = x0; wx < camX + VW + 210; wx += 210) { const [a, b] = W2S(wx, trackY(wx)); g.moveTo(a - 4, b + 2); g.lineTo(a - 4, b - 112); g.lineTo(a + 8, b - 112); }
       for (let wx = x0; wx < camX + VW + 210; wx += 8) { const [a, b] = W2S(wx, trackY(wx) - 108); wx === x0 ? g.moveTo(a, b) : g.lineTo(a, b); }
       g.stroke(); }
-    // ballast, sleepers, rail
     g.lineCap = 'round';
     g.strokeStyle = '#C6D1DB'; g.lineWidth = 9; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 6) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) + 4 - camY) : g.lineTo(sx, trackY(wx) + 4 - camY); } g.stroke();
     g.fillStyle = '#7B6A5C'; for (let wx = Math.floor(camX / 15) * 15; wx < camX + VW + 15; wx += 15) { const [a, b] = W2S(wx, trackY(wx)); g.fillRect(a - 4, b - 1, 8, 4); }
     g.strokeStyle = '#475866'; g.lineWidth = 2.4; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) - 2 - camY) : g.lineTo(sx, trackY(wx) - 2 - camY); } g.stroke();
-    // the train: the bottle's carriage, then the locomotive in front
-    body(train, 150, car);
-    body(train + 144, 118, len => loco(len, t));
-    if (bubble > 0) { const [a, b] = W2S(train + 170, trackY(train + 170) - 128), al = Math.min(1, bubble * 2);
-      g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - (1.8 - bubble) * 6, 76, 30, [12, 12, 12, 4]); g.fill();
-      g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - (1.8 - bubble) * 6); g.globalAlpha = 1; }
-    // snow thickens on the way up
-    g.fillStyle = 'rgba(255,255,255,.9)';
-    flakes.forEach((f, i) => { if (i > 20 + p * 90) return; const y = ((f.y * VH + t * 30 * f.v) % VH), x = ((f.x * VW + Math.sin(t * 0.6 + f.w) * 18 - camX * 0.5) % VW + VW) % VW;
-      g.globalAlpha = 0.35 + 0.5 * p; g.beginPath(); g.arc(x, y, f.r, 0, 6.283); g.fill(); });
+    kSnow = Math.min(1, Math.max(0, (train - START) / (END - START)) * 1.15);
+    body(train, 170, car); body(train + 152, 124, len => loco(len, t));
+    if (bubble > 0) { const [a, b] = W2S(train + 170, trackY(train + 170) - 132), al = Math.min(1, bubble * 2), lift = (1.8 - bubble) * 6;
+      g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - lift, 76, 30, [12, 12, 12, 4]); g.fill();
+      g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - lift); g.globalAlpha = 1; }
+    // a soft snow drift in the foreground, for depth
+    { const dg = g.createLinearGradient(0, VH * 0.7, 0, VH); dg.addColorStop(0, mixC('#E4EEE3', '#FFFFFF', p)); dg.addColorStop(1, mixC('#EEF4EC', '#F3F8FC', p));
+      g.fillStyle = dg; g.beginPath(); g.moveTo(-10, VH + 10);
+      for (let sx = -10; sx <= VW + 10; sx += 8) { const wx = camX * 1.25 + sx; g.lineTo(sx, Math.max(groundY(camX + sx) - camY + 120, VH * 0.82 - fbm(wx / 260 + 5) * 70)); }
+      g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill(); }
+    foreground(1.35, p);
+    frontFx(t, p);
+  }
+  // ---- the mountain: gondolas in the background, the tow, firs, the run and the finish arch
+  function gondolas(t, lift) {
+    const f = 0.3, ox = camX * f;
+    [[0.35, 0.7, 260, 0], [0.62, 0.9, 340, 1]].forEach(([ya, yb, span, k]) => {
+      const x0 = -ox % (VW * 1.4) - VW * 0.2 + k * VW * 0.5, y0 = VH * ya - lift * 0.2, x1 = x0 + VW * 1.1, y1 = VH * (yb - 0.62) - lift * 0.2 + VH * 0.2;
+      g.strokeStyle = 'rgba(70,90,110,.45)'; g.lineWidth = 1; g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.moveTo(x0, y0 + 5); g.lineTo(x1, y1 + 5); g.stroke();
+      for (let u = 0; u <= 1; u += 0.25) { const px = x0 + (x1 - x0) * u, py = y0 + (y1 - y0) * u; g.fillStyle = 'rgba(90,108,126,.55)'; g.fillRect(px - 2, py, 4, 70 - k * 10); }
+      for (let i = 0; i < 6; i++) { const u = ((i / 6 + t * 0.012 * (k ? -1 : 1)) % 1 + 1) % 1, px = x0 + (x1 - x0) * u, py = y0 + (y1 - y0) * u + 2;
+        g.strokeStyle = 'rgba(70,90,110,.6)'; g.beginPath(); g.moveTo(px, py); g.lineTo(px, py + 10); g.stroke();
+        g.fillStyle = i % 2 ? '#C23A33' : '#F3ECDD'; g.beginPath(); g.roundRect(px - 7, py + 10, 14, 12, [5, 5, 3, 3]); g.fill(); g.fillStyle = 'rgba(207,228,242,.9)'; g.fillRect(px - 5, py + 12, 10, 5); }
+    });
+  }
+  function skier(t) {
+    const [sx, sy] = W2S(sk.x, sk.y);
+    g.save(); g.translate(sx, sy); g.save(); g.rotate(sk.rot);
+    const ski = (dy, c1, c2) => {
+      g.fillStyle = c1; g.beginPath(); g.moveTo(-38, dy); g.lineTo(28, dy); g.quadraticCurveTo(40, dy, 44, dy - 9); g.quadraticCurveTo(45, dy - 11, 42, dy - 9); g.quadraticCurveTo(38, dy - 3, 28, dy - 3); g.lineTo(-38, dy - 3); g.quadraticCurveTo(-41, dy - 1.5, -38, dy); g.fill();
+      g.fillStyle = c2; g.fillRect(-30, dy - 2.2, 50, 0.9);
+    };
+    ski(-1, '#0F5FB0', '#FFFFFF'); ski(-5, '#1C7FD6', '#FFFFFF');
+    g.fillStyle = '#1D2833'; g.beginPath(); g.roundRect(-11, -11, 22, 5, 2); g.fill();
+    g.restore();
+    g.rotate(sk.rot * 0.25 + (sk.air ? -0.12 : 0.06) * Math.min(1, sk.vx / 300));
+    if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 70, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight; g.drawImage(bottleImg, -bw / 2, -bh - 8, bw, bh); }
+    const flap = Math.sin(t * 18) * 3 * Math.min(1, sk.vx / 300);
+    g.fillStyle = '#C53C34'; g.beginPath(); g.roundRect(-7, -64, 14, 5, 2); g.fill();
+    g.beginPath(); g.moveTo(-6, -63); g.quadraticCurveTo(-18, -66 + flap, -28, -63 + flap); g.lineTo(-26, -58 + flap); g.quadraticCurveTo(-16, -60, -6, -59); g.fill();
+    g.restore();
+  }
+  function drawMountain(t) {
+    const lift = backdrop(t, 1);
+    gondolas(t, lift);
+    // trees standing on the slope behind the run
+    for (let wx = Math.floor((camX - 100) / 90) * 90; wx < camX + VW + 100; wx += 90) { const r = hash(wx * 0.05 + 3.3); if (r < 0.45) continue; const [a, b] = W2S(wx - 30, skiY(wx - 30) + 4); fir('mid', a, b, 0.5 + r * 0.25, 1, wx); }
+    const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, '#FFFFFF'); gc.addColorStop(1, '#E6EEF5');
+    g.fillStyle = gc; g.beginPath(); g.moveTo(-10, VH + 10); for (let sx = -10; sx <= VW + 10; sx += 5) g.lineTo(sx, skiY(camX + sx) - camY); g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
+    g.strokeStyle = 'rgba(150,180,205,.5)'; g.lineWidth = 2; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const y = skiY(camX + sx) - camY + 3; sx === -10 ? g.moveTo(sx, y) : g.lineTo(sx, y); } g.stroke();
+    for (let wx = Math.floor(camX / 19) * 19; wx < camX + VW; wx += 19) { const r = hash(wx * 0.37); if (r < 0.62) continue; const [a, b] = W2S(wx, skiY(wx) + 10 + r * 70); glint(a, b, 2.5 + r * 3, Math.sin(t * 3.2 + wx) * 0.5 + 0.5); }
+    // the tow: towers, cable and T-bars
+    g.strokeStyle = 'rgba(60,75,90,.7)'; g.lineWidth = 1.2; g.beginPath();
+    for (let wx = TOW_B - 40; wx <= TOW_A + 40; wx += 8) { const [a, b] = W2S(wx, towY(Math.max(TOW_B, Math.min(TOW_A, wx)))); wx === TOW_B - 40 ? g.moveTo(a, b) : g.lineTo(a, b); }
+    g.stroke();
+    [TOW_B - 30, (TOW_A + TOW_B) / 2, TOW_A + 30].forEach(wx => { const [a, b] = W2S(wx, skiY(wx)), [, c] = W2S(wx, towY(Math.max(TOW_B, Math.min(TOW_A, wx))) - 6); g.fillStyle = '#7F8E9C'; g.fillRect(a - 2.5, c, 5, b - c); g.fillRect(a - 12, c, 24, 4); });
+    for (let i = 0; i < 9; i++) { const wx = TOW_B + ((i * 150 + dist * (phase === 'tow' ? 0 : 0)) % (TOW_A - TOW_B)); if (phase === 'tow' && Math.abs(wx - sk.x) < 70) continue; const [a, b] = W2S(wx, towY(wx)); g.strokeStyle = '#5F6E7C'; g.lineWidth = 1.4; g.beginPath(); g.moveTo(a, b); g.lineTo(a, b + 60); g.moveTo(a - 9, b + 60); g.lineTo(a + 9, b + 60); g.stroke(); }
+    if (phase === 'tow') { const [a, b] = W2S(sk.x, towY(sk.x)); g.strokeStyle = '#5F6E7C'; g.lineWidth = 1.4; g.beginPath(); g.moveTo(a, b); g.lineTo(a + 6, sk.y - camY - 40); g.moveTo(a - 3, sk.y - camY - 40); g.lineTo(a + 15, sk.y - camY - 40); g.stroke(); }
+    // start hut at the top and the finish arch with the brand
+    { const [a, b] = W2S(TOW_B - 90, skiY(TOW_B - 90)); g.fillStyle = '#F1EADB'; g.fillRect(a - 40, b - 44, 80, 44); g.fillStyle = '#A82C27'; g.beginPath(); g.moveTo(a - 50, b - 42); g.lineTo(a, b - 70); g.lineTo(a + 50, b - 42); g.fill(); pane(a - 9, b - 32, 18, 16, 3); }
+    { const [a, b] = W2S(FIN, skiY(FIN)); g.fillStyle = '#6E7E8C'; g.fillRect(a - 72, b - 110, 4, 110); g.fillRect(a + 68, b - 110, 4, 110);
+      g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 78, b - 134, 156, 30, [6, 14, 14, 14]); g.fill(); g.fillStyle = '#C23A33'; g.fillRect(a - 70, b - 134, 140, 3);
+      if (logoImg.complete && logoImg.naturalWidth) { const lh = 20, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, a - lw / 2, b - 129, lw, lh); } }
+    // snowflakes to collect
+    if (phase !== 'tow') STARS.forEach((s, i) => { if (s.got) return; const [a, b] = W2S(s.x, skiY(s.x) - s.h + Math.sin(t * 2 + i) * 5); if (a < -40 || a > VW + 40) return;
+      const gr = g.createRadialGradient(a, b, 0, a, b, 26); gr.addColorStop(0, 'rgba(255,255,255,.95)'); gr.addColorStop(0.4, 'rgba(190,225,255,.45)'); gr.addColorStop(1, 'rgba(190,225,255,0)'); g.fillStyle = gr; g.fillRect(a - 26, b - 26, 52, 52);
+      g.save(); g.translate(a, b); g.rotate(t * 0.8 + i); g.strokeStyle = '#1C7FD6'; g.lineWidth = 2; g.lineCap = 'round'; g.beginPath();
+      for (let k = 0; k < 6; k++) { g.rotate(Math.PI / 3); g.moveTo(0, 0); g.lineTo(0, -11); g.moveTo(0, -7); g.lineTo(-3.5, -10); g.moveTo(0, -7); g.lineTo(3.5, -10); } g.stroke(); g.restore(); });
+    puffs.forEach(p => { const [a, b] = W2S(p.x, p.y), al = 1 - p.life / p.max; g.globalAlpha = al * 0.85; g.fillStyle = '#FFFFFF'; g.beginPath(); g.arc(a, b, p.r * (1 + p.life), 0, 6.283); g.fill(); });
     g.globalAlpha = 1;
+    skier(t);
+    foreground(1.35, 1);
+    frontFx(t, 1);
   }
   function loop(now) {
     if (!visible) return;
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
-    step(dt); draw(now / 1000);
+    step(dt); g.setTransform(dpr * S, 0, 0, dpr * S, 0, 0);
+    phase === 'rail' ? drawRail(now / 1000) : drawMountain(now / 1000);
     requestAnimationFrame(loop);
   }
   new IntersectionObserver(es => es.forEach(e => { const was = visible; visible = e.isIntersecting; if (visible && !was) { size(); if (camY0 === null) snap(); last = performance.now(); requestAnimationFrame(loop); } }), { rootMargin: '120px' }).observe(sec);
   addEventListener('resize', () => { if (visible) size(); });
-  document.fonts.ready.then(() => { size(); snap(); renderCard(); card.classList.add('on'); });
-  renderCard(); card.classList.add('on');
+  document.fonts.ready.then(() => { size(); snap(); renderCard(); });
+  show(STOPS[0].pages[0]);
 }
 
 /* ---------- loop ---------- */
