@@ -1652,30 +1652,24 @@ let kukuMoving = false;
     const x1 = cx - len * 0.34, x2 = cx + len * 0.34, y1 = trackY(x1), y2 = trackY(x2);
     g.save(); const [sx, sy] = W2S(cx, (y1 + y2) / 2); g.translate(sx, sy - 2); g.rotate(Math.atan2(y2 - y1, x2 - x1)); draw(len); g.restore();
   }
-  // the festive Kukushka: Blender renders of the loco and a wagon, drawn along the track
+  // the festive Kukushka: Blender renders of the motor car and a wagon, drawn along the track
   const KU = 28;                                         // canvas units per metre of the 3D train
   function sprite(m, wm) { if (!ready(m)) return 0; const w = wm * KU, h = w * m.naturalHeight / m.naturalWidth; g.drawImage(m, -w / 2, -h + 3, w, h); return h; }
   function wagonAt(cx, logo) {
-    body(cx, 158, () => { const h = sprite(WAGON, 5.63); if (!h || !logo || !ready(logoImg)) return;
+    body(cx, 147, () => { const h = sprite(WAGON, 5.26); if (!h || !logo || !ready(logoImg)) return;
       const pw = h * 0.46, ph = h * 0.15, py = 3 - h * 0.3 - ph / 2;      // white name plate under the windows
       g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(-pw / 2, py, pw, ph, 3); g.fill();
       const lh = ph * 0.66, lw = lh * logoImg.naturalWidth / logoImg.naturalHeight; g.drawImage(logoImg, -lw / 2, py + (ph - lh) / 2, lw, lh); });
   }
   function locoAt(cx, t) {
-    body(cx, 190, () => { const w = 6.82 * KU, h = sprite(LOCO, 6.82); if (!h) return;
-      // the bottle rides in the cab window (window rect measured from the render)
-      const rx = -w / 2 + 0.1141 * w, ry = -h + 3 + 0.2895 * h, rw = 0.1173 * w, rh = 0.1961 * h;
-      if (ready(bottleImg)) { const bh = rh * 2.1, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 0.6;
-        g.save(); g.beginPath(); g.roundRect(rx, ry, rw, rh, 2); g.clip();
-        g.drawImage(bottleImg, rx + rw / 2 - bw / 2, ry + 1 + bob, bw, bh);
-        const rf = g.createLinearGradient(rx, ry, rx + rw, ry + rh); rf.addColorStop(0, 'rgba(255,240,220,.3)'); rf.addColorStop(0.5, 'rgba(255,240,220,0)'); rf.addColorStop(1, 'rgba(255,240,220,.15)');
-        g.fillStyle = rf; g.fillRect(rx, ry, rw, rh); g.restore(); }
-      // steam from the chimney, trailing back as the train speeds up
-      const chx = -w / 2 + 0.7285 * w, chy = -h + 3 + 0.126 * h, sp = Math.min(1, v / 300), now = performance.now() / 1000;
-      for (let i = 0; i < 10; i++) { const u = (now * (0.35 + sp * 0.5) + i / 10) % 1, r = 5 + u * 20, a = 0.62 * Math.sin(Math.PI * Math.min(1, u * 1.4 + 0.08)) * (1 - u * 0.6);
-        const x = chx - u * (14 + sp * 70) + Math.sin(u * 6 + i) * 3, y = chy - 3 - u * (46 - sp * 18);
-        const sm = g.createRadialGradient(x, y, 0, x, y, r); sm.addColorStop(0, `rgba(250,251,253,${a})`); sm.addColorStop(0.6, `rgba(232,237,244,${a * 0.5})`); sm.addColorStop(1, 'rgba(232,237,244,0)');
-        g.fillStyle = sm; g.fillRect(x - r, y - r, r * 2, r * 2); } });
+    body(cx, 155, () => { const w = 5.54 * KU, h = sprite(LOCO, 5.54); if (!h || !ready(bottleImg)) return;
+      // the bottle rides in the driver's window (window rect measured from the render)
+      const rx = -w / 2 + 0.7098 * w, ry = -h + 3 + 0.3007 * h, rw = 0.1624 * w, rh = 0.278 * h;
+      const bh = rh * 1.6, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 0.6;
+      g.save(); g.beginPath(); g.roundRect(rx, ry, rw, rh, 4); g.clip();
+      g.drawImage(bottleImg, rx + rw / 2 - bw / 2, ry + 2 + bob, bw, bh);
+      const rf = g.createLinearGradient(rx, ry, rx + rw, ry + rh); rf.addColorStop(0, 'rgba(255,240,220,.3)'); rf.addColorStop(0.5, 'rgba(255,240,220,0)'); rf.addColorStop(1, 'rgba(255,240,220,.15)');
+      g.fillStyle = rf; g.fillRect(rx, ry, rw, rh); g.restore(); });
   }
   const loadImgs = (n, f) => Array.from({ length: n }, (_, i) => { const m = new Image(); m.src = f(i); return m; });
   const HOUSES = loadImgs(3, i => `assets/house-${i}.webp`);
@@ -1756,7 +1750,7 @@ let kukuMoving = false;
     g.strokeStyle = '#C6D1DB'; g.lineWidth = 9; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 6) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) + 4 - camY) : g.lineTo(sx, trackY(wx) + 4 - camY); } g.stroke();
     g.fillStyle = '#7B6A5C'; for (let wx = Math.floor(camX / 15) * 15; wx < camX + VW + 15; wx += 15) { const [a, b] = W2S(wx, trackY(wx)); g.fillRect(a - 4, b - 1, 8, 4); }
     g.strokeStyle = '#475866'; g.lineWidth = 2.4; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) - 2 - camY) : g.lineTo(sx, trackY(wx) - 2 - camY); } g.stroke();
-    wagonAt(train - 410); wagonAt(train - 248, true); wagonAt(train - 86); locoAt(train + 90, t);
+    wagonAt(train - 263); wagonAt(train - 108, true); locoAt(train + 50, t);
     if (bubble > 0) { const [a, b] = W2S(train + 110, trackY(train + 110) - 120), al = Math.min(1, bubble * 2), lift = (1.8 - bubble) * 6;
       g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - lift, 76, 30, [12, 12, 12, 4]); g.fill();
       g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - lift); g.globalAlpha = 1; }
