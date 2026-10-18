@@ -1727,7 +1727,30 @@ let kukuMoving = false;
   function sprite(m, wm) { if (!ready(m)) return 0; const w = wm * KU, h = w * m.naturalHeight / m.naturalWidth; g.drawImage(m, -w / 2, -h + 3, w, h); return h; }
   // small white car numbers, like on real carriages
   const carNo = (n, x, y) => { g.font = '700 7px "Noto Sans Georgian", sans-serif'; g.fillStyle = 'rgba(255,255,255,.92)'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(n, x, y); };
-  function wagonAt(cx, n) { body(cx, 147, () => { if (sprite(WAGON, 5.26)) carNo(n, 0.36 * 5.26 * KU, 3 - 1.72 * 0.99 * KU); }); }
+  // glass over a window: a cool sky sheen at the top and two soft diagonal glare streaks
+  function glassFx(rx, ry, rw, rh) {
+    const sk = g.createLinearGradient(0, ry, 0, ry + rh); sk.addColorStop(0, 'rgba(210,228,245,.28)'); sk.addColorStop(0.45, 'rgba(210,228,245,0)'); g.fillStyle = sk; g.fillRect(rx, ry, rw, rh);
+    for (let x0 = rx - rh * 0.3; x0 < rx + rw; x0 += Math.max(rh * 2.2, 40)) {
+      g.fillStyle = 'rgba(255,255,255,.2)'; g.beginPath(); g.moveTo(x0 + rh * 0.5, ry); g.lineTo(x0 + rh * 0.85, ry); g.lineTo(x0 + rh * 0.35, ry + rh); g.lineTo(x0, ry + rh); g.fill();
+      g.fillStyle = 'rgba(255,255,255,.12)'; g.beginPath(); g.moveTo(x0 + rh * 1.05, ry); g.lineTo(x0 + rh * 1.15, ry); g.lineTo(x0 + rh * 0.65, ry + rh); g.lineTo(x0 + rh * 0.55, ry + rh); g.fill(); }
+  }
+  // the coaches carry the load: rows of Bakuriani bottles packed behind the panoramic glass (glass rect measured from the render)
+  function wagonAt(cx, n) {
+    body(cx, 147, () => { const w = 5.26 * KU, h = sprite(WAGON, 5.26); if (!h) return; carNo(n, 0.36 * w, 3 - 1.72 * 0.99 * KU);
+      if (!ready(bottleImg)) return;
+      const rx = -w / 2 + 0.1389 * w, ry = -h + 3 + 0.3145 * h, rw = 0.723 * w, rh = 0.2507 * h, ar = bottleImg.naturalWidth / bottleImg.naturalHeight;
+      const rattle = Math.min(1, v / 250) * 0.5, now = performance.now() / 1000;
+      g.save(); g.beginPath(); g.roundRect(rx, ry, rw, rh, 5); g.clip();
+      g.fillStyle = 'rgba(46,26,16,.45)'; g.fillRect(rx, ry, rw, rh);
+      const row = (bh, top, off, k0) => { const bw = bh * ar, step = bw * 1.04;
+        for (let i = 0, x = rx + off; x < rx + rw; i++, x += step) g.drawImage(bottleImg, x, top + Math.sin(now * 14 + i + k0) * rattle, bw, bh); };
+      row(rh * 0.8, ry + rh * 0.12, -2, 0);
+      g.fillStyle = 'rgba(40,22,14,.38)'; g.fillRect(rx, ry, rw, rh);                 // the back row sits deeper in the shade
+      row(rh * 0.95, ry + rh * 0.3, 1.5, 7);
+      glassFx(rx, ry, rw, rh);
+      g.fillStyle = '#23272B'; for (let i = 1; i < 3; i++) g.fillRect(rx + rw * i / 3 - 0.8, ry, 1.6, rh);
+      g.restore(); });
+  }
   // the windowless middle car carries the brand: the logo in white, large, straight on the red metal
   function brandAt(cx) {
     body(cx, 147, () => { const h = sprite(PLAIN, 5.26); if (!h || !ready(logoW)) return;
@@ -1744,10 +1767,7 @@ let kukuMoving = false;
       const ig = g.createLinearGradient(0, ry, 0, ry + rh); ig.addColorStop(0, '#2A1A14'); ig.addColorStop(0.6, '#5A3020'); ig.addColorStop(1, '#B4622A');
       g.fillStyle = ig; g.fillRect(rx, ry, rw, rh);
       g.drawImage(bottleImg, rx + rw / 2 - bw / 2, ry + 2 + bob, bw, bh);
-      // glass: a cool sky sheen at the top and two soft diagonal glare streaks
-      const sk = g.createLinearGradient(0, ry, 0, ry + rh); sk.addColorStop(0, 'rgba(210,228,245,.28)'); sk.addColorStop(0.45, 'rgba(210,228,245,0)'); g.fillStyle = sk; g.fillRect(rx, ry, rw, rh);
-      g.fillStyle = 'rgba(255,255,255,.22)'; g.beginPath(); g.moveTo(rx + rw * 0.25, ry); g.lineTo(rx + rw * 0.55, ry); g.lineTo(rx + rw * 0.05, ry + rh); g.lineTo(rx - rw * 0.25, ry + rh); g.fill();
-      g.fillStyle = 'rgba(255,255,255,.14)'; g.beginPath(); g.moveTo(rx + rw * 0.7, ry); g.lineTo(rx + rw * 0.8, ry); g.lineTo(rx + rw * 0.3, ry + rh); g.lineTo(rx + rw * 0.2, ry + rh); g.fill();
+      glassFx(rx, ry, rw, rh);
       g.restore(); });
   }
   const loadImgs = (n, f) => Array.from({ length: n }, (_, i) => { const m = new Image(); m.src = f(i); return m; });
