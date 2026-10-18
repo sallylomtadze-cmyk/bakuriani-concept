@@ -201,6 +201,34 @@ nav .lang:hover{background:rgba(10,35,72,.06)}
 #buy{background:var(--card)}
 .buy{display:grid;grid-template-columns:6fr 6fr;gap:48px;align-items:start}
 /* additions after the clean-up */
+/* kukushka */
+.kuku{position:relative;background:#EEF5FA;--edge:calc(max(0px, (100vw - var(--max)) / 2) + var(--gut))}
+.kuku-stage{position:relative;height:min(88svh,880px);min-height:580px;overflow:hidden}
+.kuku canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .45s}
+.kuku.reset canvas{opacity:0}
+.kuku-ui{position:absolute;inset:0;pointer-events:none}
+.kuku-head{position:absolute;top:clamp(104px,13vh,136px);left:var(--edge);max-width:440px}
+.kuku-head .lead{margin-top:14px}
+.kuku-alt{position:absolute;top:clamp(116px,14vh,148px);right:var(--edge);display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;color:var(--mute)}
+.kuku-alt i{position:relative;width:150px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.kuku-alt b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue)}
+.kuku-card{position:absolute;left:var(--edge);bottom:clamp(28px,5vh,48px);width:min(410px,calc(100% - 2 * var(--gut)));padding:22px 26px;border-radius:14px 30px 30px 30px;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 1px 2px rgba(10,35,72,.06),0 18px 40px -24px rgba(10,35,72,.35);opacity:0;transform:translateY(14px);transition:opacity .45s,transform .55s cubic-bezier(.2,.7,.2,1)}
+.kuku-card.on{opacity:1;transform:none;pointer-events:auto}
+.kuku-tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--blue)}
+.kuku-card h3{margin:6px 0 10px;font-size:22px;font-weight:900;color:var(--navy)}
+.kuku-card p{font-size:15px;line-height:1.65;color:#3E5068}
+.kuku-src{display:inline-block;margin-top:12px;font-size:12px;color:var(--mute)}
+.kuku-more[hidden]{display:none}.kuku-more{display:block;margin-top:12px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
+.kuku-go{position:absolute;right:var(--edge);bottom:clamp(28px,5vh,48px);min-width:190px;pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.kuku-hint{position:absolute;right:var(--edge);bottom:calc(clamp(28px,5vh,48px) + 72px);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--mute);transition:opacity .35s}
+@media(max-width:800px){
+  .kuku-stage{height:94svh;min-height:620px}
+  .kuku-head{top:88px;right:var(--gut)}.kuku-head .lead{font-size:14px;margin-top:10px}
+  .kuku-alt{right:auto;left:var(--gut);top:236px}
+  .kuku-card{left:var(--gut);bottom:92px;padding:18px 20px}.kuku-card h3{font-size:19px}.kuku-card p{font-size:14px}
+  .kuku-go{left:var(--gut);right:var(--gut);bottom:22px}
+  .kuku-hint{display:none}}
+
 .concept{position:absolute;left:calc(max(0px, (100vw - var(--max)) / 2) + var(--gut));bottom:22px;z-index:3;padding:8px 14px;border-radius:6px 16px 16px 16px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 3px 1px rgba(255,255,255,.9),0 6px 18px -10px rgba(10,35,72,.3);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--mute);pointer-events:none}
 .lng{display:flex;gap:18px}.lng button{border:0;background:none;padding:0;font:500 15px/1.75 "Noto Sans Georgian",sans-serif;color:var(--mute);cursor:pointer}.lng button.on{font-weight:700;color:var(--navy)}.lng button:hover{color:var(--blue)}
 html[lang=en] .mt{text-transform:uppercase}
@@ -429,6 +457,21 @@ html.intro-on{overflow:hidden}
       <h2 class="mt"><span>დაბადებული</span><br><span class="l2">ბაკურიანში</span></h2>
       <p class="lead">წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.</p>
       <div class="alt-num"><b>1700</b><span>მეტრი ზღვის<br>დონიდან</span></div>
+    </div>
+  </section>
+  <section class="kuku" id="kukushka">
+    <div class="kuku-stage">
+      <canvas aria-hidden="true"></canvas>
+      <div class="kuku-ui">
+        <div class="kuku-head">
+          <h2 class="mt">კუკუშკა</h2>
+          <p class="lead">ბორჯომიდან ბაკურიანამდე 1902 წლიდან ვიწროლიანდაგიანი მატარებელი დადის. გაიყოლე ბოთლი მთაში.</p>
+        </div>
+        <div class="kuku-alt"><span>820 მ</span><i><b></b></i><span>1700 მ</span></div>
+        <div class="kuku-card" data-noi18n aria-live="polite"><small class="kuku-tag"></small><h3></h3><p></p><a class="kuku-src" target="_blank" rel="noopener"></a><a class="kuku-more" href="#range" hidden></a></div>
+        <p class="kuku-hint">დააჭირე და გეჭიროს</p>
+        <button class="btn kuku-go" type="button" data-noi18n><span class="mt">გასწიე</span></button>
+      </div>
     </div>
   </section>
   <section class="sec" id="buy">
@@ -1099,7 +1142,7 @@ function updateAudio(dt) {
   if (!actx) return;
   const nearEnd = scrollY > document.documentElement.scrollHeight - innerHeight * 1.6;
   const target = soundOn && vS > 60 && !nearEnd ? 0.45 + 0.55 * Math.min(1, vS / 1200) : 0;
-  quiet = target || sprayLeft > 0 || canPhase !== 'idle' ? 0 : quiet + dt;
+  quiet = target || sprayLeft > 0 || canPhase !== 'idle' || kukuMoving ? 0 : quiet + dt;
   if (quiet > (nearEnd ? 0.6 : 2.5) && actx.state === 'running') { brookGain.gain.cancelScheduledValues(actx.currentTime); brookGain.gain.value = 0; actx.suspend(); }
   if (quiet === 0 && actx.state === 'suspended') actx.resume();
   if (actx.state !== 'running') { soundBtn.classList.remove('live'); return; }
@@ -1242,14 +1285,14 @@ if (!reduce) {
 
 
 /* ---------- language: Georgian / English ---------- */
-const EN = {"კლასიკა": "Classic", "ასორტიმენტი": "Range", "წყარო": "Source", "სად ვიყიდო": "Where to buy", "ბლოგი": "Blog", "კონტაქტი": "Contact", "ბიძინა კვერნაძის 10, თბილისი": "10 Bidzina Kvernadze St, Tbilisi", "სოციალური": "Social", "ენა": "Language", "მთის წყალი": "Mountain water", "1700 მეტრიდან": "from 1,700 metres", "წყარო ბორჯომ-ბაკურიანის ხეობაშია. წყალი რბილი და სუფთაა, ზუსტად ისეთი, როგორიც მთაში.": "The spring lies in the Borjomi-Bakuriani valley. The water is soft and clean, just as it is in the mountains.", "ბავშვები": "Kids", "ოჯახი": "Family", "სპორტი": "Sport", "ციტრუსის მიქსი": "Citrus mix", "ლიმონი": "Lemon", "ატამი": "Peach", "სპრეი": "Spray", "ბუნებრივი მინერალური წყალი ბაკურიანის წყაროდან. გაზიანი და უგაზო.": "Natural mineral water from the Bakuriani spring. Still and sparkling.", "0.5 ლ": "0.5 L", "1 ლ": "1 L", "1.5 ლ": "1.5 L", "0.33 ლ": "0.33 L", "5 ლ": "5 L", "19 ლ": "19 L", "0.75 ლ": "0.75 L", "150 მლ": "150 ml", "მინა": "Glass", "დაბალი მინერალიზაცია პირველი დღიდან. ჩვილის საკვებისთვის და დასალევად.": "Low in minerals from day one. For preparing baby food and for drinking.", "0+ თვე": "0+ months", "დაბალი მინერალიზაცია": "Low mineral content", "პატარა ბოთლი, სპორტული ხუფი და საყვარელი გმირები.": "A small bottle, a sport cap and their favourite heroes.", "სპორტული ხუფი": "Sport cap", "დიდი ბოთლები სახლისა და ოფისისთვის. მიწოდებით კართან.": "Big bottles for home and office, delivered to your door.", "მიწოდება": "Delivery", "სპორტული ხუფი ერთი ხელით. ვარჯიშზე, მატჩზე, მთაში.": "A sport cap that opens with one hand. At training, at the match, in the mountains.", "მთის წყალი ლიმონის, ლაიმისა და ფორთოხლის გემოთი.": "Mountain water with lemon, lime and orange.", "0 შაქარი და კალორია": "0 sugar, 0 calories", "მთის წყალი ლიმონის გემოთი. მსუბუქი და გამაგრილებელი.": "Mountain water with a hint of lemon. Light and refreshing.", "მთის წყალი ნაზი ატმის გემოთი.": "Mountain water with a soft peach flavour.", "მთის წყალი კანისთვის. ნაზი ნისლი, რომელიც აგრილებს და ატენიანებს.": "Mountain water for your skin. A fine mist that cools and hydrates.", "ყველა ტიპის კანი": "All skin types", "ბაკურიანი": "Bakuriani", "ყოველ დღეს": "every day", "ბაღში": "In the garden", "მატჩის შემდეგ": "After the match", "პირველი წყალი": "First water", "სამზარეულოში": "In the kitchen", "კორტზე": "On the court", "სიგრილე": "Cool down", "სკოლის გზაზე": "On the way to school", "პიკნიკზე": "At the picnic", "დაბადებული": "Born in", "ბაკურიანში": "Bakuriani", "წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.": "For years the water travels through mountain rock. That is how it is filtered and gains its natural minerals.", "მეტრი ზღვის": "metres above", "დონიდან": "sea level", "ბაკურიანი ყველა სუპერმარკეტშია. 5 და 19 ლიტრიან ბოთლებს სახლში ან ოფისში მოგიტანთ.": "Bakuriani is in every supermarket. We deliver 5 and 19 litre bottles to your home or office.", "მიწოდების შეკვეთა": "Order delivery", "მაღაზიების რუკა": "Store map", "ცხელი ხაზი": "Hotline", "ყველა სუპერმარკეტში": "In every supermarket", "ბუნებრივი მინერალური წყალი": "Natural mineral water", "ბორჯომ-ბაკურიანის ხეობიდან.": "from the Borjomi-Bakuriani valley.", "ნავიგაცია": "Navigation", "© 2026 IDS ბორჯომი საქართველო · დიზაინის კონცეფცია, არაოფიციალური": "© 2026 IDS Borjomi Georgia · design concept, unofficial", "წესები და პირობები": "Terms and conditions", "კონფიდენციალურობა": "Privacy", "ფოტო: Agshin Osmanov / Unsplash": "Photo: Agshin Osmanov / Unsplash", "ხმა": "Sound", "მენიუ": "Menu", "ბაკურიანი კლასიკა 0.5, 1 და 1.5 ლიტრი": "Bakuriani Classic, 0.5, 1 and 1.5 litres", "ბაკურიანი 0+": "Bakuriani 0+", "ბაკურიანი ბავშვებისთვის": "Bakuriani for kids", "ბაკურიანი 19 ლიტრი": "Bakuriani 19 litres", "ბაკურიანი სპორტი": "Bakuriani Sport", "ბაკურიანი ციტრუსის მიქსი": "Bakuriani Citrus mix", "ბაკურიანი ლიმონი": "Bakuriani Lemon", "ბაკურიანი ატამი": "Bakuriani Peach", "ბაკურიანი მინერალური წყლის სპრეი": "Bakuriani mineral water spray", "ბაკურიანის ბოთლები": "Bakuriani bottles", "ბაკურიანი. მთის მინერალური წყალი": "Bakuriani. Mountain mineral water", "დიზაინის კონცეფცია · არაოფიციალური": "Design concept · unofficial"};
+const EN = {"კლასიკა": "Classic", "ასორტიმენტი": "Range", "წყარო": "Source", "სად ვიყიდო": "Where to buy", "ბლოგი": "Blog", "კონტაქტი": "Contact", "ბიძინა კვერნაძის 10, თბილისი": "10 Bidzina Kvernadze St, Tbilisi", "სოციალური": "Social", "ენა": "Language", "მთის წყალი": "Mountain water", "1700 მეტრიდან": "from 1,700 metres", "წყარო ბორჯომ-ბაკურიანის ხეობაშია. წყალი რბილი და სუფთაა, ზუსტად ისეთი, როგორიც მთაში.": "The spring lies in the Borjomi-Bakuriani valley. The water is soft and clean, just as it is in the mountains.", "ბავშვები": "Kids", "ოჯახი": "Family", "სპორტი": "Sport", "ციტრუსის მიქსი": "Citrus mix", "ლიმონი": "Lemon", "ატამი": "Peach", "სპრეი": "Spray", "ბუნებრივი მინერალური წყალი ბაკურიანის წყაროდან. გაზიანი და უგაზო.": "Natural mineral water from the Bakuriani spring. Still and sparkling.", "0.5 ლ": "0.5 L", "1 ლ": "1 L", "1.5 ლ": "1.5 L", "0.33 ლ": "0.33 L", "5 ლ": "5 L", "19 ლ": "19 L", "0.75 ლ": "0.75 L", "150 მლ": "150 ml", "მინა": "Glass", "დაბალი მინერალიზაცია პირველი დღიდან. ჩვილის საკვებისთვის და დასალევად.": "Low in minerals from day one. For preparing baby food and for drinking.", "0+ თვე": "0+ months", "დაბალი მინერალიზაცია": "Low mineral content", "პატარა ბოთლი, სპორტული ხუფი და საყვარელი გმირები.": "A small bottle, a sport cap and their favourite heroes.", "სპორტული ხუფი": "Sport cap", "დიდი ბოთლები სახლისა და ოფისისთვის. მიწოდებით კართან.": "Big bottles for home and office, delivered to your door.", "მიწოდება": "Delivery", "სპორტული ხუფი ერთი ხელით. ვარჯიშზე, მატჩზე, მთაში.": "A sport cap that opens with one hand. At training, at the match, in the mountains.", "მთის წყალი ლიმონის, ლაიმისა და ფორთოხლის გემოთი.": "Mountain water with lemon, lime and orange.", "0 შაქარი და კალორია": "0 sugar, 0 calories", "მთის წყალი ლიმონის გემოთი. მსუბუქი და გამაგრილებელი.": "Mountain water with a hint of lemon. Light and refreshing.", "მთის წყალი ნაზი ატმის გემოთი.": "Mountain water with a soft peach flavour.", "მთის წყალი კანისთვის. ნაზი ნისლი, რომელიც აგრილებს და ატენიანებს.": "Mountain water for your skin. A fine mist that cools and hydrates.", "ყველა ტიპის კანი": "All skin types", "ბაკურიანი": "Bakuriani", "ყოველ დღეს": "every day", "ბაღში": "In the garden", "მატჩის შემდეგ": "After the match", "პირველი წყალი": "First water", "სამზარეულოში": "In the kitchen", "კორტზე": "On the court", "სიგრილე": "Cool down", "სკოლის გზაზე": "On the way to school", "პიკნიკზე": "At the picnic", "დაბადებული": "Born in", "ბაკურიანში": "Bakuriani", "წყალი წლების განმავლობაში მთის ქანებში გადის. ასე იწმინდება და ბუნებრივ მინერალებს იძენს.": "For years the water travels through mountain rock. That is how it is filtered and gains its natural minerals.", "მეტრი ზღვის": "metres above", "დონიდან": "sea level", "ბაკურიანი ყველა სუპერმარკეტშია. 5 და 19 ლიტრიან ბოთლებს სახლში ან ოფისში მოგიტანთ.": "Bakuriani is in every supermarket. We deliver 5 and 19 litre bottles to your home or office.", "მიწოდების შეკვეთა": "Order delivery", "მაღაზიების რუკა": "Store map", "ცხელი ხაზი": "Hotline", "ყველა სუპერმარკეტში": "In every supermarket", "კუკუშკა": "Kukushka", "ბორჯომიდან ბაკურიანამდე 1902 წლიდან ვიწროლიანდაგიანი მატარებელი დადის. გაიყოლე ბოთლი მთაში.": "Since 1902 a narrow-gauge train has climbed from Borjomi to Bakuriani. Take the bottle up the mountain.", "დააჭირე და გეჭიროს": "Press and hold", "820 მ": "820 m", "1700 მ": "1700 m", "ბუნებრივი მინერალური წყალი": "Natural mineral water", "ბორჯომ-ბაკურიანის ხეობიდან.": "from the Borjomi-Bakuriani valley.", "ნავიგაცია": "Navigation", "© 2026 IDS ბორჯომი საქართველო · დიზაინის კონცეფცია, არაოფიციალური": "© 2026 IDS Borjomi Georgia · design concept, unofficial", "წესები და პირობები": "Terms and conditions", "კონფიდენციალურობა": "Privacy", "ფოტო: Agshin Osmanov / Unsplash": "Photo: Agshin Osmanov / Unsplash", "ხმა": "Sound", "მენიუ": "Menu", "ბაკურიანი კლასიკა 0.5, 1 და 1.5 ლიტრი": "Bakuriani Classic, 0.5, 1 and 1.5 litres", "ბაკურიანი 0+": "Bakuriani 0+", "ბაკურიანი ბავშვებისთვის": "Bakuriani for kids", "ბაკურიანი 19 ლიტრი": "Bakuriani 19 litres", "ბაკურიანი სპორტი": "Bakuriani Sport", "ბაკურიანი ციტრუსის მიქსი": "Bakuriani Citrus mix", "ბაკურიანი ლიმონი": "Bakuriani Lemon", "ბაკურიანი ატამი": "Bakuriani Peach", "ბაკურიანი მინერალური წყლის სპრეი": "Bakuriani mineral water spray", "ბაკურიანის ბოთლები": "Bakuriani bottles", "ბაკურიანი. მთის მინერალური წყალი": "Bakuriani. Mountain mineral water", "დიზაინის კონცეფცია · არაოფიციალური": "Design concept · unofficial"};
 const fromMt = t => t.replace(/[\u1C90-\u1CBA\u1CBD-\u1CBF]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xBC0));
 const trName = n => lang === 'en' ? (EN[n] || n) : n;
 const kaText = new Map(), kaAttr = new Map(), kaTitle = document.title;   // originals, restored when switching back
 let lang = 'ka';
 function setLang(l) {
   lang = l; document.documentElement.lang = l;
-  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentNode.closest('script,style,svg,#intro') || !n.nodeValue.trim() ? 2 : 1 });
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentNode.closest('script,style,svg,#intro,[data-noi18n]') || !n.nodeValue.trim() ? 2 : 1 });
   for (let n; (n = w.nextNode());) {
     if (!kaText.has(n)) kaText.set(n, n.nodeValue);
     const ka = kaText.get(n), key = fromMt(ka.trim().replace(/\s+/g, ' '));
@@ -1269,6 +1312,291 @@ function setLang(l) {
 $$('.lang').forEach(b => b.addEventListener('click', () => setLang(lang === 'en' ? 'ka' : 'en')));
 $$('.lng button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.l)));
 try { if (localStorage.getItem('bk-lang') === 'en') setLang('en'); else $$('.lng button')[0].classList.add('on'); } catch (e) { $$('.lng button')[0].classList.add('on'); }
+
+/* ---------- the Kukushka: hold to drive the narrow-gauge train from Borjomi up to Bakuriani, stopping at real places ---------- */
+let kukuMoving = false;
+{
+  const sec = $('#kukushka'), cv = sec.querySelector('canvas'), g = cv.getContext('2d');
+  const card = sec.querySelector('.kuku-card'), goBtn = sec.querySelector('.kuku-go'), goLbl = goBtn.querySelector('span');
+  const hint = sec.querySelector('.kuku-hint'), altBar = sec.querySelector('.kuku-alt b');
+  const bottleImg = new Image(); bottleImg.src = 'assets/kuku-bottle.png';
+  const T = (ka, en) => lang === 'en' ? en : ka;
+  const RAIL = 'https://en.wikipedia.org/wiki/Borjomi%E2%80%93Bakuriani_railway';
+  const STOPS = [
+    { x: 420, sign: ['ბორჯომი', 'Borjomi'], alt: ['820 მ', '820 m'], pages: [
+      { tag: '1902', title: ['ბორჯომი', 'Borjomi'], src: ['Wikipedia', RAIL],
+        text: ['1902 წლის იანვარში აქედან ბაკურიანისკენ პირველი მატარებელი გავიდა. გზა 37 კილომეტრია, ლიანდაგი კი 900 მილიმეტრი.', 'In January 1902 the first train left here for Bakuriani. The line is 37 kilometres long on a 900 mm gauge.'] }] },
+    { x: 1750, bridge: true, sign: ['წაღვერი', 'Tsaghveri'], pages: [
+      { tag: '1902', title: ['ეიფელის ხიდი', 'The Eiffel bridge'], src: ['Wikipedia', 'https://en.wikipedia.org/wiki/Eiffel_Bridge,_Tsagveri'],
+        text: ['წაღვერთან მდინარეზე გადებული რკინის ხიდი გუსტავ ეიფელს მიეწერება. ის კულტურული მემკვიდრეობის ძეგლადაა აღრიცხული.', 'The iron bridge over the river near Tsaghveri is attributed to Gustave Eiffel. It is listed as a cultural heritage monument.'] }] },
+    { x: 3150, sign: ['საკოჭავი', 'Sakochavi'], pages: [
+      { tag: T('ნეოლითი', 'Neolithic'), tagKa: 'ნეოლითი', tagEn: 'Neolithic', title: ['საკოჭავი', 'Sakochavi'], src: ['საქართველოს ენციკლოპედია', 'https://georgianencyclopedia.ge/ka/form/26357'],
+        text: ['აქ ნაპოვნი უძველესი ძეგლები, ანდეზიტის კარიერები, ნეოლითის ბოლოთი თარიღდება. ანდეზიტს ეს მატარებელი 1991 წლამდე ზიდავდა.', 'The oldest sites found here, andesite quarries, date to the end of the Neolithic. This train carried andesite until 1991.'] }] },
+    { x: 4600, final: true, sign: ['ბაკურიანი', 'Bakuriani'], alt: ['1700 მ', '1700 m'], pages: [
+      { tag: 'VII–XVIII ს.', tagEn: '7th–18th c.', title: ['ბაკურიანი', 'Bakuriani'], src: ['საქართველოს ენციკლოპედია', 'https://georgianencyclopedia.ge/ka/form/26357'],
+        text: ['სახელი VII–VIII საუკუნის ქართლის ერისთავს, ბაკურიანს ძე ბალდადისას უკავშირდება. ვახუშტი ბატონიშვილი წერდა: „შავ-წყალი გამოსდის ბაკულიანისა და კოდიანის მთასა“.', 'The name is linked to Bakuriani son of Baldad, a great eristavi of Kartli in the 7th–8th centuries. Vakhushti Batonishvili wrote that the Shavtskali flows from the mountains of Bakuliani and Kodiani.'] },
+      { tag: '1935', title: ['საბჭოთა დავოსი', 'The Soviet Davos'], src: ['ვიკიპედია', 'https://ka.wikipedia.org/wiki/%E1%83%91%E1%83%90%E1%83%99%E1%83%A3%E1%83%A0%E1%83%98%E1%83%90%E1%83%9C%E1%83%98'],
+        text: ['1935 წლის 6 იანვარს აქ სათხილამურო სკოლა გაიხსნა, 1954 წელს კი საბჭოთა კავშირის პირველი საბაგირო-ბუქსირი. ამ მთებში ყალიბდება ბაკურიანის წყალი.', 'On 6 January 1935 a ski school opened here, and in 1954 the first ski tow in the Soviet Union. These are the mountains where Bakuriani water is formed.'] }] }
+  ];
+  const START = STOPS[0].x, END = STOPS[STOPS.length - 1].x, BR = STOPS[1].x;
+  const hash = n => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
+  const noise = x => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return hash(i) * (1 - u) + hash(i + 1) * u; };
+  const fbm = x => noise(x) * 0.55 + noise(x * 2.1 + 9) * 0.27 + noise(x * 4.3 + 3) * 0.13 + noise(x * 8.7 + 1) * 0.05;
+  const trackY = x => -x * 0.085 - 26 * Math.sin(x / 640) - 9 * Math.sin(x / 230 + 1.3);
+  const bell = u => Math.abs(u) < 1 ? (1 - u * u) ** 2 : 0;
+  const groundY = x => trackY(x) + 10 + 300 * bell((x - BR) / 240);
+  const mixC = (a, b, k) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const A = p(a), B = p(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * k)).join(',')})`; };
+  const flakes = Array.from({ length: 110 }, (_, i) => ({ x: hash(i + 0.3), y: hash(i + 7.1), r: 0.7 + hash(i + 3.3) * 1.7, v: 0.25 + hash(i + 5.7) * 0.6, w: hash(i + 9.9) * 6.28 }));
+  let W = 1, H = 1, S = 1, dpr = 1, VW = 1, VH = 1, train = START, v = 0, hold = false, stop = 0, page = 0, atStop = true, dist = 0, joint = 0;
+  let camX = 0, camY = 0, camY0 = null, visible = false, last = 0, bubble = 0, lastLang = null, started = false;
+
+  function size() {
+    const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    S = W < 800 ? Math.min(1, W / 500) : Math.max(0.6, Math.min(1, W / 1150)); VW = W / S; VH = H / S;
+  }
+  const mt = t => lang === 'en' ? t : toMt(t);
+  function label() {
+    const st = STOPS[stop];
+    if (!atStop) return T('გასწიე', 'Go');
+    if (page < st.pages.length - 1) return T('შემდეგი', 'Next');
+    if (st.final) return T('თავიდან', 'Start over');
+    return started ? T('გააგრძელე', 'Continue') : T('გასწიე', 'Go');
+  }
+  function renderCard() {
+    const st = STOPS[stop], pg = st.pages[page];
+    card.querySelector('.kuku-tag').textContent = lang === 'en' ? (pg.tagEn || pg.tag) : (pg.tagKa || pg.tag);
+    card.querySelector('h3').textContent = mt(T(pg.title[0], pg.title[1]));
+    card.querySelector('p').textContent = T(pg.text[0], pg.text[1]);
+    const a = card.querySelector('.kuku-src'); a.textContent = T('წყარო: ', 'Source: ') + pg.src[0]; a.href = pg.src[1];
+    const more = card.querySelector('.kuku-more'); more.hidden = !(st.final && page === st.pages.length - 1); more.textContent = mt(T('ასორტიმენტი', 'Range'));
+    goLbl.textContent = mt(label()); lastLang = lang;
+  }
+  // sounds: rail joints ta-tak, and a two-note "ku-ku" whistle when it leaves a stop
+  function clack(k) {
+    if (!actx || !soundOn || !whiteBuf || k < 0.05) return; actx.resume(); const t = actx.currentTime;
+    [0, 0.085].forEach((o, i) => { const sN = actx.createBufferSource(); sN.buffer = whiteBuf; const bp = actx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = i ? 1750 : 1250; bp.Q.value = 3.2;
+      const gn = actx.createGain(); gn.gain.setValueAtTime(0.0001, t + o); gn.gain.exponentialRampToValueAtTime(0.18 * k, t + o + 0.004); gn.gain.exponentialRampToValueAtTime(0.0001, t + o + 0.07);
+      sN.connect(bp).connect(gn).connect(master); sN.start(t + o, Math.random() * 2); sN.stop(t + o + 0.09); });
+  }
+  function cuckoo() {
+    if (!actx || !soundOn) return; actx.resume(); const t = actx.currentTime + 0.05;
+    [[659, 0], [523, 0.34]].forEach(([f, o]) => { const os = actx.createOscillator(), gn = actx.createGain(); os.type = 'sine';
+      os.frequency.setValueAtTime(f, t + o); os.frequency.exponentialRampToValueAtTime(f * 0.97, t + o + 0.26);
+      gn.gain.setValueAtTime(0.0001, t + o); gn.gain.exponentialRampToValueAtTime(0.11, t + o + 0.03); gn.gain.exponentialRampToValueAtTime(0.0001, t + o + 0.3);
+      os.connect(gn).connect(master); os.start(t + o); os.stop(t + o + 0.32); });
+  }
+  function restart() {
+    sec.classList.add('reset');
+    setTimeout(() => { train = START; v = 0; stop = 0; page = 0; atStop = true; dist = 0; started = false; camY0 = null; snap(); renderCard(); sec.classList.remove('reset'); }, 460);
+  }
+  function press() {
+    if (typeof initAudio === 'function' && soundOn) initAudio();
+    const st = STOPS[stop];
+    if (atStop) {
+      if (page < st.pages.length - 1) { page++; renderCard(); return; }
+      if (st.final) { restart(); return; }
+      atStop = false; started = true; stop++; page = 0; card.classList.remove('on'); bubble = 1.8; cuckoo(); goLbl.textContent = mt(label());
+    }
+    hold = true;
+  }
+  const release = () => { hold = false; };
+  goBtn.addEventListener('pointerdown', e => { e.preventDefault(); goBtn.setPointerCapture?.(e.pointerId); press(); });
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => goBtn.addEventListener(ev, release));
+  goBtn.addEventListener('contextmenu', e => e.preventDefault());
+  addEventListener('keydown', e => { if (!visible || e.repeat || !(e.code === 'Space' || e.code === 'ArrowRight')) return; if (e.target.closest && e.target.closest('input,textarea')) return; e.preventDefault(); press(); });
+  addEventListener('keyup', e => { if (e.code === 'Space' || e.code === 'ArrowRight') release(); });
+
+  function camTarget() { return { x: train - VW * (W < 800 ? 0.36 : 0.4), y: trackY(train) - VH * (W < 800 ? 0.56 : 0.64) }; }
+  function snap() { const c = camTarget(); camX = c.x; camY = c.y; }
+
+  function step(dt) {
+    if (!atStop) {
+      const target = STOPS[stop].x, d = target - train, B = 240;
+      if (d <= v * v / (2 * B) + 2) v = Math.max(7, Math.min(v, Math.sqrt(2 * B * Math.max(d, 0))));   // assisted braking into the platform
+      else if (hold) v = Math.min(250, v + 150 * dt);
+      else v = Math.max(0, v - 110 * dt);
+      const before = train; train = Math.min(target, train + v * dt); dist += train - before;
+      if (target - train < 1) { train = target; v = 0; atStop = true; hold = false; page = 0; renderCard(); card.classList.add('on'); }
+    }
+    kukuMoving = v > 1;
+    const j = Math.floor(dist / 74); if (j !== joint) { joint = j; clack(Math.min(1, v / 250)); }
+    const c = camTarget(), k = 1 - Math.pow(0.0015, dt);
+    camX += (c.x - camX) * k; camY += (c.y - camY) * k;
+    if (camY0 === null) camY0 = camY;
+    bubble = Math.max(0, bubble - dt);
+    if (lastLang !== lang) renderCard();
+    hint.style.opacity = !atStop && v < 4 ? 1 : 0;
+    altBar.style.width = (Math.min(1, (train - START) / (END - START)) * 100).toFixed(1) + '%';
+  }
+
+  // ---- drawing (world units; the screen shows VW x VH of them)
+  function ridge(f, base, amp, period, col, cap, seed) {
+    const ox = camX * f, top = base - amp;
+    g.beginPath(); g.moveTo(0, VH);
+    for (let sx = -8; sx <= VW + 8; sx += 6) g.lineTo(sx, base - fbm((ox + sx) / period + seed) * amp);
+    g.lineTo(VW, VH); g.closePath();
+    const gr = g.createLinearGradient(0, top, 0, base + 40);
+    if (cap) { gr.addColorStop(0, cap); gr.addColorStop(0.32, cap); gr.addColorStop(0.5, col); } else gr.addColorStop(0, col);
+    gr.addColorStop(1, mixC(col.length === 7 ? col : '#C9DCEC', '#EEF5FA', 0.55)); g.fillStyle = gr; g.fill();
+  }
+  function pine(x, y, h, col, snow) {
+    const w = h * 0.42;
+    g.fillStyle = col; g.beginPath();
+    for (let k = 0; k < 3; k++) { const ty = y - h * (0.3 + k * 0.28), bw = w * (1 - k * 0.24); g.moveTo(x - bw, ty + h * 0.34); g.lineTo(x, ty - h * 0.12); g.lineTo(x + bw, ty + h * 0.34); }
+    g.fill(); g.fillRect(x - 1.2, y - h * 0.08, 2.4, h * 0.1);
+    if (snow > 0.02) { g.fillStyle = `rgba(255,255,255,${0.85 * snow})`; g.beginPath();
+      for (let k = 0; k < 3; k++) { const ty = y - h * (0.3 + k * 0.28), bw = w * (1 - k * 0.24) * 0.55; g.moveTo(x - bw, ty + h * 0.06); g.lineTo(x, ty - h * 0.12); g.lineTo(x + bw, ty + h * 0.06); }
+      g.fill(); }
+  }
+  function forest(f, base, snow, col, step0, hMin, hVar, seed) {
+    const ox = camX * f, x0 = Math.floor((ox - 60) / step0) * step0;
+    for (let wx = x0; wx < ox + VW + 60; wx += step0) {
+      const r = hash(wx * 0.013 + seed); if (r < 0.18) continue;
+      const sx = wx - ox + (hash(wx + seed) - 0.5) * step0 * 0.8, y = base + (fbm(wx / 300 + seed) - 0.5) * 40;
+      pine(sx, y, hMin + r * hVar, col, snow);
+    }
+  }
+  const W2S = (x, y) => [x - camX, y - camY];
+  function body(cx, len, draw) {
+    const x1 = cx - len * 0.36, x2 = cx + len * 0.36, y1 = trackY(x1), y2 = trackY(x2);
+    g.save(); const [sx, sy] = W2S(cx, (y1 + y2) / 2); g.translate(sx, sy - 3); g.rotate(Math.atan2(y2 - y1, x2 - x1)); draw(len); g.restore();
+  }
+  function wheels(len) {
+    g.fillStyle = '#33424F'; g.fillRect(-len / 2 + 10, -21, len - 20, 7);
+    [-len * 0.36, len * 0.36].forEach(bx => [-11, 11].forEach(o => {
+      g.save(); g.translate(bx + o, -9); g.fillStyle = '#26333F'; g.beginPath(); g.arc(0, 0, 8, 0, 6.283); g.fill();
+      g.rotate(dist / 8); g.strokeStyle = '#7C8C9A'; g.lineWidth = 1.2; g.beginPath(); for (let a = 0; a < 3; a++) { g.moveTo(Math.cos(a * 2.094) * 6, Math.sin(a * 2.094) * 6); g.lineTo(-Math.cos(a * 2.094) * 6, -Math.sin(a * 2.094) * 6); } g.stroke();
+      g.fillStyle = '#9AA8B5'; g.beginPath(); g.arc(0, 0, 2, 0, 6.283); g.fill(); g.restore(); }));
+  }
+  function shell(len, h) {
+    const gr = g.createLinearGradient(0, -16 - h, 0, -16); gr.addColorStop(0, '#4A8A71'); gr.addColorStop(1, '#2C624F');
+    g.fillStyle = gr; g.beginPath(); g.roundRect(-len / 2, -16 - h, len, h, [12, 12, 4, 4]); g.fill();
+    g.fillStyle = '#F2EAD3'; g.fillRect(-len / 2, -16 - h * 0.42, len, 6);
+    g.fillStyle = '#244F40'; g.beginPath(); g.roundRect(-len / 2 + 6, -22 - h, len - 12, 9, 5); g.fill();
+    g.fillStyle = 'rgba(255,255,255,.16)'; g.fillRect(-len / 2 + 4, -14 - h, len - 8, 2);
+  }
+  function car(len, t) {
+    wheels(len); shell(len, 58);
+    const win = (x, w) => { g.fillStyle = '#D6EAF7'; g.beginPath(); g.roundRect(x - w / 2, -66, w, 26, 5); g.fill(); g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.moveTo(x - w / 2 + 4, -42); g.lineTo(x - w / 2 + 12, -64); g.lineTo(x - w / 2 + 18, -64); g.lineTo(x - w / 2 + 10, -42); g.fill(); };
+    win(-48, 26); win(48, 26);
+    // the open middle window, the passenger looking out
+    g.save(); g.beginPath(); g.roundRect(-20, -70, 40, 32, 6); g.fillStyle = '#1F4537'; g.fill(); g.clip();
+    if (bottleImg.complete && bottleImg.naturalWidth) { const bh = 66, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 1.6;
+      g.drawImage(bottleImg, -bw / 2, -66 + bob, bw, bh); }
+    g.restore();
+    g.strokeStyle = '#F2EAD3'; g.lineWidth = 2; g.beginPath(); g.roundRect(-20, -70, 40, 32, 6); g.stroke();
+  }
+  function loco(len) {
+    wheels(len); shell(len, 54);
+    g.fillStyle = '#D6EAF7'; g.beginPath(); g.roundRect(len / 2 - 30, -62, 22, 22, [4, 9, 4, 4]); g.fill(); g.beginPath(); g.roundRect(-len / 2 + 10, -62, 20, 20, 4); g.fill();
+    g.fillStyle = '#FFF6D8'; g.beginPath(); g.arc(len / 2 - 4, -28, 3.2, 0, 6.283); g.fill();
+    const gl = g.createRadialGradient(len / 2 + 2, -28, 0, len / 2 + 2, -28, 26); gl.addColorStop(0, 'rgba(255,246,214,.55)'); gl.addColorStop(1, 'rgba(255,246,214,0)'); g.fillStyle = gl; g.fillRect(len / 2 - 20, -54, 50, 50);
+    g.strokeStyle = '#3B4A57'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(-14, -76); g.lineTo(0, -98); g.lineTo(14, -76); g.moveTo(-10, -98); g.lineTo(10, -98); g.stroke();
+  }
+  function station(st) {
+    const x = st.x, [sx] = W2S(x, 0);
+    if (sx < -400 || sx > VW + 400) return;
+    // small station house behind the line
+    const hx = x + 70, hy = trackY(hx) - 4; const [px, py] = W2S(hx, hy);
+    g.fillStyle = '#E4ECF2'; g.fillRect(px - 46, py - 50, 92, 50); g.fillStyle = '#C9D7E2'; g.beginPath(); g.moveTo(px - 54, py - 48); g.lineTo(px, py - 76); g.lineTo(px + 54, py - 48); g.fill();
+    g.fillStyle = '#D6EAF7'; [-26, 0, 26].forEach(o => g.fillRect(px + o - 7, py - 38, 14, 18));
+    // platform along the rails
+    g.fillStyle = '#D9E2EA'; g.beginPath();
+    for (let wx = x - 150; wx <= x + 150; wx += 10) { const [a, b] = W2S(wx, trackY(wx) + 4); wx === x - 150 ? g.moveTo(a, b) : g.lineTo(a, b); }
+    for (let wx = x + 150; wx >= x - 150; wx -= 10) { const [a, b] = W2S(wx, trackY(wx) + 15); g.lineTo(a, b); }
+    g.fill();
+    // name board
+    const bx = x - 168, [qx, qy] = W2S(bx, trackY(bx));
+    g.fillStyle = '#5B6B79'; g.fillRect(qx - 1.5, qy - 74, 3, 74);
+    g.font = '900 13px "Noto Sans Georgian", sans-serif'; const name = mt(T(st.sign[0], st.sign[1])), tw = g.measureText(name).width + 26;
+    g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(qx - tw / 2, qy - 104, tw, 32, [6, 12, 12, 12]); g.fill();
+    g.fillStyle = '#1C7FD6'; g.fillRect(qx - tw / 2 + 8, qy - 104, tw - 16, 3);
+    g.fillStyle = '#0A2348'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(name, qx, qy - 87);
+    if (st.alt) { g.font = '700 11px "Noto Sans Georgian", sans-serif'; g.fillStyle = '#4D5F76'; g.fillText(T(st.alt[0], st.alt[1]), qx, qy - 60); }
+  }
+  function bridge() {
+    const [sx] = W2S(BR, 0); if (sx < -500 || sx > VW + 500) return;
+    const L = 236;
+    // river in the gorge
+    const [rx, ry] = W2S(BR, groundY(BR) - 6);
+    const rv = g.createLinearGradient(rx - 120, 0, rx + 120, 0); rv.addColorStop(0, 'rgba(120,175,215,0)'); rv.addColorStop(0.5, 'rgba(120,175,215,.9)'); rv.addColorStop(1, 'rgba(120,175,215,0)');
+    g.fillStyle = rv; g.beginPath(); g.ellipse(rx, ry, 130, 7, 0, 0, 6.283); g.fill();
+    g.strokeStyle = '#6B7F92'; g.lineWidth = 2;
+    // piers
+    [-118, 118].forEach(o => { const [a, b] = W2S(BR + o, trackY(BR + o) + 40); const [, c] = W2S(BR + o, groundY(BR + o)); g.fillStyle = '#8899A8'; g.fillRect(a - 7, b, 14, c - b); });
+    // lattice truss under the deck
+    g.beginPath();
+    for (let wx = BR - L; wx <= BR + L; wx += 4) { const [a, b] = W2S(wx, trackY(wx) + 40); wx === BR - L ? g.moveTo(a, b) : g.lineTo(a, b); }
+    for (let wx = BR - L, k = 0; wx < BR + L; wx += 32, k++) {
+      const [a1, b1] = W2S(wx, trackY(wx) + 4), [a2, b2] = W2S(wx + 32, trackY(wx + 32) + 40), [a3, b3] = W2S(wx + 32, trackY(wx + 32) + 4), [a4, b4] = W2S(wx, trackY(wx) + 40);
+      g.moveTo(a1, b1); g.lineTo(a2, b2); g.moveTo(a4, b4); g.lineTo(a3, b3); g.moveTo(a1, b1); g.lineTo(a4, b4);
+    }
+    g.stroke();
+  }
+  function draw(t) {
+    const p = Math.min(1, Math.max(0, (train - START) / (END - START)));
+    g.setTransform(dpr * S, 0, 0, dpr * S, 0, 0);
+    const sky = g.createLinearGradient(0, 0, 0, VH); sky.addColorStop(0, '#DDEBF6'); sky.addColorStop(0.7, '#F1F6FB'); sky.addColorStop(1, '#F6FAFD');
+    g.fillStyle = sky; g.fillRect(0, 0, VW, VH);
+    const sun = g.createRadialGradient(VW * 0.8, VH * 0.2, 0, VW * 0.8, VH * 0.2, VH * 0.7); sun.addColorStop(0, 'rgba(255,255,255,.95)'); sun.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = sun; g.fillRect(0, 0, VW, VH);
+    const lift = camY - (camY0 ?? camY);
+    ridge(0.1, VH * 0.5 - lift * 0.05, VH * 0.3, 760, '#C8DAEA', '#FFFFFF', 3.1);
+    ridge(0.22, VH * 0.6 - lift * 0.12, VH * 0.26, 520, '#AFC6DA', '#F4F8FC', 7.7);
+    forest(0.42, VH * 0.7 - lift * 0.3, p * 0.9, 'rgba(126,152,173,.75)', 22, 26, 22, 1.7);
+    // ground + near trees, in world space
+    const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, mixC('#DCE7DD', '#F4F8FC', p)); gc.addColorStop(1, mixC('#E8EFE9', '#FFFFFF', p));
+    g.fillStyle = gc; g.beginPath(); g.moveTo(-10, VH + 10);
+    for (let sx = -10; sx <= VW + 10; sx += 6) g.lineTo(sx, groundY(camX + sx) - camY);
+    g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
+    // the gorge under the bridge: shaded walls and a tree line down to the river
+    { const [gx] = W2S(BR, 0); if (gx > -400 && gx < VW + 400) {
+      const [, top] = W2S(BR, trackY(BR) + 10), [, bot] = W2S(BR, groundY(BR));
+      const sh = g.createLinearGradient(0, top, 0, bot); sh.addColorStop(0, 'rgba(140,165,188,0)'); sh.addColorStop(1, 'rgba(120,150,175,.38)');
+      g.fillStyle = sh; g.beginPath(); g.moveTo(...W2S(BR - 250, groundY(BR - 250)));
+      for (let wx = BR - 250; wx <= BR + 250; wx += 6) g.lineTo(...W2S(wx, groundY(wx)));
+      g.closePath(); g.fill();
+      for (let wx = BR - 230; wx <= BR + 230; wx += 17) { const r = hash(wx * 0.07 + 2.3); if (r < 0.3 || Math.abs(wx - BR) < 40) continue; const [a, b] = W2S(wx, groundY(wx) + 2); pine(a, b, 22 + r * 18, mixC('#557560', '#6A8699', p), p * 0.8); } } }
+    // trees standing on the slope behind the line
+    { const x0 = Math.floor((camX - 80) / 30) * 30;
+      for (let wx = x0; wx < camX + VW + 80; wx += 30) { if (Math.abs(wx - BR) < 300) continue; const r = hash(wx * 0.021 + 4.2); if (r < 0.45) continue;
+        const [a, b] = W2S(wx, trackY(wx) - 18 - r * 20); pine(a, b, 36 + r * 34, mixC('#5E7E68', '#6F8BA0', p), p); } }
+    bridge(); STOPS.forEach(st => { if (!st.bridge) station(st); });
+    // catenary: poles and the wire the pantograph touches
+    g.strokeStyle = 'rgba(70,85,100,.55)'; g.lineWidth = 1;
+    { const x0 = Math.floor((camX - 100) / 210) * 210; g.beginPath();
+      for (let wx = x0; wx < camX + VW + 210; wx += 210) { const [a, b] = W2S(wx, trackY(wx)); g.moveTo(a - 4, b + 2); g.lineTo(a - 4, b - 112); g.lineTo(a + 8, b - 112); }
+      for (let wx = x0; wx < camX + VW + 210; wx += 8) { const [a, b] = W2S(wx, trackY(wx) - 108); wx === x0 ? g.moveTo(a, b) : g.lineTo(a, b); }
+      g.stroke(); }
+    // ballast, sleepers, rail
+    g.lineCap = 'round';
+    g.strokeStyle = '#C6D1DB'; g.lineWidth = 9; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 6) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) + 4 - camY) : g.lineTo(sx, trackY(wx) + 4 - camY); } g.stroke();
+    g.fillStyle = '#7B6A5C'; for (let wx = Math.floor(camX / 15) * 15; wx < camX + VW + 15; wx += 15) { const [a, b] = W2S(wx, trackY(wx)); g.fillRect(a - 4, b - 1, 8, 4); }
+    g.strokeStyle = '#475866'; g.lineWidth = 2.4; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 5) { const wx = camX + sx; sx === -10 ? g.moveTo(sx, trackY(wx) - 2 - camY) : g.lineTo(sx, trackY(wx) - 2 - camY); } g.stroke();
+    // the train: the bottle's carriage, then the locomotive in front
+    body(train, 150, len => car(len, t));
+    body(train + 144, 118, loco);
+    if (bubble > 0) { const [a, b] = W2S(train + 170, trackY(train + 170) - 128), al = Math.min(1, bubble * 2);
+      g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - (1.8 - bubble) * 6, 76, 30, [12, 12, 12, 4]); g.fill();
+      g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - (1.8 - bubble) * 6); g.globalAlpha = 1; }
+    // snow thickens on the way up
+    g.fillStyle = 'rgba(255,255,255,.9)';
+    flakes.forEach((f, i) => { if (i > 20 + p * 90) return; const y = ((f.y * VH + t * 30 * f.v) % VH), x = ((f.x * VW + Math.sin(t * 0.6 + f.w) * 18 - camX * 0.5) % VW + VW) % VW;
+      g.globalAlpha = 0.35 + 0.5 * p; g.beginPath(); g.arc(x, y, f.r, 0, 6.283); g.fill(); });
+    g.globalAlpha = 1;
+  }
+  function loop(now) {
+    if (!visible) return;
+    const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    step(dt); draw(now / 1000);
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => es.forEach(e => { const was = visible; visible = e.isIntersecting; if (visible && !was) { size(); if (camY0 === null) snap(); last = performance.now(); requestAnimationFrame(loop); } }), { rootMargin: '120px' }).observe(sec);
+  addEventListener('resize', () => { if (visible) size(); });
+  document.fonts.ready.then(() => { size(); snap(); renderCard(); card.classList.add('on'); });
+  renderCard(); card.classList.add('on');
+}
 
 /* ---------- loop ---------- */
 const mouse = { x: 0, y: 0 }, sm = { x: 0, y: 0 };
