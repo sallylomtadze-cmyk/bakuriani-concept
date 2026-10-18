@@ -1661,7 +1661,7 @@ let kukuMoving = false;
   // the windowless middle car carries the brand: the logo in white, large, straight on the red metal
   function brandAt(cx) {
     body(cx, 147, () => { const h = sprite(PLAIN, 5.26); if (!h || !ready(logoW)) return;
-      const lw = 0.56 * 5.26 * KU, lh = lw * logoW.naturalHeight / logoW.naturalWidth; g.drawImage(logoW, -lw / 2 + 0.0044 * 5.26 * KU, 3 - 2.15 * 0.99 * KU - lh / 2, lw, lh); });     // centred between the livery band and the top lights
+      const lw = 0.4 * 5.26 * KU, lh = lw * logoW.naturalHeight / logoW.naturalWidth; g.drawImage(logoW, -lw / 2 + 0.0044 * 5.26 * KU, 3 - 2.13 * 0.99 * KU - lh / 2, lw, lh); });     // centred between the livery band and the top lights
   }
   function locoAt(cx, t) {
     body(cx, 155, () => { const w = 5.54 * KU, h = sprite(LOCO, 5.54); if (!h) return; carNo('01', -0.36 * w, 3 - 1.72 * 0.99 * KU); if (!ready(bottleImg)) return;
