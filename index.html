@@ -1443,7 +1443,7 @@ let kukuMoving = false;
   let got = 0;
 
   function size() {
-    const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+    const r = cv.getBoundingClientRect(); dpr = Math.min(1.5, devicePixelRatio || 1);
     W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     S = W < 800 ? Math.min(1, W / 500) : Math.max(0.6, Math.min(1, W / 1150)); VW = W / S; VH = H / S;
   }
@@ -1510,7 +1510,7 @@ let kukuMoving = false;
   addEventListener('keyup', e => { if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'ArrowUp') release(); });
 
   function camTarget() {
-    if (phase === 'rail') return { x: train - VW * (W < 800 ? 0.5 : 0.48), y: trackY(train) - VH * (W < 800 ? (H > W * 1.4 ? 0.45 : 0.52) : 0.64) };
+    if (phase === 'rail') return { x: train - VW * (W < 800 ? 0.62 : 0.7), y: trackY(train) - VH * (W < 800 ? (H > W * 1.4 ? 0.45 : 0.52) : 0.64) };
     return { x: sk.x - VW * (W < 800 ? 0.36 : 0.42), y: sk.y - VH * (W < 800 ? (H > W * 1.4 ? 0.44 : 0.5) : 0.6) };
   }
   function snap() { const c = camTarget(); camX = c.x; camY = c.y; camY0 = camY; }
@@ -1598,6 +1598,9 @@ let kukuMoving = false;
       glow.addColorStop(0, 'rgba(255,238,210,.45)'); glow.addColorStop(0.4, 'rgba(255,230,200,.12)'); glow.addColorStop(1, 'rgba(255,190,160,0)'); g.fillStyle = glow; g.fillRect(0, 0, VW, VH); g.restore();
     }
     mist(hz + VH * 0.02, 0.35, 0.3, t);
+    // a soft veil behind the heading so the text reads cleanly over the photo
+    if (!sec.classList.contains('moving')) { const vg = g.createRadialGradient(VW * 0.12, VH * 0.18, 0, VW * 0.12, VH * 0.18, VW * 0.42);
+      vg.addColorStop(0, 'rgba(246,249,252,.82)'); vg.addColorStop(0.6, 'rgba(246,249,252,.45)'); vg.addColorStop(1, 'rgba(246,249,252,0)'); g.fillStyle = vg; g.fillRect(0, 0, VW, VH); }
     return lift;
   }
   function foreground(f, p) {
@@ -1747,8 +1750,8 @@ let kukuMoving = false;
     g.fillStyle = '#2A343D'; g.fillRect(x0 - 6, -17, 8, 3);
   }
   function station(st) {
-    const x = st.x, [sx] = W2S(x, 0); if (sx < -400 || sx > VW + 400) return;
-    const hx = x + 70, [px, py] = W2S(hx, trackY(hx) - 4);
+    const x = st.x, [sx] = W2S(x, 0); if (sx < -700 || sx > VW + 500) return;
+    const hx = x + 300, [px, py] = W2S(hx, trackY(hx) - 10);
     // timber walls
     const wood = g.createLinearGradient(0, py - 52, 0, py); wood.addColorStop(0, '#6B4A33'); wood.addColorStop(1, '#4A3222');
     g.fillStyle = wood; g.fillRect(px - 46, py - 52, 92, 52);
@@ -1774,7 +1777,7 @@ let kukuMoving = false;
     for (let wx = x - 150; wx <= x + 150; wx += 10) { const [a, b] = W2S(wx, trackY(wx) + 4); wx === x - 150 ? g.moveTo(a, b) : g.lineTo(a, b); }
     for (let wx = x + 150; wx >= x - 150; wx -= 10) { const [a, b] = W2S(wx, trackY(wx) + 15); g.lineTo(a, b); }
     g.fill();
-    const bx = x - 168, [qx, qy] = W2S(bx, trackY(bx));
+    const bx = x + 190, [qx, qy] = W2S(bx, trackY(bx));
     g.fillStyle = '#5B6B79'; g.fillRect(qx - 1.5, qy - 74, 3, 74);
     g.font = '900 13px "Noto Sans Georgian", sans-serif'; const name = mt(T(st.sign[0], st.sign[1])), tw = g.measureText(name).width + 26;
     g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(qx - tw / 2, qy - 104, tw, 32, [6, 12, 12, 12]); g.fill();
@@ -1787,7 +1790,6 @@ let kukuMoving = false;
     const [, top] = W2S(BR, trackY(BR) + 10), [, bot] = W2S(BR, groundY(BR));
     const sh = g.createLinearGradient(0, top, 0, bot); sh.addColorStop(0, 'rgba(140,165,188,0)'); sh.addColorStop(1, 'rgba(110,140,165,.35)');
     g.fillStyle = sh; g.beginPath(); g.moveTo(...W2S(BR - 250, groundY(BR - 250))); for (let wx = BR - 250; wx <= BR + 250; wx += 6) g.lineTo(...W2S(wx, groundY(wx))); g.closePath(); g.fill();
-    for (let wx = BR - 230; wx <= BR + 230; wx += 34) { const r = hash(wx * 0.07 + 2.3); if (r < 0.4 || Math.abs(wx - BR) < 40) continue; const [a, b] = W2S(wx, groundY(wx) + 2); fir('mid', a, b, 0.35 + r * 0.25, p * 0.8, wx); }
     const [rx, ry] = W2S(BR, groundY(BR) - 6), rv = g.createLinearGradient(rx - 120, 0, rx + 120, 0); rv.addColorStop(0, 'rgba(120,175,215,0)'); rv.addColorStop(0.5, 'rgba(120,175,215,.9)'); rv.addColorStop(1, 'rgba(120,175,215,0)');
     g.fillStyle = rv; g.beginPath(); g.ellipse(rx, ry, 130, 7, 0, 0, 6.283); g.fill();
     const [px0, py0] = W2S(BR, trackY(BR) + 70), [, pyb] = W2S(BR, groundY(BR) + 4);
@@ -1904,14 +1906,15 @@ let kukuMoving = false;
     skier(t);
     frontFx(t, 1);
   }
-  function loop(now) {
-    if (!visible) return;
+  let loopId = 0;
+  function loop(now, id) {
+    if (!visible || id !== loopId) return;
     const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
     step(dt); g.setTransform(dpr * S, 0, 0, dpr * S, 0, 0);
     phase === 'rail' ? drawRail(now / 1000) : drawMountain(now / 1000);
-    requestAnimationFrame(loop);
+    requestAnimationFrame(n => loop(n, id));
   }
-  new IntersectionObserver(es => es.forEach(e => { const was = visible; visible = e.isIntersecting; if (visible && !was) { size(); if (camY0 === null) snap(); last = performance.now(); requestAnimationFrame(loop); } }), { rootMargin: '120px' }).observe(sec);
+  new IntersectionObserver(es => es.forEach(e => { const was = visible; visible = e.isIntersecting; if (visible && !was) { size(); if (camY0 === null) snap(); last = performance.now(); const id = ++loopId; requestAnimationFrame(n => loop(n, id)); } }), { rootMargin: '120px' }).observe(sec);
   addEventListener('resize', () => { if (visible) size(); });
   document.fonts.ready.then(() => { size(); snap(); renderCard(); });
   show(STOPS[0].pages[0]);
