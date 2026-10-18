@@ -1725,8 +1725,8 @@ let kukuMoving = false;
   // the festive Kukushka: Blender renders of the motor car and a wagon, drawn along the track
   const KU = 28;                                         // canvas units per metre of the 3D train
   function sprite(m, wm) { if (!ready(m)) return 0; const w = wm * KU, h = w * m.naturalHeight / m.naturalWidth; g.drawImage(m, -w / 2, -h + 3, w, h); return h; }
-  // small white car numbers, like on real carriages
-  const carNo = (n, x, y) => { g.font = '700 7px "Noto Sans Georgian", sans-serif'; g.fillStyle = 'rgba(255,255,255,.92)'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(n, x, y); };
+  // car numbers in navy on the white livery stripe, like on real carriages
+  const carNo = (n, x, y) => { g.font = '800 6.5px "Noto Sans Georgian", sans-serif'; g.fillStyle = '#0A2348'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(n, x, y); };
   // glass over a window: a cool sky sheen at the top and two soft diagonal glare streaks
   function glassFx(rx, ry, rw, rh) {
     const sk = g.createLinearGradient(0, ry, 0, ry + rh); sk.addColorStop(0, 'rgba(210,228,245,.28)'); sk.addColorStop(0.45, 'rgba(210,228,245,0)'); g.fillStyle = sk; g.fillRect(rx, ry, rw, rh);
@@ -1736,20 +1736,23 @@ let kukuMoving = false;
   }
   // the coaches carry the load: rows of Bakuriani bottles packed behind the panoramic glass (glass rect measured from the render)
   function wagonAt(cx, n) {
-    body(cx, 147, () => { const w = 5.26 * KU, h = sprite(WAGON, 5.26); if (!h) return; carNo(n, 0.36 * w, 3 - 1.72 * 0.99 * KU);
-      if (!ready(bottleImg)) return;
-      const rx = -w / 2 + 0.1389 * w, ry = -h + 3 + 0.3145 * h, rw = 0.723 * w, rh = 0.2507 * h, ar = bottleImg.naturalWidth / bottleImg.naturalHeight;
-      const rattle = Math.min(1, v / 250) * 0.5, now = performance.now() / 1000;
-      g.save(); g.beginPath(); g.roundRect(rx, ry, rw, rh, 5); g.clip();
-      g.fillStyle = 'rgba(46,26,16,.45)'; g.fillRect(rx, ry, rw, rh);
-      const row = (bh, top, off, k0) => { const bw = bh * ar, step = bw * 1.04;
-        for (let i = 0, x = rx + off; x < rx + rw; i++, x += step) g.drawImage(bottleImg, x, top + Math.sin(now * 14 + i + k0) * rattle, bw, bh); };
-      row(rh * 0.8, ry + rh * 0.12, -2, 0);
-      g.fillStyle = 'rgba(40,22,14,.38)'; g.fillRect(rx, ry, rw, rh);                 // the back row sits deeper in the shade
-      row(rh * 0.95, ry + rh * 0.3, 1.5, 7);
-      glassFx(rx, ry, rw, rh);
-      g.fillStyle = '#23272B'; for (let i = 1; i < 3; i++) g.fillRect(rx + rw * i / 3 - 0.8, ry, 1.6, rh);
-      g.restore(); });
+    body(cx, 147, () => { const w = 5.26 * KU, h = sprite(WAGON, 5.26); if (!h) return; carNo(n, 0.36 * w, 3 - 1.3 * 0.99 * KU);
+      loadBottles(-w / 2 + 0.1389 * w, -h + 3 + 0.3145 * h, 0.723 * w, 0.2507 * h, 3, 0); });
+  }
+  // rows of bottles packed behind panoramic glass: a darker back row, a taller front row, a light rattle at speed
+  function loadBottles(rx, ry, rw, rh, parts, seed) {
+    if (!ready(bottleImg)) return;
+    const ar = bottleImg.naturalWidth / bottleImg.naturalHeight, rattle = Math.min(1, v / 250) * 0.5, now = performance.now() / 1000;
+    g.save(); g.beginPath(); g.roundRect(rx, ry, rw, rh, 5); g.clip();
+    g.fillStyle = 'rgba(46,26,16,.45)'; g.fillRect(rx, ry, rw, rh);
+    const row = (bh, top, off, k0) => { const bw = bh * ar, step = bw * 1.04;
+      for (let i = 0, x = rx + off; x < rx + rw; i++, x += step) g.drawImage(bottleImg, x, top + Math.sin(now * 14 + i + k0) * rattle, bw, bh); };
+    row(rh * 0.8, ry + rh * 0.12, -2, seed);
+    g.fillStyle = 'rgba(40,22,14,.38)'; g.fillRect(rx, ry, rw, rh);
+    row(rh * 0.95, ry + rh * 0.3, 1.5, seed + 7);
+    glassFx(rx, ry, rw, rh);
+    g.fillStyle = '#23272B'; for (let i = 1; i < parts; i++) g.fillRect(rx + rw * i / parts - 0.8, ry, 1.6, rh);
+    g.restore();
   }
   // the windowless middle car carries the brand: the logo in white, large, straight on the red metal
   function brandAt(cx) {
@@ -1758,7 +1761,8 @@ let kukuMoving = false;
       g.drawImage(logoW, -lw / 2 + 0.0044 * 5.26 * KU, 3 - h + 0.455 * h - lh / 2, lw, lh); });
   }
   function locoAt(cx, t) {
-    body(cx, 155, () => { const w = 5.54 * KU, h = sprite(LOCO, 5.54); if (!h) return; carNo('01', -0.36 * w, 3 - 1.72 * 0.99 * KU); if (!ready(bottleImg)) return;
+    body(cx, 155, () => { const w = 5.54 * KU, h = sprite(LOCO, 5.54); if (!h) return; carNo('01', -0.36 * w, 3 - 1.3 * 0.99 * KU); if (!ready(bottleImg)) return;
+      loadBottles(-w / 2 + 0.1322 * w, -h + 3 + 0.3145 * h, 0.5415 * w, 0.2507 * h, 2, 3);
       // the bottle rides in the driver's window (window rect measured from the render)
       const rx = -w / 2 + 0.7098 * w, ry = -h + 3 + 0.3007 * h, rw = 0.1624 * w, rh = 0.278 * h;
       const bh = rh * 1.6, bw = bh * bottleImg.naturalWidth / bottleImg.naturalHeight, bob = Math.sin(t * 11) * Math.min(1, v / 250) * 0.6;
