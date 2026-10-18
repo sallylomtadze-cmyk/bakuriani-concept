@@ -1837,10 +1837,11 @@ let kukuMoving = false;
   function drawRail(t) {
     const p = Math.min(1, Math.max(0, (train - START) / (END - START)));
     backdrop(t, p);
-    const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, mixC('#DCE9DC', '#F5F9FC', p)); gc.addColorStop(1, mixC('#E9F1E8', '#FFFFFF', p));
+    const gc = g.createLinearGradient(0, 0, 0, VH); gc.addColorStop(0, '#FFFFFF'); gc.addColorStop(0.6, '#F1F6FB'); gc.addColorStop(1, '#DDE8F2');     // cool snow, the same as the ski run
     const bankY = x => groundY(x) - 30 - fbm(x / 380 + 3.3) * 46;
-    { const bg2 = g.createLinearGradient(0, VH * 0.3, 0, VH); bg2.addColorStop(0, mixC('#E3ECE4', '#EEF4F9', p)); bg2.addColorStop(1, mixC('#D9E5DA', '#E6EEF5', p));
-      g.fillStyle = bg2; g.beginPath(); g.moveTo(-10, VH + 10); for (let sx = -10; sx <= VW + 10; sx += 6) g.lineTo(sx, bankY(camX + sx) - camY); g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill(); }
+    { const bg2 = g.createLinearGradient(0, 0, 0, VH); bg2.addColorStop(0, '#F4F8FC'); bg2.addColorStop(1, '#DCE6F0');
+      g.fillStyle = bg2; g.beginPath(); g.moveTo(-10, VH + 10); for (let sx = -10; sx <= VW + 10; sx += 6) g.lineTo(sx, bankY(camX + sx) - camY); g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = 2.5; g.beginPath(); for (let sx = -10; sx <= VW + 10; sx += 6) { const y = bankY(camX + sx) - camY + 1; sx === -10 ? g.moveTo(sx, y) : g.lineTo(sx, y); } g.stroke(); }
     g.fillStyle = gc; g.beginPath(); g.moveTo(-10, VH + 10); for (let sx = -10; sx <= VW + 10; sx += 6) g.lineTo(sx, groundY(camX + sx) - camY); g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill();
     for (let wx = Math.floor(camX / 23) * 23; wx < camX + VW; wx += 23) { if (Math.abs(wx - BR) < 260) continue; const r = hash(wx * 0.31); if (r < 0.7) continue; const [a, b] = W2S(wx, groundY(wx) + 14 + r * 60); glint(a, b, 2.5 + r * 2.5, (Math.sin(t * 3 + wx) * 0.5 + 0.5) * p); }
     bridge(p);
@@ -1859,7 +1860,7 @@ let kukuMoving = false;
       g.globalAlpha = al; g.fillStyle = '#FFFFFF'; g.beginPath(); g.roundRect(a - 38, b - 18 - lift, 76, 30, [12, 12, 12, 4]); g.fill();
       g.fillStyle = '#0A2348'; g.font = '900 13px "Noto Sans Georgian", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(mt(T('კუ-კუ!', 'Ku-ku!')), a, b - 3 - lift); g.globalAlpha = 1; }
     // a soft snow drift in the foreground, for depth
-    { const dg = g.createLinearGradient(0, VH * 0.7, 0, VH); dg.addColorStop(0, mixC('#E4EEE3', '#FFFFFF', p)); dg.addColorStop(1, mixC('#EEF4EC', '#F3F8FC', p));
+    { const dg = g.createLinearGradient(0, VH * 0.7, 0, VH); dg.addColorStop(0, '#F6F9FD'); dg.addColorStop(1, '#E4ECF5');
       g.fillStyle = dg; g.beginPath(); g.moveTo(-10, VH + 10);
       for (let sx = -10; sx <= VW + 10; sx += 8) { const wx = camX * 1.25 + sx; g.lineTo(sx, Math.max(groundY(camX + sx) - camY + 120, VH * 0.82 - fbm(wx / 260 + 5) * 70)); }
       g.lineTo(VW + 10, VH + 10); g.closePath(); g.fill(); }
