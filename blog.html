@@ -33,17 +33,24 @@ nav .logo img{height:38px}
 .back:hover{color:var(--blue)}
 
 /* header */
-.head{padding:clamp(140px,20vh,200px) 0 clamp(48px,7vh,72px)}
+.head{padding-top:clamp(140px,20vh,200px);padding-bottom:clamp(48px,7vh,72px)}
 .head .lead{margin-top:22px}
 .concept{display:inline-block;margin-top:26px;padding:8px 14px;border-radius:6px 16px 16px 16px;background:rgba(255,255,255,.82);box-shadow:inset 0 0 0 1px var(--line);font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--mute)}
 
 /* article cards */
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,2vw,28px);padding-bottom:clamp(72px,10vh,120px)}
+/* the Kukushka story leads as a wide card, the other three sit in one even row */
+.cards{grid-template-columns:repeat(3,1fr)}
+.card.lead-card{grid-column:1/-1;display:grid;grid-template-columns:3fr 2fr}
+.card.lead-card .cover{aspect-ratio:auto;height:100%;min-height:340px}
+.card.lead-card .body{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,3.4vw,56px)}
+.card.lead-card h3{font-size:clamp(26px,2.4vw,38px)}
+.card.lead-card p{font-size:16px}
 .card{display:flex;flex-direction:column;text-decoration:none;background:var(--card);border-radius:16px 34px 34px 34px;overflow:hidden;box-shadow:0 1px 2px rgba(10,35,72,.05),0 18px 40px -26px rgba(10,35,72,.28);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
 .card:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(10,35,72,.05),0 26px 50px -24px rgba(10,35,72,.34)}
 .cover{position:relative;aspect-ratio:16/8;overflow:hidden;background:linear-gradient(160deg,#FFFFFF 0%,#EAF2FA 55%,#D8E6F3 100%)}
 .cover img{width:100%;height:100%;object-fit:cover}
-.cover .yr{position:absolute;left:clamp(22px,2.4vw,34px);bottom:clamp(14px,1.8vw,24px);font-size:clamp(54px,6.4vw,104px);font-weight:900;line-height:1;color:var(--navy);letter-spacing:-.01em}
+.cover .yr{position:absolute;left:clamp(22px,2.4vw,34px);bottom:clamp(14px,1.8vw,24px);font-size:clamp(46px,4.2vw,74px);font-weight:900;line-height:1;color:var(--navy);letter-spacing:-.01em}
 .cover .yr small{display:block;font-size:.2em;letter-spacing:.12em;color:var(--blue);margin-bottom:.5em}
 .cover svg.ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:46%;color:#C9DAEA}
 .card .body{padding:clamp(22px,2.2vw,32px)}
@@ -53,7 +60,7 @@ nav .logo img{height:38px}
 .more{margin-top:18px;display:inline-flex;font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--blue)}
 
 /* articles */
-.post{padding:clamp(72px,10vh,120px) 0;border-top:1px solid var(--line)}
+.post{padding-top:clamp(72px,10vh,120px);padding-bottom:clamp(72px,10vh,120px);border-top:1px solid var(--line)}
 .post .col{max-width:760px;margin:0 auto}
 .post h2{margin-top:12px}
 .post .cover{margin:30px 0 34px;border-radius:16px 34px 34px 34px}
@@ -66,7 +73,7 @@ nav .logo img{height:38px}
 .src a{color:var(--blue);text-decoration:none}.src a:hover{text-decoration:underline}
 .top{display:inline-flex;margin-top:28px;font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--mute);text-decoration:none}
 .top:hover{color:var(--blue)}
-.note{padding:0 0 clamp(64px,9vh,100px);font-size:13px;line-height:1.7;color:var(--mute);max-width:760px;margin:0 auto}
+.note{padding:0 var(--gut) clamp(64px,9vh,100px);font-size:13px;line-height:1.7;color:var(--mute);max-width:760px;margin:0 auto}
 
 /* footer: the same as the main page */
 footer{background:var(--card);border-top:1px solid var(--line);overflow:hidden}
@@ -82,7 +89,7 @@ footer a:hover{color:var(--navy)}
 .f-links{display:flex;gap:20px;flex-wrap:wrap}
 @media(max-width:800px){
   nav .wrap{height:64px}nav .logo img{height:30px}
-  .cards{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}.card.lead-card{grid-template-columns:1fr}.card.lead-card .cover{aspect-ratio:16/8;min-height:0}
   .f-top{grid-template-columns:1fr 1fr;padding:56px 0 40px}.f-top>div:first-child,.f-top>div:nth-child(3){grid-column:1/-1}.f-word{padding:4px 0 20px}
 }
 </style>
@@ -103,8 +110,8 @@ footer a:hover{color:var(--navy)}
   </header>
 
   <section class="wrap cards" aria-label="სტატიები">
-    <a class="card" href="#kukushka">
-      <div class="cover"><img src="assets/blog-kukushka.jpg" alt="კუკუშკის ილუსტრაცია ზამთრის მთებში"></div>
+    <a class="card lead-card" href="#kukushka">
+      <div class="cover"><img src="assets/blog-kukushka-2.jpg" alt="კუკუშკის ილუსტრაცია ზამთრის მთებში"></div>
       <div class="body"><span class="tag">1902</span><h3>კუკუშკა: 37 კილომეტრი მთისკენ</h3><p>ბორჯომიდან ბაკურიანამდე ვიწროლიანდაგიანი მატარებელი 1902 წლიდან დადის.</p><span class="more mt">წაიკითხე</span></div>
     </a>
     <a class="card" href="#bridge">
@@ -125,7 +132,7 @@ footer a:hover{color:var(--navy)}
     <div class="wrap"><div class="col">
       <span class="tag">1902</span>
       <h2 class="mt">კუკუშკა: 37 კილომეტრი მთისკენ</h2>
-      <figure class="cover"><img src="assets/blog-kukushka.jpg" alt="კუკუშკის ილუსტრაცია ზამთრის მთებში"></figure>
+      <figure class="cover"><img src="assets/blog-kukushka-2.jpg" alt="კუკუშკის ილუსტრაცია ზამთრის მთებში"></figure>
       <p>ბორჯომი–ბაკურიანის ვიწროლიანდაგიანი რკინიგზის მშენებლობა 1897 წელს დაიწყო. პირველმა მატარებელმა 1902 წლის იანვარში გაიარა.</p>
       <p>გზის სიგრძე 37 კილომეტრია, ლიანდაგის სიგანე კი 900 მილიმეტრი. ამ მანძილზე მატარებელი 820 მეტრიდან 1700 მეტრამდე ადის.</p>
       <p>ამ პატარა მატარებელს „კუკუშკას“ ეძახიან. საიტზე მისი თამაშიც არის: ბოთლი მატარებლით ბორჯომიდან ბაკურიანამდე მიდის.</p>
