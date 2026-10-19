@@ -1115,11 +1115,12 @@ function brookLayer(pan, level) {
   // Babbling brook (after Andy Farnell, "Designing Sound"): brown noise through a resonant high-pass whose cutoff is wobbled by slow noise
   const lp1 = actx.createBiquadFilter(); lp1.type = 'lowpass'; lp1.frequency.value = 400;
   const lp2 = actx.createBiquadFilter(); lp2.type = 'lowpass'; lp2.frequency.value = 14;
-  const depth = actx.createGain(); depth.gain.value = 1500;
-  const rhp = actx.createBiquadFilter(); rhp.type = 'highpass'; rhp.Q.value = 8.5; rhp.frequency.value = 500;
+  const depth = actx.createGain(); depth.gain.value = 650;
+  const rhp = actx.createBiquadFilter(); rhp.type = 'highpass'; rhp.Q.value = 4; rhp.frequency.value = 700;
+  const soft = actx.createBiquadFilter(); soft.type = 'lowpass'; soft.frequency.value = 2200; soft.Q.value = 0.5;   // no hiss on top
   const g = actx.createGain(); g.gain.value = level;
   const p = actx.createStereoPanner(); p.pan.value = pan;
-  loop(noiseBuf(9, true)).connect(lp1).connect(rhp).connect(g).connect(p).connect(brookGain);
+  loop(noiseBuf(9, true)).connect(lp1).connect(rhp).connect(soft).connect(g).connect(p).connect(brookGain);
   loop(noiseBuf(9, true)).connect(lp2).connect(depth).connect(rhp.frequency);
 }
 function initAudio() {
@@ -1128,9 +1129,9 @@ function initAudio() {
   master = actx.createGain(); master.gain.value = soundOn ? 1 : 0; master.connect(actx.destination);
   brookGain = actx.createGain(); brookGain.gain.value = 0; brookGain.connect(master);
   brookLayer(-0.4, 0.8); brookLayer(0.4, 0.7);
-  // soft rush underneath the babble so it reads as running water, not just bubbles
-  const bp = actx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900; bp.Q.value = 0.6;
-  const rg = actx.createGain(); rg.gain.value = 0.35;
+  // a deep, quiet flow underneath the babble so it reads as running water, not just bubbles
+  const bp = actx.createBiquadFilter(); bp.type = 'lowpass'; bp.frequency.value = 620; bp.Q.value = 0.4;
+  const rg = actx.createGain(); rg.gain.value = 0.28;
   loop(noiseBuf(7, true)).connect(bp).connect(rg).connect(brookGain);
   whiteBuf = noiseBuf(3, false);
 }
@@ -1146,14 +1147,22 @@ const sfx = {
     if (!actx || !soundOn) return; actx.resume(); const t = actx.currentTime;
     const s = actx.createBufferSource(); s.buffer = whiteBuf;
     const hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 900;
-    const bp = actx.createBiquadFilter(); bp.type = 'peaking'; bp.frequency.value = 4200; bp.Q.value = 0.7; bp.gain.value = 4;
-    const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(9500, t); lp.frequency.linearRampToValueAtTime(6500, t + dur);
+    const bp = actx.createBiquadFilter(); bp.type = 'peaking'; bp.frequency.value = 2600; bp.Q.value = 0.6; bp.gain.value = -3;
+    const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(5200, t); lp.frequency.linearRampToValueAtTime(3600, t + dur);
     const g = actx.createGain();
     // valve opens fast, a short steady hiss, then it closes
-    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.14, t + 0.04);
-    g.gain.setValueAtTime(0.14, t + dur * 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.12);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.085, t + 0.06);
+    g.gain.setValueAtTime(0.085, t + dur * 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.12);
     s.connect(hp).connect(bp).connect(lp).connect(g).connect(master); s.start(t); s.stop(t + dur + 0.15);
     this.cur = g;
+  },
+  drop(level) {
+    // a small bubble in the stream: a soft sine that rises in pitch and dies away fast
+    const t = actx.currentTime, f = 520 + Math.random() * 760, o = actx.createOscillator(), g = actx.createGain(), lp = actx.createBiquadFilter(), p = actx.createStereoPanner();
+    o.type = 'sine'; o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 1.7, t + 0.06);
+    lp.type = 'lowpass'; lp.frequency.value = 2600; p.pan.value = Math.random() - 0.5;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.05 * level, t + 0.006); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.1);
+    o.connect(lp).connect(g).connect(p).connect(master); o.start(t); o.stop(t + 0.12);
   },
   stopSpray() { if (this.cur && actx) { this.cur.gain.cancelScheduledValues(actx.currentTime); this.cur.gain.setTargetAtTime(0.0001, actx.currentTime, 0.03); this.cur = null; } }
 };
@@ -1174,13 +1183,14 @@ function updateAudio(dt) {
   vS += ((dy > 1 ? dy / Math.max(dt, 1e-3) : 0) - vS) * Math.min(1, dt * 8);   // px per second, down is positive
   if (!actx) return;
   const nearEnd = scrollY > document.documentElement.scrollHeight - innerHeight * 1.6;
-  const target = soundOn && vS > 60 && !nearEnd ? 0.45 + 0.55 * Math.min(1, vS / 1200) : 0;
+  const target = soundOn && vS > 60 && !nearEnd ? 0.28 + 0.37 * Math.min(1, vS / 1200) : 0;
   quiet = target || sprayLeft > 0 || canPhase !== 'idle' || kukuMoving ? 0 : quiet + dt;
   if (quiet > (nearEnd ? 0.6 : 2.5) && actx.state === 'running') { brookGain.gain.cancelScheduledValues(actx.currentTime); brookGain.gain.value = 0; actx.suspend(); }
   if (quiet === 0 && actx.state === 'suspended') actx.resume();
   if (actx.state !== 'running') { soundBtn.classList.remove('live'); return; }
   const cur = brookGain.gain.value;
-  brookGain.gain.setTargetAtTime(target, actx.currentTime, target > cur ? 0.08 : (nearEnd ? 0.12 : 0.6));
+  brookGain.gain.setTargetAtTime(target, actx.currentTime, target > cur ? 0.25 : (nearEnd ? 0.12 : 0.7));
+  if (cur > 0.05 && Math.random() < dt * 6 * cur) sfx.drop(cur);              // now and then a small water drop
   soundBtn.classList.toggle('live', soundOn && (cur > 0.03 || sprayLeft > 0));
 }
 
