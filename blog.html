@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ბლოგი · ბაკურიანი</title>
+<meta name="description" content="ბაკურიანის ისტორია ფაქტებით: კუკუშკა, წაღვერის ხიდი, სათხილამურო კურორტი და სახელის წარმომავლობა. ყველა სტატიას წყარო აქვს.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2348; --blue:#1C7FD6; --mute:#4D5F76; --line:rgba(10,35,72,.12);
+  --bg:#F3F7FA; --card:#FFFFFF;
+  --gut:clamp(20px,4.2vw,72px); --max:1440px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:"Noto Sans Georgian",system-ui,sans-serif;color:var(--navy);background:var(--bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+h1{font-size:clamp(40px,6vw,96px);line-height:1.02;font-weight:900;letter-spacing:.005em}
+h2{font-size:clamp(28px,3.2vw,48px);line-height:1.08;font-weight:900;letter-spacing:.005em}
+.lead{font-size:clamp(16px,1.2vw,18px);line-height:1.7;color:var(--mute);max-width:46ch}
+
+/* nav: the same bar as the main page */
+nav{position:fixed;top:0;left:0;right:0;z-index:10;background:rgba(243,247,250,.82);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:80px}
+nav .logo img{height:38px}
+.back{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px 0 14px;border-radius:12px 22px 22px 22px;font-size:13px;font-weight:700;letter-spacing:.03em;text-decoration:none;color:var(--navy);background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px var(--line)}
+.back svg{width:16px;height:16px}
+.back:hover{color:var(--blue)}
+
+/* header */
+.head{padding:clamp(140px,20vh,200px) 0 clamp(48px,7vh,72px)}
+.head .lead{margin-top:22px}
+.concept{display:inline-block;margin-top:26px;padding:8px 14px;border-radius:6px 16px 16px 16px;background:rgba(255,255,255,.82);box-shadow:inset 0 0 0 1px var(--line);font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--mute)}
+
+/* article cards */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,2vw,28px);padding-bottom:clamp(72px,10vh,120px)}
+.card{display:flex;flex-direction:column;text-decoration:none;background:var(--card);border-radius:16px 34px 34px 34px;overflow:hidden;box-shadow:0 1px 2px rgba(10,35,72,.05),0 18px 40px -26px rgba(10,35,72,.28);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.card:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(10,35,72,.05),0 26px 50px -24px rgba(10,35,72,.34)}
+.cover{position:relative;aspect-ratio:16/8;overflow:hidden;background:linear-gradient(160deg,#FFFFFF 0%,#EAF2FA 55%,#D8E6F3 100%)}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover .yr{position:absolute;left:clamp(22px,2.4vw,34px);bottom:clamp(14px,1.8vw,24px);font-size:clamp(54px,6.4vw,104px);font-weight:900;line-height:1;color:var(--navy);letter-spacing:-.01em}
+.cover .yr small{display:block;font-size:.2em;letter-spacing:.12em;color:var(--blue);margin-bottom:.5em}
+.cover svg.ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:46%;color:#C9DAEA}
+.card .body{padding:clamp(22px,2.2vw,32px)}
+.tag{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--blue)}
+.card h3{margin-top:10px;font-size:clamp(20px,1.7vw,26px);line-height:1.25;font-weight:900}
+.card p{margin-top:12px;font-size:15px;line-height:1.7;color:var(--mute)}
+.more{margin-top:18px;display:inline-flex;font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--blue)}
+
+/* articles */
+.post{padding:clamp(72px,10vh,120px) 0;border-top:1px solid var(--line)}
+.post .col{max-width:760px;margin:0 auto}
+.post h2{margin-top:12px}
+.post .cover{margin:30px 0 34px;border-radius:16px 34px 34px 34px}
+.post p{font-size:clamp(16px,1.15vw,18px);line-height:1.85;color:#22364F;margin-top:18px}
+.post blockquote{margin:26px 0 8px;padding:6px 0 6px 22px;border-left:3px solid var(--blue);font-size:clamp(17px,1.3vw,20px);line-height:1.7;font-weight:500;color:var(--navy)}
+.post figcaption{margin-top:10px;font-size:12px;color:var(--mute)}
+.src{margin-top:34px;padding:20px 24px;border-radius:12px 24px 24px 24px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.src h4{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--mute);margin-bottom:10px}
+.src li{list-style:none;font-size:14px;line-height:1.8}
+.src a{color:var(--blue);text-decoration:none}.src a:hover{text-decoration:underline}
+.top{display:inline-flex;margin-top:28px;font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--mute);text-decoration:none}
+.top:hover{color:var(--blue)}
+.note{padding:0 0 clamp(64px,9vh,100px);font-size:13px;line-height:1.7;color:var(--mute);max-width:760px;margin:0 auto}
+
+/* footer: the same as the main page */
+footer{background:var(--card);border-top:1px solid var(--line);overflow:hidden}
+.f-top{display:grid;grid-template-columns:5fr 2fr 3fr 2fr;gap:40px;padding:80px 0 64px;align-items:start}
+.f-top img{height:34px;margin-bottom:20px}
+.f-top p,.f-top li{font-size:14px;line-height:1.7;color:var(--mute);list-style:none}
+.f-top li{display:flex;align-items:center;gap:10px;padding:2px 0}
+footer h4{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--mute);margin-bottom:18px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--navy)}
+.f-word{display:block;font-weight:900;line-height:1;white-space:nowrap;padding:0 0 36px;font-size:120px;color:#E6EEF6;user-select:none}
+.f-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 0 28px;font-size:12px;line-height:1.6;color:var(--mute);border-top:1px solid var(--line)}
+.f-links{display:flex;gap:20px;flex-wrap:wrap}
+@media(max-width:800px){
+  nav .wrap{height:64px}nav .logo img{height:30px}
+  .cards{grid-template-columns:1fr}
+  .f-top{grid-template-columns:1fr 1fr;padding:56px 0 40px}.f-top>div:first-child,.f-top>div:nth-child(3){grid-column:1/-1}.f-word{padding:4px 0 20px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo.svg" alt="ბაკურიანი"></a>
+    <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><span class="mt">მთავარი</span></a>
+  </div>
+</nav>
+
+<main>
+  <header class="head wrap" id="top">
+    <h1 class="mt">ბლოგი</h1>
+    <p class="lead">ბაკურიანის ისტორია ფაქტებით: მატარებელი, ხიდი, თხილამური და სახელი. ყველა სტატიას წყარო აქვს.</p>
+    <span class="concept">დიზაინის კონცეფცია · არაოფიციალური</span>
+  </header>
+
+  <section class="wrap cards" aria-label="სტატიები">
+    <a class="card" href="#kukushka">
+      <div class="cover"><img src="assets/blog-kukushka.jpg" alt="კუკუშკის ილუსტრაცია ზამთრის მთებში"></div>
+      <div class="body"><span class="tag">1902</span><h3>კუკუშკა: 37 კილომეტრი მთისკენ</h3><p>ბორჯომიდან ბაკურიანამდე ვიწროლიანდაგიანი მატარებელი 1902 წლიდან დადის.</p><span class="more mt">წაიკითხე</span></div>
+    </a>
+    <a class="card" href="#bridge">
+      <div class="cover"><svg class="ridge" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 100V62l60-28 46 22 58-40 70 46 52-24 58 30 56-20v52z" fill="currentColor"/></svg><span class="yr mt"><small>წაღვერი</small>ხიდი</span></div>
+      <div class="body"><span class="tag">წაღვერი</span><h3>ხიდი, რომელიც ეიფელს მიეწერება</h3><p>კუკუშკის გზაზე, წაღვერთან, რკინის ხიდი დგას. ავტორად გუსტავ ეიფელს ასახელებენ.</p><span class="more mt">წაიკითხე</span></div>
+    </a>
+    <a class="card" href="#ski">
+      <div class="cover"><svg class="ridge" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 100V70l80-46 40 20 50-30 80 50 40-18 110 34v20z" fill="currentColor"/></svg><span class="yr mt"><small>1924 – 2023</small>1935</span></div>
+      <div class="body"><span class="tag">1924 – 2023</span><h3>როგორ გახდა ბაკურიანი „საბჭოთა დავოსი“</h3><p>პირველი მოთხილამურეებიდან სათხილამურო სკოლამდე და მსოფლიო ჩემპიონატამდე.</p><span class="more mt">წაიკითხე</span></div>
+    </a>
+    <a class="card" href="#name">
+      <div class="cover"><svg class="ridge" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 100V58l50 18 70-44 60 34 46-14 74 30 100-26v44z" fill="currentColor"/></svg><span class="yr mt"><small>VII – XVI საუკუნე</small>სახელი</span></div>
+      <div class="body"><span class="tag">VII – XVI ს.</span><h3>საიდან მოდის სახელი „ბაკურიანი“</h3><p>ერისთავი ბაკურიანი, სიტყვა „ბაკვა“ და ვახუშტი ბატონიშვილის ერთი წინადადება.</p><span class="more mt">წაიკითხე</span></div>
+    </a>
+  </section>
+
+  <article class="post" id="kukushka">
+    <div class="wrap"><div class="col">
+      <span class="tag">1902</span>
+      <h2 class="mt">კუკუშკა: 37 კილომეტრი მთისკენ</h2>
+      <figure class="cover"><img src="assets/blog-kukushka.jpg" alt="კუკუშკის ილუსტრაცია ზამთრის მთებში"></figure>
+      <p>ბორჯომი–ბაკურიანის ვიწროლიანდაგიანი რკინიგზის მშენებლობა 1897 წელს დაიწყო. პირველმა მატარებელმა 1902 წლის იანვარში გაიარა.</p>
+      <p>გზის სიგრძე 37 კილომეტრია, ლიანდაგის სიგანე კი 900 მილიმეტრი. ამ მანძილზე მატარებელი 820 მეტრიდან 1700 მეტრამდე ადის.</p>
+      <p>ამ პატარა მატარებელს „კუკუშკას“ ეძახიან. საიტზე მისი თამაშიც არის: ბოთლი მატარებლით ბორჯომიდან ბაკურიანამდე მიდის.</p>
+      <div class="src"><h4 class="mt">წყარო</h4><ul><li><a href="https://en.wikipedia.org/wiki/Borjomi%E2%80%93Bakuriani_railway" target="_blank" rel="noopener">Wikipedia: Borjomi–Bakuriani railway</a></li></ul></div>
+      <a class="top mt" href="#top">ყველა სტატია</a>
+    </div></div>
+  </article>
+
+  <article class="post" id="bridge">
+    <div class="wrap"><div class="col">
+      <span class="tag">წაღვერი</span>
+      <h2 class="mt">ხიდი, რომელიც ეიფელს მიეწერება</h2>
+      <p>კუკუშკის გზაზე, წაღვერთან, რკინის ხიდი დგას. მის ავტორად გუსტავ ეიფელს ასახელებენ, იმავე ინჟინერს, ვისი სახელიც პარიზის ეიფელის კოშკს ჰქვია.</p>
+      <p>ეს ამბავი ბევრ წყაროშია, მაგრამ დოკუმენტური მტკიცებულება ცოტაა. ამიტომ ზუსტად ასე ვწერთ: ხიდი ეიფელს მიეწერება.</p>
+      <div class="src"><h4 class="mt">წყარო</h4><ul><li><a href="https://en.wikipedia.org/wiki/Eiffel_Bridge,_Tsagveri" target="_blank" rel="noopener">Wikipedia: Eiffel Bridge, Tsagveri</a></li></ul></div>
+      <a class="top mt" href="#top">ყველა სტატია</a>
+    </div></div>
+  </article>
+
+  <article class="post" id="ski">
+    <div class="wrap"><div class="col">
+      <span class="tag">1924 – 2023</span>
+      <h2 class="mt">როგორ გახდა ბაკურიანი „საბჭოთა დავოსი“</h2>
+      <p>1924 წელს ბაკურიანის ალპურ ბოტანიკურ ბაღს გიორგი ნიკოლაძე და ნიკო კეცხოველი ესტუმრნენ. ნიკოლაძემ ბაკურიანში პირველი ქართველი მოთხილამურეები მიიყვანა.</p>
+      <p>1926 წელს ბაკურიანმა დაბის სტატუსი მიიღო. 1932 წელს აქ პირველი სათხილამურო ბაზა გაიხსნა, 1935 წლის 6 იანვარს კი სათხილამურო სკოლა.</p>
+      <p>1954 წელს ბაკურიანში სსრკ-ში პირველი საბაგირო-ბუქსირი აშენდა. საბჭოთა პრესა ბაკურიანს „საბჭოთა დავოსს“ და „საბჭოთა სათხილამურო სპორტის დედაქალაქს“ უწოდებდა.</p>
+      <p>2023 წელს ბაკურიანში ფრისტაილისა და სნოუბორდის მსოფლიო ჩემპიონატი ჩატარდა.</p>
+      <div class="src"><h4 class="mt">წყაროები</h4><ul>
+        <li><a href="https://karibche.ge/skhvadaskhva/chemi-sofeli/9219-bakuriani.html" target="_blank" rel="noopener">კარიბჭე: ბაკურიანი</a></li>
+        <li><a href="https://ka.wikipedia.org/wiki/%E1%83%91%E1%83%90%E1%83%99%E1%83%A3%E1%83%A0%E1%83%98%E1%83%90%E1%83%9C%E1%83%98" target="_blank" rel="noopener">ვიკიპედია: ბაკურიანი</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Bakuriani" target="_blank" rel="noopener">Wikipedia: Bakuriani</a></li>
+      </ul></div>
+      <a class="top mt" href="#top">ყველა სტატია</a>
+    </div></div>
+  </article>
+
+  <article class="post" id="name">
+    <div class="wrap"><div class="col">
+      <span class="tag">VII – XVI ს.</span>
+      <h2 class="mt">საიდან მოდის სახელი „ბაკურიანი“</h2>
+      <p>საქართველოს ენციკლოპედიის მიხედვით, სახელი VII–VIII საუკუნეების ქართლის დიდ ერისთავს, ბაკურიანს ძე ბალდადისას უკავშირდება.</p>
+      <p>მიხეილ ჯავახიშვილის ვერსიით კი „ბაკურიანი“, ანუ „ბაკულიანი“, სიტყვა „ბაკვიდან“ მოდის. ბაკვა შემოღობვას, ბაკის გაკეთებას ნიშნავს.</p>
+      <blockquote>„შავ-წყალი გამოსდის ბაკულიანისა და კოდიანის მთასა“</blockquote>
+      <figcaption>ვახუშტი ბატონიშვილი</figcaption>
+      <p>XVI საუკუნის ბოლოს, „გურჯისტანის ვილაიეთის დიდ დავთარში“, ბაკურიანი უკაცრიელ სოფლად არის ჩაწერილი.</p>
+      <div class="src"><h4 class="mt">წყაროები</h4><ul>
+        <li><a href="https://georgianencyclopedia.ge/ka/form/26357" target="_blank" rel="noopener">საქართველოს ენციკლოპედია: ბაკურიანი</a></li>
+        <li><a href="https://karibche.ge/skhvadaskhva/chemi-sofeli/9219-bakuriani.html" target="_blank" rel="noopener">კარიბჭე: ბაკურიანი</a></li>
+      </ul></div>
+      <a class="top mt" href="#top">ყველა სტატია</a>
+    </div></div>
+  </article>
+
+  <p class="note">ტექსტები კონცეფციისთვის მომზადდა საჯარო წყაროებიდან. სადაც წყაროები ერთმანეთს არ ეთანხმება, ეს ცალკეა აღნიშნული.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div><img src="assets/logo.svg" alt="ბაკურიანი"><p>ბუნებრივი მინერალური წყალი<br>ბორჯომ-ბაკურიანის ხეობიდან.</p></div>
+      <div><h4 class="mt">ნავიგაცია</h4><ul><li><a href="index.html#range">ასორტიმენტი</a></li><li><a href="index.html#source">წყარო</a></li><li><a href="index.html#buy">სად ვიყიდო</a></li><li><a href="blog.html">ბლოგი</a></li></ul></div>
+      <div><h4 class="mt">კონტაქტი</h4><ul>
+        <li>ბიძინა კვერნაძის 10, თბილისი</li>
+        <li><a href="tel:+995322484484">(995 32) 248-44-84</a></li>
+        <li><a href="mailto:marketing@borjomi.com">marketing@borjomi.com</a></li>
+      </ul></div>
+      <div><h4 class="mt">სოციალური</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li></ul></div>
+    </div>
+    <div class="f-word mt" aria-hidden="true">ბაკურიანი</div>
+    <div class="f-bot"><span>© 2026 IDS ბორჯომი საქართველო · დიზაინის კონცეფცია, არაოფიციალური</span><span class="f-links"><a href="#">წესები და პირობები</a><a href="#">კონფიდენციალურობა</a></span></div>
+  </div>
+</footer>
+
+<script>
+// Real Mtavruli: swap Mkhedruli letters to their Mtavruli code points (Chrome ignores text-transform for Georgian)
+const toMt = s => s.replace(/[ა-ჺჽ-ჿ]/g, c => String.fromCharCode(c.charCodeAt(0) + 0xBC0));
+document.querySelectorAll('.mt').forEach(el => { const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); for (let n; (n = w.nextNode());) n.nodeValue = toMt(n.nodeValue); });
+// the footer wordmark fills the width, as on the main page
+const fw = document.querySelector('.f-word'), fit = () => { fw.style.cssText = 'font-size:100px;display:inline-block'; const k = fw.parentElement.clientWidth / fw.offsetWidth; fw.style.cssText = `font-size:${100 * k * 0.98}px`; };
+document.fonts.ready.then(fit); addEventListener('resize', fit);
+</script>
+</body>
+</html>
